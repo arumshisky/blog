@@ -21,13 +21,26 @@ description: #>- # this means to ignore newlines until "baseurl:"
 #  line in _config.yml. It will appear in your document head meta (for
 #  Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://localhost:4000" # the base hostname & protocol for your site, e.g. http://example.com
 repository: "annargrs/blog"
 
-twitter_username: "annargrs"
-github_username:  "annargrs"
-name: "Anna Rogers"
-logo: "/assets/images/aro.png"
+author:
+  name: "Anna Rogers"
+  avatar: "/assets/images/aro.png"
+  bio: "Musings on computational linguistics, AI and NLP"
+#  location: "Bengaluru, India"
+  uri: "http://www.cs.uml.edu/~arogers/"
+  twitter: "annargrs"
+  github: "annargrs"
+#  medium: ".aravindiyer"
+  linkedin: "annargrs"
+
+
+
+#twitter_username: "annargrs"
+#github_username:  "annargrs"
+#name: "Anna Rogers"
+#logo: "/assets/images/aro.png"
 
 masthead_title: "Hacking Semantics"
 # Build settings
@@ -59,6 +72,44 @@ defaults:
       path: ""
       type: posts
     values:
+      layout: single
+      author_profile: true
+      read_time: true
       comments: true
+      share: true
+      related: true
       sidebar:
         nav: "docs"
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+      sidebar:
+        nav: "docs"
+#  # _docs
+#  - scope:
+#      path: ""
+#      type: docs
+#    values:
+#      sidebar:
+#        nav: "docs"
+#Archive settings
+category_archive:
+  type: jekyll-archives
+  path: /categories/
+tag_archive:
+  type: jekyll-archives
+  path: /tags/
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: archive-taxonomy
+    tag: archive-taxonomy
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
