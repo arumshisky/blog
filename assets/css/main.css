@@ -8,6 +8,8 @@
 @import "minimal-mistakes"; // main partials
 
 
+$doc-font-size: 14 !default;
+
 $serif              : 'Roboto', sans-serif;
 $sans-serif-narrow  : 'Oswald', sans-serif;
 

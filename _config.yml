@@ -27,7 +27,7 @@ repository: "annargrs/blog"
 author:
   name: "Anna Rogers"
   avatar: "/assets/images/aro.png"
-  bio: "Musings on computational linguistics, AI and NLP"
+  bio: "Thinking aloud: computational linguistics, cognition, AI and NLP"
 #  location: "Bengaluru, India"
   uri: "http://www.cs.uml.edu/~arogers/"
   twitter: "annargrs"
