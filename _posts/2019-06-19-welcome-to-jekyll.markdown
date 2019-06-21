@@ -3,16 +3,19 @@ layout: single
 title:  "Welcome to Jekyll!"
 date:   2019-06-19 18:41:47 -0400
 categories: jekyll update
-tags: tag
+tags: tag 
+mathjax: true
 ---
 
 # Subtitle
 
-Just testing everything
+Just testing everything including $$x$$ math
 
 * list
 * list
 * list
+
+$$ f(a) = \frac{1}{2\pi i} \oint_\gamma \frac{f(z)}{z-a} dz $$
 
 ## Just testing
 

@@ -40,7 +40,8 @@ author:
 #twitter_username: "annargrs"
 #github_username:  "annargrs"
 #name: "Anna Rogers"
-#logo: "/assets/images/aro.png"
+logo: "/assets/images/logo-3col.png"
+# for the site icon, change head/custom.html
 
 masthead_title: "Hacking Semantics"
 # Build settings
