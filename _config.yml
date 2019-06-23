@@ -65,11 +65,14 @@ include:
   - _redirects
 exclude:
   - .sass-cache
-  - assets/js/plugins
-  - assets/js/_main.js
-  - assets/js/vendor
   - Gemfile
   - node_modules
+  - vendor
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - Rakefile
+
 keep_files:
   - .git
   - .svn
