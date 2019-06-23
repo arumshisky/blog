@@ -3,10 +3,10 @@ layout: single
 title:  "Why blog about NLP in 2019?"
 date:   2019-06-23 17:00:47 -0400
 categories: squib
-tags: productivity 
+tags: academia 
 mathjax: false
 toc: false
-excerpt: "A unique line of text to describe this post that will display in an archive listing and meta description with SEO benefits."
+excerpt: "Benefits of blogging for the academic souls."
 classes: wide
 ---
 
@@ -19,7 +19,7 @@ I think there are two reasons for this trend:
 * People use their blogs to increase the visibility of their work (as many blog posts are about research they're done), and **to do so in a way that does not involve dry, dull writing** that too many of us seem to think is prerequisite for an accepted paper (see eg this recent discussion on Twitter). Also, blogs enable showing off your Jupyter notebooks, fancy interactive charts, and other cool stuff that won't ever fit into a paper pdf.
 * People use their blogs as **a platform to think aloud**, hopefully get feedback and start important conversations in the NLP community. Heck, we're trying to model human language, we need all the help we can get! 
 
-My goal is rather the latter (although who can resist a good shameless self-citation every now and then?) Thinking-aloud, thinking-in-writing is really the only way to think clearly. Here's an anecdote of Richard Feynman (as narrated by Sonke Ahrens):
+My goal is rather the latter (although who can resist a good shameless self-citation every now and then?) Thinking-aloud, thinking-in-writing is really the only way to think clearly. Here's an anecdote of Richard Feynman, as narrated by Sonke Ahrens {% cite Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers %}:
 
 > Richard Feynman once had a visitor in his office, a historian who wanted to interview him. When he spotted Feynman’s notebooks, he said how delighted he was to see such “wonderful records of Feynman’s thinking.” “No, no!” Feynman protested. “They aren’t a record of my thinking process. They are my thinking process. I actually did the work on the paper.” <br/>
   “Well,” the historian said, “the work was done in your head, but the record of it is still here.” “No, it’s not a record, not really. It’s working. You have to work on paper, and this is the paper.
@@ -27,3 +27,7 @@ My goal is rather the latter (although who can resist a good shameless self-cita
 I don't know about you, but this is 100% true of me: if I can't spell something out, I don't understand it - and if I never try, I won't even see the holes in my argument. So... 
 
 The blog is dead. Long live the blog! 
+
+## References
+
+{% bibliography --cited %}

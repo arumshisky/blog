@@ -21,7 +21,7 @@ description: #>- # this means to ignore newlines until "baseurl:"
 #  line in _config.yml. It will appear in your document head meta (for
 #  Google search results) and in your feed.xml site description.
 baseurl: "/blog" # the subpath of your site, e.g. /blog
-url: "http://localhost:4000" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http:annargrs.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 repository: "annargrs/blog"
 
 author:
@@ -35,7 +35,12 @@ author:
 #  medium: ".aravindiyer"
   linkedin: "annargrs"
 
+# linking to author account on Twitter
+twitter:
+  username: "annargrs"
 
+#todo add a default 120-x120 image to be used in cards for imageless posts
+#og_image: /assets/images/site-logo.png
 
 #twitter_username: "annargrs"
 #github_username:  "annargrs"
@@ -50,7 +55,31 @@ markdown: kramdown
 theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
+  - jekyll-scholar
+  - jekyll-sitemap
 #  - jekyll-archives
+
+# File reading
+include:
+  - _pages
+  - _redirects
+exclude:
+  - .sass-cache
+  - assets/js/plugins
+  - assets/js/_main.js
+  - assets/js/vendor
+  - Gemfile
+  - node_modules
+keep_files:
+  - .git
+  - .svn
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+
+
+scholar:
+  style: apa
 
 # utterances comments
 repository: "annargrs/blog" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"

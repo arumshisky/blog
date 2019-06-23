@@ -3,8 +3,14 @@ layout: single
 title:  "Welcome to Jekyll!"
 date:   2019-06-19 18:41:47 -0400
 categories: jekyll update
+collections: test
 tags: tag 
 mathjax: true
+toc: true
+toc_label: "My Table of Contents"
+toc_icon: "cog"
+excerpt: "A unique line of text to describe this post that will display in an archive listing and meta description with SEO benefits."
+classes: wide
 ---
 
 # Subtitle
