@@ -1,0 +1,29 @@
+---
+layout: single
+title:  "Why blog about NLP in 2019?"
+date:   2019-06-23 17:00:47 -0400
+categories: squib
+tags: productivity 
+mathjax: false
+toc: false
+excerpt: "A unique line of text to describe this post that will display in an archive listing and meta description with SEO benefits."
+classes: wide
+---
+
+When I said I wanted to start a research blog, I got asked why - wasn't it something from the nineties that nobody did anymore? That's actually not an unreasonable question: nobody is even able to keep up with arXiv anymore, why introduce any more sources of long reads? Sure, big teams at DeepMind and Microsoft Research keep blogs, but they also have the resources to hire designers and editors.
+
+Still, despite the over-abundance of information, NLP blogging is definitely having a Renaissance moment. There are not only great technical blogs like [Towards Data Science](https://towardsdatascience.com/); many great minds are using it to talk about methodology and other community-wide issues. See, for example, the recent discussion of the issues in review process by [Matt Gardner](https://medium.com/ai2-blog/5-steps-to-reconciling-pre-prints-and-blind-review-92a2d80d8735), and interdisciplinarity in NLP by [Ryan Cotterell](https://medium.com/@ryancotterell/what-interdisciplinarity-in-acl-means-to-me-f070121bfa85).
+
+I think there are two reasons for this trend:
+
+* People use their blogs to increase the visibility of their work (as many blog posts are about research they're done), and **to do so in a way that does not involve dry, dull writing** that too many of us seem to think is prerequisite for an accepted paper (see eg this recent discussion on Twitter). Also, blogs enable showing off your Jupyter notebooks, fancy interactive charts, and other cool stuff that won't ever fit into a paper pdf.
+* People use their blogs as **a platform to think aloud**, hopefully get feedback and start important conversations in the NLP community. Heck, we're trying to model human language, we need all the help we can get! 
+
+My goal is rather the latter (although who can resist a good shameless self-citation every now and then?) Thinking-aloud, thinking-in-writing is really the only way to think clearly. Here's an anecdote of Richard Feynman (as narrated by Sonke Ahrens):
+
+> Richard Feynman once had a visitor in his office, a historian who wanted to interview him. When he spotted Feynman’s notebooks, he said how delighted he was to see such “wonderful records of Feynman’s thinking.” “No, no!” Feynman protested. “They aren’t a record of my thinking process. They are my thinking process. I actually did the work on the paper.” <br/>
+  “Well,” the historian said, “the work was done in your head, but the record of it is still here.” “No, it’s not a record, not really. It’s working. You have to work on paper, and this is the paper.
+
+I don't know about you, but this is 100% true of me: if I can't spell something out, I don't understand it - and if I never try, I won't even see the holes in my argument. So... 
+
+The blog is dead. Long live the blog! 
