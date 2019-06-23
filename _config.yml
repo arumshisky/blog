@@ -20,7 +20,7 @@ description: #>- # this means to ignore newlines until "baseurl:"
 #  Write an awesome description for your new site here. You can edit this
 #  line in _config.yml. It will appear in your document head meta (for
 #  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "http://localhost:4000" # the base hostname & protocol for your site, e.g. http://example.com
 repository: "annargrs/blog"
 
@@ -50,6 +50,15 @@ markdown: kramdown
 theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
+#  - jekyll-archives
+
+# utterances comments
+repository: "annargrs/blog" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+comments:
+  provider: "utterances"
+  utterances:
+    theme: "github-light" # "github-dark"
+    issue_term: "pathname"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -90,6 +99,8 @@ defaults:
       author_profile: true
       sidebar:
         nav: "docs"
+
+
 #  # _docs
 #  - scope:
 #      path: ""
@@ -99,18 +110,36 @@ defaults:
 #        nav: "docs"
 #Archive settings
 category_archive:
-  type: jekyll-archives
+  type: liquid #jekyll-archives
   path: /categories/
 tag_archive:
-  type: jekyll-archives
+  type: liquid #jekyll-archives
   path: /tags/
-jekyll-archives:
-  enabled:
-    - categories
-    - tags
-  layouts:
-    category: archive-taxonomy
-    tag: archive-taxonomy
-  permalinks:
-    category: /categories/:name/
-    tag: /tags/:name/
+
+# jekyll-archives config
+#jekyll-archives:
+#  enabled:
+#    - categories
+#    - tags
+#  layouts:
+#    category: archive-taxonomy
+#    tag: archive-taxonomy
+#  permalinks:
+#    category: /categories/:name/
+#    tag: /tags/:name/
+
+# Outputting
+permalink: /:title/
+# paginate: 5 # amount of posts to show
+# paginate_path: /page:num/
+timezone: America/New_York # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
+# SEO and Analytics
+#google_site_verification : "todo"
+#bing_site_verification   : "todo"
+analytics:
+  provider: "google-gtag" # false (default), "google", "google-universal", "custom"
+  google:
+    tracking_id: "UA-127096214-1"
+environment: production # should work, if not check if env set to development
