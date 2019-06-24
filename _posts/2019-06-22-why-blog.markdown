@@ -7,7 +7,6 @@ tags: academia
 mathjax: false
 toc: false
 excerpt: "Benefits of blogging for the academic souls."
-classes: wide
 ---
 
 When I said I wanted to start a research blog, I got asked why - wasn't it something from the nineties that nobody did anymore? That's actually not an unreasonable question: nobody is even able to keep up with arXiv anymore, why introduce any more sources of long reads? Sure, big teams at DeepMind and Microsoft Research keep blogs, but they also have the resources to hire designers and editors.

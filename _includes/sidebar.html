@@ -22,11 +22,11 @@
   {% endif %}
 
 
-
-<div class="tag-cloud">
 <!-- stolen from here:
 https://www.gungorbudak.com/blog/2017/12/08/tags-cloud-sorted-by-post-count-for-jekyll-blogs-without-plugins/
 -->
+<!--div class="tag-cloud">
+
 {% capture tags %}
   {% for tag in site.tags %}
     {{ tag[1].size | plus: -10000 }}###{{ tag[0] | replace: ' ', '##' }}###{{ tag[1].size }}
@@ -43,14 +43,14 @@ https://www.gungorbudak.com/blog/2017/12/08/tags-cloud-sorted-by-post-count-for-
         {% assign size = count %}
     {% endif %}
     <span class="tag-size-{{ size }}">
-        <a class="tag-link" href="/blog/tags/#{{ tag }}/" rel="tag">#{{ tag }}</a> ({{ count }})
+        <a class="tag-link" href="/tags/#{{ tag }}/" rel="tag">#{{ tag }}</a> ({{ count }})
     </span>
 {% endfor %}
 
 
 
 
-</div>
+</div-->
 
 
 
