@@ -85,6 +85,10 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 scholar:
   style: apa
 
+# enabling auto-generation of subtitle links
+kramdown:
+    auto_ids: true
+
 # utterances comments
 repository: "annargrs/blog" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 comments:
