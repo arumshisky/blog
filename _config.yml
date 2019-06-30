@@ -60,6 +60,7 @@ plugins:
   - jekyll-paginate
 #  - jekyll-archives
 
+
 # File reading
 include:
   - _pages
@@ -80,10 +81,21 @@ keep_files:
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
+head_scripts:
+  - https://code.jquery.com/jquery-3.2.1.min.js
+
 
 
 scholar:
-  style: apa
+  # more options: https://pages.lip6.fr/Pascal.Poizat/blog/posts/2016/02/01/jekyll-and-bibtex/
+  style: _bibliography/apa_modified.csl
+  sort_by: author, year
+  order: descending
+  bibliography_template: bib
+  use_raw_bibtex_entry: true # to enable {{...}} inside bibtex
+
+
+
 
 # enabling auto-generation of subtitle links
 kramdown:
