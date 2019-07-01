@@ -504,6 +504,9 @@
   border-radius: $border-radius;
   -webkit-box-shadow: $box-shadow;
   box-shadow: $box-shadow;
+  position: fixed; /*absolute for non-moving toc*/
+  display: inline-block;
+  margin-left: 2em;
 
   .nav__title {
     color: #fff;
@@ -518,6 +521,21 @@
     @include yiq-contrasted($active-color);
   }
 }
+
+@media screen and (max-device-width: 640px){
+
+.toc {
+  position: absolute;
+  display: contents;
+}
+}
+
+/*@media screen and (min-device-width: 641px){
+toc {
+
+}
+}*/
+
 
 .toc__menu {
   margin: 0;
