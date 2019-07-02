@@ -522,19 +522,13 @@
   }
 }
 
-@media screen and (max-device-width: 640px){
+@media screen and (max-device-width: 900px){
 
 .toc {
   position: absolute;
   display: contents;
 }
 }
-
-/*@media screen and (min-device-width: 641px){
-toc {
-
-}
-}*/
 
 
 .toc__menu {
