@@ -8,7 +8,7 @@ mathjax: false
 toc: false
 excerpt: "Benefits of blogging for the academic souls."
 header:
-    og_image: /assets/images/writing.pn
+    og_image: /assets/images/writing.png
 ---
 
 <figure>
@@ -27,7 +27,7 @@ Still, despite the over-abundance of information, NLP blogging is definitely hav
 I think there are two reasons for this trend:
 
 * People use their blogs to increase the visibility of their work (as many blog posts are about research they're done), and **to do so in a way that does not involve dry, dull writing** that too many of us seem to think is prerequisite for an accepted paper (see eg this recent discussion on Twitter). Also, blogs enable showing off your Jupyter notebooks, fancy interactive charts, and other cool stuff that won't ever fit into a paper pdf.
-* People use their blogs as **a platform to think aloud**, hopefully get feedback and start important conversations in the NLP community. Heck, we're trying to model human language, we need all the help we can get! 
+* People use their blogs as **a platform to think aloud**, hopefully get feedback and start important conversations in the NLP community. Heck, we're trying to model human language, we need all the help we can get! These conversations count as "gray literature": pre-publication snippets that are still [citable](https://patthomson.net/2017/12/14/can-i-cite-a-blog-post/) if need be, and useful to shape the final publication.
 
 My goal is rather the latter (although who can resist a good shameless self-citation every now and then?) Thinking-aloud, thinking-in-writing is really the only way to think clearly. Here's an anecdote of Richard Feynman, as narrated by Sonke Ahrens {% cite Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers %}:
 
