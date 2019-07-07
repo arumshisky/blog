@@ -208,7 +208,8 @@ li ol {
 
 figure {
   display: -webkit-box;
-  display: flex;
+  display: inline-block;/*flex;*/
+  text-align: center;
   -webkit-box-pack: justify;
   justify-content: space-between;
   -webkit-box-align: start;
@@ -355,4 +356,24 @@ input[type="submit"],
 .archive__item-teaser {
   -webkit-transition: $global-transition;
   transition: $global-transition;
+}
+
+.width50 {
+    width: 50%;
+}
+
+.width60 {
+    width: 60%;
+}
+
+.width70 {
+    width: 70%;
+}
+
+.width80 {
+    width: 80%;
+}
+
+.width90 {
+    width: 90%;
 }
