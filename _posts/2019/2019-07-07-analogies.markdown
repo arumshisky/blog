@@ -1,7 +1,8 @@
 ---
 layout: single
 title:  "On word analogies and negative results in NLP"
-date:   2019-07-07 22:00:47 -0400
+date:   2019-07-07 16:00:47
+last_modified_at: 2019-07-07 16:00:47 
 categories: squib
 tags: academia methodology negresults review
 mathjax: true
