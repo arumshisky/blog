@@ -66,7 +66,7 @@ If the source vectors $$a$$ ("man"), $$a'$$ (king), and $$b$$ ("woman") are excl
 	<figcaption>The share of BATS analogy questions predicted successfully vs similarity of the target vector to the source vectors</figcaption>
 </figure>
 
-All of this makes the vector offset not much different from cosine similarity. Basically you're just fishing around in the neighborhood of the source vectors. If you're lucky, the word you're looking for happens to be there.
+To sum up: if your formulation of vector offset excludes the source vectors, it will appear to work for the small original dataset, where its success correlates with basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations. And no, we cannot just discard most of language as "irregular" or "suffering from polysemy", because the goal is to be able to perform verbal reasoning, and that's what natural language is like.
 
 ## The impact on further research
 
