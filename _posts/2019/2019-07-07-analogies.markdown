@@ -53,7 +53,7 @@ Now, here's why the vector offset doesn't work: it wouldn't have worked in the f
 
 <figure>
 	<img src="/assets/images/analogy-honest.png" class="width60"> 
-	<figcaption>The vector predicted by the vector offset mostly lands back on the source vectors <br/>
+	<figcaption>Share of BATS analogy questions in which the vector the closest to the predicted vector is one of the source vectors (a,a', b), the target vector b', or some other vector. In most cases the result is simply the vector b ("woman").
 	</figcaption>
 </figure>
 
@@ -74,11 +74,13 @@ So much for the "linguistic regularities". But the problem is not just that the 
 
 Obviously, I'm impartial here because some of this work is mine, but isn't it just counter-productive for the field in general? If there are serious updates to a widely cited but too-good-to-be-true paper, it is in everybody's interest for those updates to travel fast - because they could save people the effort of either doing the same work again, or the wasted effort of building on the original untested assumption. Right?
 
-Well, only one of all the above-mentioned papers by 4 teams even made it to one of the main conferences. However, there are two ACL and one COLING paper providing mathematical proofs of why the vector offset should work, on the assumption that it does: {% cite GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity HakamiHayashiEtAl_2018_Why_does_PairDiff_work EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies %}. 
+Well, only one of all the above-mentioned papers by 4 teams even made it to one of the main conferences. However, there are two ACL, one COLING, and best-paper-mention ICML paper providing mathematical proofs of why the vector offset should work, on the assumption that it does: {% cite GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity HakamiHayashiEtAl_2018_Why_does_PairDiff_work EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies AllenHospedales_2019_Analogies_Explained_Towards_Understanding_Word_Embeddings %}. 
 
-Don't take me wrong, I'm not out to shame anybody: these papers are a symptom of a larger problem in the field in general, and the point of this post is to try to address that. Also, obviously, everybody makes mistakes, and there must be plenty in my own papers. In fact, I would be very happy if these papers *disproved* the above negative evidence, showing that it was wrong in some way and the vector offset does in fact work. That would mean that we already have a great and cheap method to reason with word embeddings. But the negative evidence was simply not addressed.
+Don't take me wrong, I'm not out to shame anybody. The reason these papers appeared is the general problem of low visibility of negative results, and the point of this post is to try to address that. Also, obviously, everybody makes mistakes, that's in the nature of research - and there must be plenty of mistakes in my own papers. 
 
-I sometimes also hear the argument "we're just mathematicians / statisticians, we're not experts on this". That is not a good line of defense. Here is a paper that independently, from purely quantitative perspective arrived at the same conclusion as the above studies that were based on extended datasets {% cite Schluter_2018_Word_Analogy_Testing_Caveat %}. Its author was just not willing to accept often-repeated claims without a question. 
+I would actually be very happy if these papers *disproved* the above negative evidence, showing that it was wrong in some way. Vector offset is computationally cheap and conceptually simple, it would be fantastic for the whole field if it was a reliable tool with which we could perform analogical reasoning beyond-the-original-dataset. But so far the negative evidence was simply not addressed.
+
+Note that all of the above-mentioned papers relied on extended datasets to show the limitations of the original Mikolov study. Considering a wider range of linguistic relations is something that takes linguistic expertise, and I sometimes hear the argument "we're just mathematicians / statisticians, we're not experts on this". That is not a good line of defense. Here is a paper that independently, from purely quantitative perspective arrived at the same conclusion as the above studies that were based on extended datasets {% cite Schluter_2018_Word_Analogy_Testing_Caveat %}. Its author was just not willing to accept often-repeated claims without a question. 
 
 As another example, analogies have also attracted the attention of researchers on fairness/bias. Here's a NIPS paper that started from accepting that the underlying vector offset mechanism works: {% cite BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings %}. And this one didn't: {% cite NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor %}. Let me quote the authors on the impact of the blind use of the vector offset:
 
