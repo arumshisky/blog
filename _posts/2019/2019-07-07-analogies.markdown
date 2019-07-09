@@ -36,9 +36,9 @@ These citations are not just something from 2013 either. Because it's so temptin
 	<!--figcaption>some figure</figcaption-->
 </figure>
 
-Unfortunately, they are not, and it's actually been shown a while ago that the vector offset does not work as advertised.  
+Unfortunately, they are not. It's actually been shown a while ago that the vector offset does not work as advertised.  
 
-## All things wrong with word analogies
+## All things wrong with word analogies.
 
 To the best of my knowledge, the first suspicions about vector offset arose when it didn't work for lexicographic relations {% cite KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces %}. Then the still-largest-to-date BATS dataset {% cite GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt %} offered a large balanced sample of 40 relations, among which the vector offset worked well only on those that happened to be included in the original Google dataset.
 
@@ -47,7 +47,7 @@ To the best of my knowledge, the first suspicions about vector offset arose when
 	<figcaption>When does the vector offset work? 40 relations from the BATS dataset</figcaption>
 </figure>
 
-A later study constructed a comparable (NOT google-translated) dataset for Japanese, which showed a similar pattern even for subcharacter-based embeddings {% cite KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It %}. Roughly concurrently with BATS, Australian experiments on 15 relations in English also showed difficulties with lexical semantics {% cite VylomovaRimmelEtAl_2016_Take_and_took_gaggle_and_goose_book_and_read_evaluating_utility_of_vector_differences_for_lexical_relation_learning %}).
+Roughly concurrently with BATS, Australian experiments on 15 relations in English also showed difficulties with lexical semantics {% cite VylomovaRimmelEtAl_2016_Take_and_took_gaggle_and_goose_book_and_read_evaluating_utility_of_vector_differences_for_lexical_relation_learning %}. A later study constructed a comparable (NOT google-translated) BATS dataset for Japanese, which showed a similar pattern even for subcharacter-based embeddings {% cite KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It %}. 
 
 So why doesn't it work, if language relations are so neat and regular? Well, it turns out that it wouldn't have worked in the first place if the 3 source words were not excluded from the set of possible answers. In the original formulation, the solution to $$king-man+woman$$ should be $$queen$$, given that the vectors $$king$$, $$man$$ and $$woman$$ are excluded from the set of possible answers. Tal Linzen showed that for some relations you get considerable accuracy by simply getting the nearest neighbor of $$woman$$ word, or the one most similar to both $$woman$$ and $$king$$ (without $$man$$) {% cite Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies %}. And here's what happens if you don't exclude any of them {% cite RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors %}:
 
@@ -59,14 +59,14 @@ So why doesn't it work, if language relations are so neat and regular? Well, it 
 
 If in most cases the predicted vector is the closest to the source $$woman$$ vector, it means that the vector offset is simply too small to induce a meaning shift on its own. And that means that adding it will not get you somewhere significantly different. Which means you're staying in the neighborhood of the original vectors.   
 
-Here are the experiments showing that if the source vectors $$a$$ ("man"), $$a'$$ (king), and $$b$$ ("woman") are excluded, your likelihood to succeed depends on how close the correct answer is to the source words:
+Here are the experiments showing that if the source vectors $$a$$ ("man"), $$a'$$ (king), and $$b$$ ("woman") are excluded, your likelihood to succeed depends on how close the correct answer is to the source words {% cite RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors %}:
 
 <figure>
 	<img src="/assets/images/analogy-sim-bias.png">
 	<figcaption>The share of BATS analogy questions predicted successfully vs similarity of the target vector to the source vectors</figcaption>
 </figure>
 
-So... does that sound like linguistic relations are reliably nice and regular, and vector offset lets us reliably control how we move in the semantic space? 
+So... does that still sound like vector offset lets us reliably control how we move in the semantic space? 
 
 All of the above are simply observations of actual behavior of word embeddings. From the theoretical perspective, there has never been much room for optimism:
  * Semantically, the idea of manipulating vector differences is reminiscent of componential analysis of the 1950s, and there are good reasons why that is no longer actively developed. For example, does "man" + "unmarried" as definition of "bachelor" apply to Pope?
@@ -74,28 +74,25 @@ All of the above are simply observations of actual behavior of word embeddings. 
 
 To sum up: if the formulation of vector offset excludes the source vectors, it will *appear* to work for the small original dataset, where much of its success can be attributed to basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations. And no, we cannot just discard most of language as "irregular" or "suffering from polysemy", because the goal is to be able to perform verbal reasoning, and that's what natural language is like. To do that, we are going to need either better representations, or a better method.
 
-## The impact on further research
+## (Lack of) impact on further research
 
-So much for the "linguistic regularities". But the problem is not just that the vector offset doesn't work as advertised. The focus of this post is the fact that the negative results memo never reached the same audience of thousands of researchers who were impressed by the original Mikolov's paper. 
+The problem is not just that the vector offset doesn't work as advertised. The focus of this post is the fact that the reports of negative results by teams from 4 countries never reached the same audience of thousands of researchers who were impressed by the original Mikolov's paper. 
 
-Obviously, I'm impartial here because some of this work is mine, but isn't it just counter-productive for the field in general? If there are serious updates to a widely cited but too-good-to-be-true paper, it is in everybody's interest for those updates to travel fast - because they could save people the effort of either doing the same work again, or the wasted effort of building on the original untested assumption. Right?
+Obviously, I'm impartial here because some of this work is mine, but isn't it just counter-productive for the field in general? If there are serious updates to a widely cited but too-good-to-be-true paper, it is in everybody's interest for those updates to travel fast. They could save people the effort of either doing the same work again, or the wasted effort of building on the original untested assumption. Right?
 
-Well, it's perhaps not coincidental that only one of all the above negative-results papers by 4 teams even made it to one of the main conferences. However, there are two ACL, one COLING, and one best-paper-mention ICML paper providing mathematical proofs of why the vector offset *should* work: {% cite GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity HakamiHayashiEtAl_2018_Why_does_PairDiff_work EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies AllenHospedales_2019_Analogies_Explained_Towards_Understanding_Word_Embeddings %}. Go figure. Only one paper also took a quantitative perspective, but bravely arrived at the opposite conclusion {% cite Schluter_2018_Word_Analogy_Testing_Caveat %}. 
+Well, it's perhaps not coincidental that only one of all the above negative-results papers even made it to one of the main conferences. At the same time, there are two ACL, one COLING, and one best-paper-mention ICML paper providing mathematical proofs of why the vector offset *should* work when it does {% cite GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity HakamiHayashiEtAl_2018_Why_does_PairDiff_work EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies AllenHospedales_2019_Analogies_Explained_Towards_Understanding_Word_Embeddings %}. Go figure. Only one paper also took a quantitative perspective, but bravely arrived at the opposite conclusion {% cite Schluter_2018_Word_Analogy_Testing_Caveat %}. 
 
-Don't take me wrong, I'm not out to shame anybody. First, research inherently involves mistakes, and I'm making them daily myself. Second, the papers offering proofs for vector offset are serious work aiming to establish important facts, and I'm sure the authors would not ignore the relevant negative evidence if they had been aware of it. And that is the general problem with low visibility of negative results that is not unique to NLP.
-
-Btw, if any of the authors of the above papers on proofs for vector offset are reading this - I would actually be very happy to be proved wrong. Vector offset is computationally cheap and conceptually simple, it would be fantastic for the whole field if it was a reliable tool with which we could perform actual meaning shifts across a wide range of linguistic relations. But so far the negative evidence stands unchallenged.
+I think the papers offering proofs for vector offset are serious work towards a model of how linguistic relations are represented in vector space. However, there is plenty of evidence that the linear offset model is simplistic and not representative of most of linguistic relations. Therefore, the case of these papers would have been much stronger if the above negative evidence was somehow refuted. Btw, I personally would be totally happy to be proved wrong on this, because this would mean that we have a computationally cheap and efficient method for performing actual meaning shifts across a wide range of linguistic relations. 
  
-An important implication of the vector offset problem is that analogies have attracted the attention of researchers on fairness/bias, where many practitioners use it in earnest. For example, here's a NIPS paper that started from accepting that the underlying vector offset mechanism works: {% cite BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings %}. But this one didn't: {% cite NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor %}. Let me quote its authors on the impact of the blind use of the vector offset:
+However, if the negative evidence is correct, this has serious implications for the field. Please note that the vector offset attracted the attention of researchers on fairness/bias, and many practitioners actually use it in earnest. For example, here's a NIPS paper that started from accepting that the underlying vector offset mechanism works: {% cite BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings %}. But this one didn't: {% cite NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor %}. Let me quote the authors on what it would mean to make social conclusions on the basis of unreliable metrics:
 
 <figure>
 	<img src="/assets/images/analogy-nissim.png">
 </figure>
 
+Analogical reasoning is an incredibly important aspect of human reasoning, and we *have* to get it right if we're ever to arrive at general AI. From what I've seen, linear vector offsets in word embeddings are not the right way to think of it. But there are plenty of other directions, including better methods for analogical reasoning {% cite DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen VineGevaEtAl_2018_Unsupervised_Mining_of_Analogical_Frames_by_Constraint_Satisfaction BouraouiJameelEtAl_2018_Relation_Induction_in_Word_Embeddings_Revisited DufterSchutze_2019_Analytical_Methods_for_Interpretable_Ultradense_Word_Embeddings %} and specialized representations for analogous pairs {% cite WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space JoshiChoiEtAl_2018_pair2vec_Compositional_Word-Pair_Embeddings_for_Cross-Sentence_Inference HakamiBollegala_2019_Learning_Relation_Representations_from_Word_Representations Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word_Embeddings %}. If we're not married to the ideal of natural language with impossibly regular relations, shouldn't we try to maximize the effort in more promising directions?
 
-Analogical reasoning is an incredibly important aspect of human reasoning, and we *have* to get it right if we're ever to arrive at general AI. From what I've seen, linear vector offsets in word embeddings are not the right way to think of it. But there are plenty of other directions, including better methods for analogical reasoning {% cite DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen VineGevaEtAl_2018_Unsupervised_Mining_of_Analogical_Frames_by_Constraint_Satisfaction BouraouiJameelEtAl_2018_Relation_Induction_in_Word_Embeddings_Revisited DufterSchutze_2019_Analytical_Methods_for_Interpretable_Ultradense_Word_Embeddings %} and specialized representations for analogous pairs {% cite WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space JoshiChoiEtAl_2018_pair2vec_Compositional_Word-Pair_Embeddings_for_Cross-Sentence_Inference HakamiBollegala_2019_Learning_Relation_Representations_from_Word_Representations Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word_Embeddings %}. If we're not married to the ideal of natural language with impossibly regular relations, shouldn't we try to maximize the effort in those more promising directions?
-
-## How we can encourage factchecking of widespread assumptions
+## How we can encourage fact-checking of widespread claims
 
 The problem with vector offset is not unique. Its components are (1) a shiny result that is intuitively appealing and becomes too-famous-to-be-questioned, (2) the low visibility of negative results, even when they are available. In NLP, the latter problem is aggravated by the insane Arxiv pace. When you work on "a truth universally accepted", and you can't even keep up with the list of papers that you *want* to read, why would you bother searching for papers nobody cited?
 
@@ -119,6 +116,3 @@ More visibility for impactful negative results, please. *Debunked assumption* + 
 
 {% include bib_footer.markdown %}
 
-## Leave a comment (Twitter)
-
-TBA
