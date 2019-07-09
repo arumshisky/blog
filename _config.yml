@@ -190,5 +190,5 @@ timezone: America/New_York # https://en.wikipedia.org/wiki/List_of_tz_database_t
 analytics:
   provider: "google-gtag" # false (default), "google", "google-universal", "custom"
   google:
-    tracking_id: "UA-127096214-1"
+    tracking_id: "UA-127096214-2"
 environment: production # should work, if not check if env set to development
