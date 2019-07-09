@@ -58,6 +58,7 @@ plugins:
   - jekyll-scholar
   - jekyll-sitemap
   - jekyll-paginate
+  - jekyll-redirect-from
 #  - jekyll-archives
 
 

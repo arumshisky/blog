@@ -7,6 +7,7 @@ categories: squib
 tags: academia methodology negresults review
 mathjax: true
 toc: true
+redirect_from: "/analogies/"
 excerpt: "Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov's word analogies."
 header:
     og_image: /assets/images/analogy-header.png
