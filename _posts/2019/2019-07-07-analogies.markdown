@@ -40,7 +40,7 @@ Unfortunately, they are not. It's actually been shown a while ago that the vecto
 
 ## All things wrong with word analogies.
 
-To the best of my knowledge, the first suspicions about vector offset arose when it didn't work for lexicographic relations {% cite KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces %}. Then the still-largest-to-date BATS dataset {% cite GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt %} offered a large balanced sample of 40 relations, among which the vector offset worked well only on those that happened to be included in the original Google dataset.
+To the best of my knowledge, the first suspicions about vector offset arose when it didn't work for lexicographic relations {% cite KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces %}. Then the BATS dataset {% cite GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt %} offered a larger balanced sample of 40 relations, among which the vector offset worked well only on those that happened to be included in the original Google dataset.
 
 <figure>
 	<img src="/assets/images/analogy-bats2.png">
