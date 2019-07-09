@@ -66,9 +66,13 @@ Here are the experiments showing that if the source vectors $$a$$ ("man"), $$a'$
 	<figcaption>The share of BATS analogy questions predicted successfully vs similarity of the target vector to the source vectors</figcaption>
 </figure>
 
-Does that sound like linguistic relations are reliably nice and regular, and vector offset lets us reliably control how we move in the semantic space? 
+So... does that sound like linguistic relations are reliably nice and regular, and vector offset lets us reliably control how we move in the semantic space? 
 
-To sum up: if your formulation of vector offset excludes the source vectors, it will *appear* to work for the small original dataset, where its success is largerly explainable by basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations. And no, we cannot just discard most of language as "irregular" or "suffering from polysemy", because the goal is to be able to perform verbal reasoning, and that's what natural language is like.
+All of the above are simply observations of actual behavior of word embeddings. From the theoretical perspective, there has never been much room for optimism:
+ * Semantically, the idea of manipulating vector differences is reminiscent of componential analysis of the 1950s, and there are good reasons why that is no longer actively developed. For example, does "man" + "unmarried" as definition of "bachelor" apply to Pope?
+ * Distributionally, even seemingly perfect analogy between *cat:cats* and *table:tables* are never perfect. For example, *turn the tables* is not the same as *turn the table*, but that difference does not apply to *cat:cats*. Given hundreds of such differences, why would we expect the aggregate representations to always perfectly line up? And if they did, would that even be a good representation of language semantics? If we are to ever have good language generation, we need to be able to take into account such nuances, not to discard them.
+
+To sum up: if the formulation of vector offset excludes the source vectors, it will *appear* to work for the small original dataset, where much of its success can be attributed to basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations. And no, we cannot just discard most of language as "irregular" or "suffering from polysemy", because the goal is to be able to perform verbal reasoning, and that's what natural language is like. To do that, we are going to need either better representations, or a better method.
 
 ## The impact on further research
 
