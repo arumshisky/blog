@@ -109,7 +109,9 @@ For example, in NAACL 2019 there were several interesting papers that could defi
 * limitations of attention as "explaining" mechanism {% cite JainWallace_2019_Attention_is_not_Explanation%},
 * multimodal QA systems that work better by simply ignoring some of the input modalities {% cite ThomasonGordonEtAl_2019_Shifting_Baseline_Single_Modality_Performance_on_Visual_Navigation_QA %}. 
 
-2 out of 3 of these great papers were posters, and I can not imagine how many more did not even make it through review. I would argue that it sends a message to the community, and it is the wrong message.
+2 out of 3 of these great papers were posters, and I can not imagine how many more did not even make it through review. I would argue that it sends a message to the people doing this important work, and it is the wrong message.
+
+On the other hand, imagine that such an award existed, and was granted, say, to {% cite Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC %}. Then everybody in the final session got to hear about the lack of transfer between 3 popular QA datasets. QA is one of the most popular tasks, so wouldn't it be good for the community to highlight the problem, so that next year more people focus on solving QA rather than particular datasets? Perhaps the impactful-negative-result paper could also be chosen so as to match next year's theme.
 
 ##  ***
 
