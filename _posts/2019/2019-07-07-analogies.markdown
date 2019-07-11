@@ -2,7 +2,7 @@
 layout: single
 title:  "On word analogies and negative results in NLP"
 date:   2019-07-07 16:00:47
-last_modified_at: 2019-07-07 16:00:47 
+last_modified_at: 2019-07-11 09:00:47 
 categories: squib
 tags: academia methodology negresults review
 mathjax: true
@@ -41,14 +41,12 @@ Unfortunately, they are not.
 
 ## All things wrong with word analogies.
 
-To the best of my knowledge, the first suspicions about vector offset arose when it didn't work for lexicographic relations {% cite KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces %}. Then the BATS dataset {% cite GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt %} offered a larger balanced sample of 40 relations, among which the vector offset worked well only on those that happened to be included in the original Google dataset.
+To the best of my knowledge, the first suspicions about vector offset arose when it didn't work for lexicographic relations {% cite KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces %} - a pattern later confirmed by {% cite KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It %}. Then the BATS dataset {% cite GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt %} offered a larger balanced sample of 40 relations, among which the vector offset worked well only on those that happened to be included in the original Google dataset.
 
 <figure>
 	<img src="/assets/images/analogy-bats2.png">
 	<figcaption>When does the vector offset work? 40 relations from the BATS dataset</figcaption>
-</figure>
-
-Roughly concurrently with BATS, Australian experiments on 15 relations in English also showed difficulties with lexical semantics {% cite VylomovaRimmelEtAl_2016_Take_and_took_gaggle_and_goose_book_and_read_evaluating_utility_of_vector_differences_for_lexical_relation_learning %}. A later study constructed a comparable (NOT google-translated) BATS dataset for Japanese, which showed a similar pattern even for subcharacter-based embeddings {% cite KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It %}. 
+</figure> 
 
 So why doesn't it work, if language relations are so neat and regular? Well, it turns out that it wouldn't have worked in the first place if the 3 source words were not excluded from the set of possible answers. In the original formulation, the solution to $$king-man+woman$$ should be $$queen$$, given that the vectors $$king$$, $$man$$ and $$woman$$ are excluded from the set of possible answers. Tal Linzen showed that for some relations you get considerable accuracy by simply getting the nearest neighbor of $$woman$$ word, or the one most similar to both $$woman$$ and $$king$$ (without $$man$$) {% cite Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies %}. And here's what happens if you don't exclude any of them {% cite RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors %}:
 
@@ -69,11 +67,12 @@ Here are the experiments showing that if the source vectors $$a$$ ("man"), $$a'$
 
 So... does that still sound like vector offset really reliably controls how we move in the semantic space? 
 
-All of the above are simply observations of actual behavior of word embeddings. From the theoretical perspective, there has never been much room for optimism:
+One could object that this is due to bad word embeddings, and ideal embeddings would have every possible relation encoded so that it would be recoverable from vector offset. That remains to be shown empirically, but from theoretical perspective it is not likely to happen:
+
  * Semantically, the idea of manipulating vector differences is reminiscent of componential analysis of the 1950s, and there are good reasons why that is no longer actively developed. For example, does "man" + "unmarried" as definition of "bachelor" apply to Pope?
  * Distributionally, even seemingly perfect analogy between *cat:cats* and *table:tables* are never perfect. For example, *turn the tables* is not the same as *turn the table*, they will appear in different contexts - but that difference does not apply to *cat:cats*. Given hundreds of such differences, why would we expect the aggregate representations to always perfectly line up? And if they did, would that even be a good representation of language semantics? If we are to ever have good language generation, we need to be able to take into account such nuances, not to discard them.
 
-To sum up: if the formulation of vector offset excludes the source vectors, it will *appear* to work for the small original dataset, where much of its success can be attributed to basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations. And no, we cannot just discard most of language as "irregular" or "suffering from polysemy", because the goal is to be able to perform verbal reasoning, and that's what natural language is like. 
+To sum up: if the formulation of vector offset excludes the source vectors, it will appear to work for the small original dataset, where much of its success can be attributed to basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations. And no, we cannot just discard most of language as "irregular" or "suffering from polysemy", because the goal is to be able to perform verbal reasoning, and that's what natural language is like. 
 
 ## (Lack of) impact on further research
 
