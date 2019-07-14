@@ -30,7 +30,7 @@ The readers are not necessarily triple-checking either. For an academic publicat
 
 I think this is what happened to word analogies {% cite MikolovChenEtAl_2013_Efficient_estimation_of_word_representations_in_vector_space %}. Its [over 11K citations](https://scholar.google.com/citations?hl=en&user=oBu8kMMAAAAJ) are mostly due to the hugely popular word2vec architecture, but the idea of word analogies rode the same wave. A separate paper on "linguistic regularities" {% cite MikolovYihEtAl_2013_Linguistic_Regularities_in_Continuous_Space_Word_Representations %} currently has extra 2K citations.
 
-These citations are not just something from 2013 either. Because it's so tempting to believe that language really works this way, the word analogies are still everywhere. Only in June 2019, I heard them mentioned in the first 10 minutes of a NAACL invited talk, in a word embeddings lecture in the CISS dialogue summer school, and all over Twitter. It just soo makes sense that language relations are all neat and regular like this: 
+These citations are not just something from 2013 either. Because it's so tempting to believe that language really works this way, the word analogies are still everywhere. Only in June 2019, I heard them mentioned in the first 10 minutes of a NAACL invited talk, in a word embeddings lecture in the [CISS dialogue summer school](http://ciss.deephack.me/), and all over Twitter. It just soo makes sense that language relations are all neat and regular like this: 
 
 <figure>
 	<img src="/assets/images/analogy-mikolov.png" class="width70">

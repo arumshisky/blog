@@ -28,13 +28,12 @@ author:
   name: "Anna Rogers"
   avatar: "/assets/images/aro.png"
   bio: "Thinking aloud: computational linguistics, cognition, AI and NLP"
-#  location: "Bengaluru, India"
   uri: "http://www.cs.uml.edu/~arogers/"
   twitter: "annargrs"
   github: "annargrs"
+  vine: "doesn't matter"
 #  medium: ".aravindiyer"
   linkedin: "annargrs"
-
 # linking to author account on Twitter
 twitter:
   username: "annargrs"

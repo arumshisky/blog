@@ -36,6 +36,7 @@
       <p class="author__bio" itemprop="description">
         {{ author.bio }}
       </p>
+    <!--p>Post-doctoral associate at <a href="">Text Machine Lab</a>, University of Massachusetts Lowell</p-->
     {% endif %}
   </div>
 
@@ -56,10 +57,11 @@
         {% endfor %}
       {% endif %}
 
+
       {% if author.uri %}
         <li>
           <a href="{{ author.uri }}" itemprop="url">
-            <i class="fas fa-fw fa-link" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].website_label | default: "Website" }}
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].website_label | default: "Homepage" }}
           </a>
         </li>
       {% endif %}
@@ -249,6 +251,7 @@
         </li>
       {% endif %}
 
+      <!--p>
       {% if author.vine %}
         <li>
           <a href="https://vine.co/u/{{ author.vine }}" itemprop="sameAs" rel="nofollow noopener noreferrer">
@@ -256,6 +259,16 @@
           </a>
         </li>
       {% endif %}
+      </p-->
+
+      {% if author.vine %}
+        <li>
+          <a href="http://text-machine.cs.uml.edu/lab/">
+            <i class="fas fa-fw fa-university" aria-hidden="true"></i> UMass Lowell, <br/>Text Machine Lab
+          </a>
+        </li>
+      {% endif %}
+
 
       {% include author-profile-custom-links.html %}
     </ul>
