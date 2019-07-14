@@ -81,8 +81,8 @@ keep_files:
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
-head_scripts:
-  - https://code.jquery.com/jquery-3.2.1.min.js
+#head_scripts:
+#  - https://code.jquery.com/jquery-3.2.1.min.js
 
 
 
