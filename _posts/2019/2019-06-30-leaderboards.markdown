@@ -111,4 +111,4 @@ If we are to make actual progress, we need to make sure new systems get fame and
 
 ## Leave a comment (Twitter)
 
-TBA
+[https://twitter.com/annargrs/status/1152194347942731776](https://twitter.com/annargrs/status/1152194347942731776)
