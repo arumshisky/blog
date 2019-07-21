@@ -3,7 +3,7 @@ layout: single
 title:  "A conversation with an evangelical Trump supporter"
 date:   2019-07-21 11:00:47 -0400
 categories: squib
-tags: academia social
+tags: academia socialNLP
 mathjax: false
 redirect_from: "/conversation/"
 toc: true
@@ -17,7 +17,7 @@ header:
 </figure>
 
 
-> This blog is NOT political, even though the story below will show some of my political views. I'm sharing it because it highlights a burning problem in computational social science that is getting nowhere near enough attention. Reader beware.
+> This blog is NOT political, even though the story below will show some of my political views. I'm sharing it because it highlights a burning issue in computational social science that is getting nowhere near enough attention. Reader beware.
 
 ## Academics and Populism
 
@@ -35,16 +35,16 @@ The Brexit movie provides a helpful demonstration of what happens when we're try
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YpP6ZdsBgmE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="padding-top:1em; padding-bottom:1em;"></iframe>
 
-No. Facts won't help because the populst is talking to the emotions of these people. [Until the emotions are addressed, no facts will get through](https://qz.com/838321/nonviolent-communication-the-scientifically-proven-step-by-step-guide-to-having-a-breakthrough-conversation-across-party-lines/).
+No. Fact-checking won't help because the populst is talking to the emotions of these people. [Until the emotions are addressed, no facts will get through](https://qz.com/838321/nonviolent-communication-the-scientifically-proven-step-by-step-guide-to-having-a-breakthrough-conversation-across-party-lines/).
 
 ## Case study: an evangelical Trump supporter
 
-Here's an Uber ride I will never forget. I was in a new area (Buffalo, NY), I wanted to learn more about it, and the driver (let's call him Dave) was very talkative. According to Dave, the place was very vibrant, with all kinds of jobs, opportunities, fun, strong economy (it didn't actually look like any of that to me, and Dave's own car was quite beat-up). It was also full of good God-loving people who supported Trump.
+Here's an Uber ride I will never forget. I was in a new area (Buffalo, NY), I wanted to learn more about it, and the driver (let's call him Dave) was very talkative. According to Dave, the place was very vibrant, with all kinds of jobs, opportunities, fun, and strong economy (it didn't actually look like any of that to me, and Dave's own car was quite beat-up). It was also full of good God-loving people who supported Trump.
 
 Among the theses that came my way in a steady stream, with almost no prompting, were the following:
 
 * Democrats are trying to impeach Trump because he is not allowing them to take the Word of God from schools and courts.
-* Trump is mentioned in Bible. He's obviously the trumpet before the judgement day. There's a prophecy of him ruling for 8 years.
+* Trump is mentioned in Bible. He's obviously the trumpet before the Judgement Day. There's a prophecy of him ruling for 8 years.
 * Trump is fundamentally a good Christian who never did any of the bad stuff that the media are lying about.
 * All technology is evil (including Dave's own car and his phone, except when he uses the phone for reading Bible). But Trump, thankfully, is taking the country back to 1800s when it was the richest country and everything was good and people worried about God and not stars in the sky.
 
@@ -52,7 +52,7 @@ Dear reader of my academic blog with a PhD degree: I know what you're thinking. 
 
 I have to admit I am a terrible actress. I was unable to maintain a straight face, and was only saved by my hat and the fact that Dave was driving and watching the road rather than me. 
 
-Still, I'm proud to say that I was able to not laugh, to not ridicule any of the above theses, to not sound as a militant atheist. To not come off as an intellectual jerk with zero points of intersection with Dave's version of reality. I did get out of his car with his saying it was nice talking to me.
+Still, I'm proud to say that I was able to not laugh, to not ridicule any of the above theses, to not sound as a militant atheist. To not come off as an elitist intellectual jerk with zero points of intersection with Dave's version of reality. I did get out of his car with his saying it was nice talking to me.
 
 Why did I bother? Why should we all try harder for such an outcome? Simply because there are many more people like Dave than like you and me. And we all live in democracies, a.k.a. the worst form of government except all others. Unless our minority manages to share our knowledge in a way that would actually address the concerns and improve the lives of the frustrated majority, the populism is going to march on.
 
@@ -72,10 +72,9 @@ In conversation with Dave, I only get the points for being able to sustain a civ
   
 > 2) **Avoid non-starters**. I did ask how come Christians vote for Trump with his self-admitted grabbing women. Dave was unwilling to believe anything coming from the press, and I probably sounded confrontational.
    
-> 3) **Mention you are a researcher**. Even if you fail to convey any information, hopefully there would be a memory of researchers being real and nice people, and not completely out of touch with the reality of Dave's life. Most likely, he has no face on the broad category of "experts", like I didn't have a face for "evangelical Trump supporters".
+> 3) **Mention being a researcher**. Even if you fail to convey any information, hopefully there would be a memory of researchers being real and nice people, and not completely out of touch with the reality of Dave's life. Most likely, he has no face for the broad category of "experts", like I didn't have a face for "evangelical Trump supporters".
     
-  > 4) **Practice your poker face**.
-
+> 4) **Practice the poker face**.
 
 People inherently prefer simplicity and coherence. We all build our own biased model of the world as we go, and we will try to just ignore/discard any facts not fitting in. Sawing doubt is only possible by presenting conflicting evidence on something that a mind is not yet cemented against. In this case, it turns out that Dave does NOT actually follow news obsessively, and facts that come from a friendly-looking concrete person rather than the abstract enemy-of-the-people-press might get in - given that the empathy has been established. 
 
@@ -111,4 +110,4 @@ For the last point, let's all start offline. When we are lucky to meet a Dave, l
 
 ## Leave a comment (Twitter)
 
-[https://twitter.com/annargrs/status/1152194347942731776](https://twitter.com/annargrs/status/1152194347942731776)
+[https://twitter.com/annargrs/status/1153027705413296131](https://twitter.com/annargrs/status/1153027705413296131)
