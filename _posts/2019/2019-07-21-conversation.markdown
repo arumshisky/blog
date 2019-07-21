@@ -4,10 +4,10 @@ title:  "A conversation with an evangelical Trump supporter"
 date:   2019-07-21 11:00:47 -0400
 categories: squib
 tags: academia social
-mathjax: true
+mathjax: false
 redirect_from: "/conversation/"
 toc: true
-excerpt: "The pain and insight of talking with people outside your filter bubble."
+excerpt: "The pain and insight of talking to people outside your ech chamber."
 header:
     og_image: /assets/images/puzzle-connect.jpg
 ---
@@ -83,7 +83,7 @@ What I did do right was **reframing**. Dave and I both care about environmental 
 
 ## Implications for computational social science
 
-So, we've known about the echo chamber effects {% cite Pariser_2011_Beware_online_filter_bubbles Pariser_2011_filter_bubble_what_Internet_is_hiding_from_you %} for a while. Still, nothing much seems to be happening: we never talk to Daves, and Daves' frustration that the populists are channeling is partly due to the experts' being out of touch. 
+So, we've known about the echo chamber effects {% cite Pariser_2011_Beware_online_filter_bubbles Pariser_2011_filter_bubble_what_Internet_is_hiding_from_you %} for a while. Still, nothing much seems to be happening. In fact, even when the users are shown just how coccooned they are, the diversity of their connections does not increase {% cite GillaniYuanEtAl_2018_Me_My_Echo_Chamber_and_I_Introspection_on_Social_Media_Polarization %}.
 
 There are several successful projects for starting conversations across political spectrum, such as [Hi From The Other Side](https://www.hifromtheotherside.com/) and [Fiskitt](https://fiskkit.com/).  [Kialo](https://www.kialo.com/) is an excellent debate tool. There are also a few tools for visualizing the bubbles, such as [Blue Feed, Red Feed by Wall Street Journal](http://graphics.wsj.com/blue-feed-red-feed/), [Read Across the Aisle](www.readacrosstheaisle.com), [All sides](https://www.allsides.com/unbiased-balanced-news). Multiple organizations are now engaged in fact-checking and flagging clickbait and fake news stories, e.g. [FactCheck.org](https://www.factcheck.org/fake-news/). Still, all these efforts only target the people who actively self-select and already assume the other side is worth talking to. Dave would probably not be there. 
 
