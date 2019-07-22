@@ -105,6 +105,14 @@ Imagine that tomorrow we wake up to a paper presenting a Don't-Even-Try-Net (mod
 
 If we are to make actual progress, we need to make sure new systems get fame and awards only with rigorous proofs - including the multiple runs of training on the same data as the baselines, ablation studies, estimates of compute and stability. This would inherently encourage more hypothesis-driven research. For instance, the dependency objective in XLNet looks really interesting, and I would love to know how much advantage it actually confers on different tasks, given that dependency-based word embeddings turned out to be of limited use {% cite LiLiuEtAl_2017_Investigating_Different_Syntactic_Context_Types_and_Context_Representations_for_Learning_Word_Embeddings LapesaEvert_2017_Large-scale_evaluation_of_dependency-based_DSMs_Are_they_worth_the_effort %}.
 
+## Update of 22.07.2019
+
+Oh wow, this post was retweeted over 100 times and [made it to Sebastian Ruder's NLP newsletter](http://newsletter.ruder.io/)! Clearly, the issue of fair evaluation of huge models resonates with the community deeply. 
+
+Sebastian points out that Transformers make an important contribution in showing us the limitations of more-data-and-compute approach, and, ironically, also starting to encourage research on the leaner models. I fully agree with both points, and of course the Transformer in itself is an undeniable breakthrough. My point is simply that the current leaderboards implicitly encourage a blend of architectures, data and compute that are impossible to disentangle and replicate. If we are on a quest for the best possible NLP *model*, this is a problem we are going to have to solve.
+
+*Model training cost clarification*. the price of training XLNet was estimated as follows: the paper states that it was trained on 512 TPU v3 chips for 2.5 days, i.e. 60 hours. [Google on-demand price for TPU v-3](https://cloud.google.com/tpu/pricing) is currently $8, which amounts to $245760 before fine-tuning. [James Bradbury points out](https://twitter.com/jekbradbury/status/1143397614093651969) that authors could actually mean "devices" or "cores", which would bring it down to $61,440 or $30,720, respectively. I would add that even in this most optimistic scenario the model would still cost [more than the stipend of the graduate student working on it](https://www.glassdoor.com/Salaries/phd-student-salary-SRCH_KO0,11.htm), which would be unrealistic for most labs. 
+
 ##  ***
 
 {% include bib_footer.markdown %}
