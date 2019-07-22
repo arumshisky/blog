@@ -1,13 +1,13 @@
 ---
 layout: single
-title:  "A conversation with an evangelical Trump supporter"
 date:   2019-07-21 11:00:47 -0400
+title:  "Talking to people outside your echo chamber: SocNLP challenges"
 categories: squib
 tags: academia socialNLP
 mathjax: false
 redirect_from: "/conversation/"
 toc: true
-excerpt: "The pain and insight of talking to people outside your ech chamber."
+excerpt: "A post inspired by an Uber ride with a Trump supporter."
 header:
     og_image: /assets/images/puzzle-connect.jpg
 ---
