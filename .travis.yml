@@ -2,7 +2,8 @@ language: ruby
 rvm:
 - 2.3.1
 install:
-- bundle install --full-index
+- bundle update html-pipeline
+- bundle install
 deploy:
   provider: pages
   skip_cleanup: true
