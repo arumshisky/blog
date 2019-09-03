@@ -15,11 +15,17 @@ I strongly believe that getting machines to understand natural language, if at a
 
 Don't take just my word for it. Here's [Yoav Goldberg's](https://allenai.org/ai2-israel/) slide from his [SpacyIRL 2019 talk](https://www.youtube.com/watch?v=e12danHhlic): the future NLP will require both linguistic and machine learning expertise. 
 
-![](/assets/images/goldberg-spacyirl.png)
+
+<figure>
+	<img src="/assets/images/goldberg-spacyirl.png"/>
+</figure>
+
 
 Consider also the raising investment in cross-disciplinary programs in all kinds of data science, aimed to train the new "bilingual" task force. [State of AI 2019](https://www.slideshare.net/StateofAIReport/state-of-ai-report-2019-151804430) reports the following: 
 
-![](/assets/images/state-of-ai-report-2019-48-1024.jpg)
+<figure>
+	<img src="/assets/images/state-of-ai-report-2019-48-1024.jpg"/>
+</figure>
 
 So, we need to train this new taskforce. Great idea, right? Let's just do it.
 
@@ -56,11 +62,13 @@ This means two things for the lecturer:
 * at any point you can safely assume that a part of the audience is either bored or confused.
 * at any point you can get any kind of question, from something very basic to something you can't even answer on the spot.
 
-To balance out boredom and confusion, and also to acknowledge the impossibility of humans attending to any one thing for 90 minutes straight, my strategy was to split the class into a short lecture (~30-40 min out of 90) and a hands-on tutorial in Jupyter. I prepared the lectures with the confused part of the audience in mind, and I assumed that the bored part will just dive into Jupyter and keep themselves occupied that way.
+To balance out boredom and confusion, and also to acknowledge the impossibility of humans attending to any one thing for 90 minutes straight, my strategy was to split the class into a short lecture (~30-40 min out of 90) and a hands-on tutorial in Jupyter. I prepared the lectures with the confused part of the audience in mind, and I assumed that the bored part will just dive into Jupyter and keep themselves occupied.
 
 Still, I was definitely not prepared for everything:
 
+<div style="margin: 3em auto !important;">
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Teaching an intro PyTorch tutorial at ESSLLI. Audience is 80% linguists, and I start very confident I know how to talk to former colleagues.<br><br>A question halfway into the tutorial:<br>- Sorry, what is &quot;GPU&quot;?<br><br>(Sound of my brain overclocking to reassess the rest of the material)</p>&mdash; Anna Rogers (@annargrs) <a href="https://twitter.com/annargrs/status/1161237977638625281?ref_src=twsrc%5Etfw">August 13, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
 
 ## Problem 2: basic Python is not enough
 
@@ -102,7 +110,9 @@ So this is what I learned the hard way, and I hope might be helpful for other pe
 
 I'd like to thank ESSLLI organizers, the great city of Riga (with its fantastic food), and, of course, all of my very brave students. 
 
-![](/assets/images/esslli2019.jpg)
+<figure>
+	<img src="/assets/images/esslli2019.jpg"/>
+</figure>
 
 I'm particularly grateful to the students who came up later and shared their stories. A few of them were in strong computational programs, but many were theoretical linguists, language teachers, translators, students of literature, in departments without a single computational linguist, with no one to ask for advice. These are the people who keep struggling with online coding courses in their spare time, and nobody's there to tell them that it's totally normal to spend 5 hours hunting for a silly bug. At least 50% of the class were women, which means 2x impostor syndrome. Rather than getting recognized for their attempt to go across the fence, they feel like they're wasting time on something they will never be able to do well. 
 
