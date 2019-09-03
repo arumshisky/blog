@@ -1,0 +1,1474 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>How the Transformers broke NLP leaderboards - Hacking semantics</title>
+<meta name="description" content="With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hacking semantics">
+<meta property="og:title" content="How the Transformers broke NLP leaderboards">
+<meta property="og:url" content="https://hackingsemantics.xyz/2019/leaderboards/">
+
+
+  <meta property="og:description" content="With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?">
+
+
+
+  <meta property="og:image" content="https://hackingsemantics.xyz/assets/images/compete.png">
+
+
+
+  <meta name="twitter:site" content="@annargrs">
+  <meta name="twitter:title" content="How the Transformers broke NLP leaderboards">
+  <meta name="twitter:description" content="With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?">
+  <meta name="twitter:url" content="https://hackingsemantics.xyz/2019/leaderboards/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://hackingsemantics.xyz/assets/images/compete.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-06-30T22:00:47-04:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://hackingsemantics.xyz/2019/leaderboards/">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hacking semantics Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+<!--bibtex hack-->
+<script>
+function showBibtex(bibDiv) {
+  var x = document.getElementById(bibDiv);
+  if (x.style.display === "none" || x.style.display === '') {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="icon" type="image/png" href="/assets/images/logo-3col.png">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" type="text/css">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo-3col.png" alt=""></a>
+        
+        <a class="site-title" href="/">Hacking Semantics</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >All Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/aro.png" alt="Anna Rogers" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Anna Rogers</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Thinking aloud: computational linguistics, cognition, AI and NLP
+      </p>
+    <!--p>Post-doctoral associate at <a href="">Text Machine Lab</a>, University of Massachusetts Lowell</p-->
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+
+      
+        <li>
+          <a href="http://www.cs.uml.edu/~arogers/" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i> Homepage
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--p>
+      
+        <li>
+          <a href="https://vine.co/u/doesn't matter" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-vine" aria-hidden="true"></i> Vine
+          </a>
+        </li>
+      
+      </p-->
+
+      
+        <li>
+          <a href="http://text-machine.cs.uml.edu/lab/">
+            <i class="fas fa-fw fa-university" aria-hidden="true"></i> UMass Lowell, <br/>Text Machine Lab
+          </a>
+        </li>
+      
+
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!--label for="ac-toc">Toggle Menu</label-->
+  <ul class="nav__items">
+    
+  </ul>
+</nav>
+    
+  
+
+
+<!-- stolen from here:
+https://www.gungorbudak.com/blog/2017/12/08/tags-cloud-sorted-by-post-count-for-jekyll-blogs-without-plugins/
+-->
+<!--div class="tag-cloud">
+
+
+
+
+    
+    
+    
+    
+    <span class="tag-size-5">
+        <a class="tag-link" href="/tags/#academia/" rel="tag">#academia</a> (5)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-2">
+        <a class="tag-link" href="/tags/#methodology/" rel="tag">#methodology</a> (2)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#negresults/" rel="tag">#negresults</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#review/" rel="tag">#review</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#socialNLP/" rel="tag">#socialNLP</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#teaching/" rel="tag">#teaching</a> (1)
+    </span>
+
+
+
+
+
+</div-->
+
+
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="How the Transformers broke NLP leaderboards">
+    <meta itemprop="description" content="With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?">
+    <meta itemprop="datePublished" content="June 30, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">How the Transformers broke NLP leaderboards
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  11 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> </h4></header>
+              <ul class="toc__menu">
+  <li><a href="#so-whats-wrong-with-the-leaderboards">So what’s wrong with the leaderboards?</a></li>
+  <li><a href="#wait-this-was-supposed-to-happen">Wait, this was supposed to happen!</a></li>
+  <li><a href="#why-huge-models--leaderboards--trouble">Why huge models + leaderboards = trouble</a></li>
+  <li><a href="#possible-solutions">Possible solutions</a></li>
+  <li><a href="#summing-up">Summing up</a></li>
+  <li><a href="#update-of-22072019">Update of 22.07.2019</a></li>
+  <li><a href="#">***</a></li>
+  <li><a href="#references">References</a></li>
+  <li><a href="#cite-this-post">Cite this post</a></li>
+  <li><a href="#leave-a-comment-twitter">Leave a comment (Twitter)</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <figure>
+	<img src="/assets/images/compete.png" />
+</figure>
+
+<blockquote>
+  <p>This post summarizes some of the recent XLNet-prompted discussions on Twitter and offline. Idea credits go to Yoav Goldberg, Sam Bowman, Jason Weston, Alexis Conneau, Ted Pedersen, fellow members of Text Machine Lab, and many others. Any misconfiguration of those ideas is my own.</p>
+</blockquote>
+
+<p>A big reason why NLP is such an actively developed area is the leaderboards: they are the core of multiple shared tasks, benchmark systems like GLUE, and individual datasets such as SQUAD and AllenAI datasets. Leaderboards stimulate competitions between engineering teams, helping them to develop better and better models to tackle human language.</p>
+
+<p>Or do they?</p>
+
+<h2 id="so-whats-wrong-with-the-leaderboards">So what’s wrong with the leaderboards?</h2>
+
+<p>Typically a leaderboard for an NLP task X looks roughly as follows:</p>
+
+<div class="table-wrapper">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">System</th>
+        <th style="text-align: center">Citation</th>
+        <th style="text-align: center">Performance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">System A</td>
+        <td style="text-align: center">Smith et al. 2018</td>
+        <td style="text-align: center"><strong>76.05</strong></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">System B</td>
+        <td style="text-align: center">Li et al. 2018</td>
+        <td style="text-align: center">75.85</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">System C</td>
+        <td style="text-align: center">Petrov et al. 2018</td>
+        <td style="text-align: center">75.62</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>This format is followed both by online leaderboards (such as the GLUE benchmark), and academic papers (when comparing the proposed model to the baselines).</p>
+
+<p>Now, the test performance of the model is far from the only thing that make it novel or even interesting, but it is the only thing that is in the leaderboard. Since DL is such a big zoo with different architectures, there is no standard way to present additional information such as model parameters and training data. In the papers, sometimes these details are in the methodology section, sometimes in the appendices, sometimes in the comments on github repo or nowhere at all. In an online leaderboard, the details of each system can only be retrieved from the link to the paper (if one is available), or by going through the code in the repository.</p>
+
+<p>In an increasingly busy world, how many of us actually look for those details, unless we are reviewing or re-implementing? The simple leaderboard already gives us the information we most care about: who SOTA-ed. Generally, our minds are lazy and tend to receive such messages uncritically, ignoring any caveats even they are immediately present <a class="citation" href="#Kahneman_2013_Thinking_fast_and_slow">(Kahneman, 2013)</a>. And if we have to actively hunt for the caveats… well, no chance. The winner receives all the Twitter hype, potentially <a href="https://medium.com/@ryancotterell/we-should-anonymize-model-names-during-peer-review-bcab0cc78946">gaining unfair advantage in the blind review</a>.</p>
+
+<p>There has been a lot of discussion of the dangers of the SOTA-centric approach. If the reader’s main takeaway is going to be the leaderboard, that increases the perception that the publication-worthiness is only achieved by beating the SOTA. That perception results in a flood of papers with marginal and often unreproducible performance gains <a class="citation" href="#Crane_2018_Questionable_Answers_in_Question_Answering_Research_Reproducibility_and_Variability_of_Published_Results">(Crane, 2018)</a>. It also creates a huge problem for shared tasks, when non-winners feel like it’s not even worth their while to write the paper on their work <a class="citation" href="#EscartinReijersEtAl_2017_Ethical_Considerations_in_NLP_Shared_Tasks">(Escartín et al., 2017)</a>, see also <a href="https://medium.com/@tpederse/semeval-discussions-naacl-2019-4b73cd6734c0">the recent discussion of the issue by Ted Pedersen</a>).</p>
+
+<p>The focus of this post is yet another problem with the leaderboards that is relatively recent. Its cause is simple: fundamentally, <strong>a model may be better than its competitors by building better representations from the available data - or it may simply use more data, and/or throw a deeper network at it</strong>. When we have a paper presenting a new model that also uses more data/compute than its competitors, credit attribution becomes hard.</p>
+
+<p>The most popular NLP leaderboards are currently dominated by Transformer-based models. BERT <a class="citation" href="#DevlinChangEtAl_2019_BERT_Pre-training_of_Deep_Bidirectional_Transformers_for_Language_Understanding">(Devlin, Chang, Lee, &amp; Toutanova, 2019)</a> received the best paper award at NAACL 2019 after months of holding SOTA on many leaderboards. Now the hot topic is XLNet <a class="citation" href="#YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding">(Yang et al., 2019)</a> that is said to overtake BERT on GLUE and some other benchmarks. Other Transformers include GPT-2 <a class="citation" href="#RadfordWuEtAl_2019_Language_models_are_unsupervised_multitask_learners">(Radford et al., 2019)</a>, ERNIE <a class="citation" href="#ZhangHanEtAl_2019_ERNIE_Enhanced_Language_Representation_with_Informative_Entities">(Zhang et al., 2019)</a>, and the list is growing.</p>
+
+<p>The problem we’re starting to face is that these models are HUGE. While the source code is available, in reality it is beyond the means of an average lab to reproduce these results, or to produce anything comparable. For instance, XLNet is trained on 32B tokens, and the price of using 500 TPUs for 2 days is over $250,000. Even fine-tuning this model is getting expensive.</p>
+
+<h2 id="wait-this-was-supposed-to-happen">Wait, this was supposed to happen!</h2>
+
+<p>On the one hand, this trend looks predictable, even inevitable: people with more resources <em>will</em> use more resources to get better performance. One could even argue that a huge model proves its scalability and fulfils the inherent promise of deep learning, i.e. being able to learn more complex patterns from more information. Nobody knows how much data we actually need to solve a given NLP task, but more should be better, and limiting data seems counter-productive.</p>
+
+<p>On that view - well, from now on top-tier NLP research is going to be something possible only for industry. Academics will have to somehow up their game, either by getting more grants or by collaborating with high-performance computing centers. They are also welcome to switch to analysis, building something on top of the industry-provided huge models, or making datasets.</p>
+
+<p>However, in terms of overall progress in NLP that might not be the best thing to do. Here is why.</p>
+
+<h2 id="why-huge-models--leaderboards--trouble">Why huge models + leaderboards = trouble</h2>
+
+<p>The chief problem with the huge models is simply this:</p>
+
+<blockquote>
+  <p><strong>“More data &amp; compute = SOTA” is NOT research news</strong>.</p>
+</blockquote>
+
+<p>If leaderboards are to highlight the actual progress, we need to incentivize new architectures rather than teams outspending each other. Obviously, huge pretrained models are valuable, but unless the authors show that their system consistently behaves differently from its competition with comparable data &amp; compute, it is not clear whether they are presenting a model or a resource.</p>
+
+<p>Furthermore, much of this research is not reproducible: nobody is going to spend $250,000 just to repeat XLNet training. Given the fact that its ablation study showed only 1-2% gain over BERT in 3 datasets out of 4 <a class="citation" href="#YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding">(Yang et al., 2019)</a>, we don’t actually know for sure that its masking strategy is more successful than BERT’s.</p>
+
+<p>At the same time, the development of leaner models is dis-incentivized, as their task is fundamentally harder and the leaderboard-oriented community only rewards the SOTA. That, in its turn, prices out of competitions academic teams, which will not result in students becoming better engineers when they graduate.</p>
+
+<p>Last but not the least, huge DL models are often overparametrized <a class="citation" href="#FrankleCarbin_2019_Lottery_Ticket_Hypothesis_Finding_Sparse_Trainable_Neural_Networks">(Frankle &amp; Carbin, 2019; Wu, Fan, Baevski, Dauphin, &amp; Auli, 2019)</a>. As an example, the smaller version of BERT achieves better scores on a number of syntax-testing experiments than the larger one <a class="citation" href="#Goldberg_2019_Assessing_BERTs_Syntactic_Abilities">(Goldberg, 2019)</a>. The fact that DL models require a lot of compute is not necessarily a bad thing in itself, but <em>wasting</em> compute is not ideal for the environment <a class="citation" href="#StrubellGaneshEtAl_2019_Energy_and_Policy_Considerations_for_Deep_Learning_in_NLP">(Strubell, Ganesh, &amp; McCallum, 2019)</a>.</p>
+
+<h2 id="possible-solutions">Possible solutions</h2>
+
+<p>NLP leaderboards are in real danger of turning into something where we give up on reproducibility and just watch one Google model outperform another Google model every couple of months. To avoid that, <strong>the leaderboards need to change</strong>.</p>
+
+<!-- However, it is hard to do fairly, because DL architectures are such a big zoo: the impact of the training time, size and nature of the training data, number and impact of individual parameters may vary widely across architectures, so fixing any one of these may disadvantage a class of models.  -->
+
+<p>In principle, there are two possible solutions:</p>
+
+<p>1) For a specific task, it should be possible to <strong>provide a standard training corpus, and limit the amount of compute to that used by a strong baseline</strong>. If the baseline is itself something like BERT, this will incentivize the development of models that make better use of resources. If a system uses pre-trained representations (word embeddings, BERT, etc.), the size of pre-training data should be factored into the final score.</p>
+
+<p>2) For a suite of tasks like GLUE, we could <strong>let the participants use however much data&amp;compute they wanted, but factor that into the final score</strong>. The leaderboard itself should make it immediately clear what is the performance of a model over the baseline relative to the amount of resources it consumed.</p>
+
+<p>Both of these approaches require a reliable way to estimate the computation cost. At the minimum, it could be the inference time as estimated by the task organizers. Aleksandr Drozd (RIKEN CCS) suggests the best way is to just report the FLOPs count, which seems to be already possible for both <a href="https://github.com/Lyken17/pytorch-OpCounter">PyTorch</a> and <a href="https://medium.com/@fanzongshaoxing/model-flops-measurement-in-tensorflow-a84084bbb3b5">TensorFlow</a>. Perhaps it would also be possible to build a general service for shared tasks that would receive a DL model, train it for one epoch on one batch of data, and provide the researchers with the estimate.</p>
+
+<p>Estimating the training data is also not straightforward: a plain text corpus should be worth less than an annotated corpus or Freebase. However, this should be possible to weigh. For example, unstructured data could be estimated as raw token count <script type="math/tex">N</script>, augmented/parsed data - as <script type="math/tex">aN</script>, and structured data such as dictionaries - as <script type="math/tex">N^2</script>.</p>
+
+<p>One counter-argument to the above is that some models may inherently require more data than others, and can only be fairly evaluated in large-scale experiments. But even in this case, a convincing paper would need to show that the new model can “hold” more data than its competitors, and so multiple rounds of training all models on the same data are still necessary.</p>
+
+<h2 id="summing-up">Summing up</h2>
+
+<p>This is the leaderboard discussion so far, and it’s far from over. If you have anything to add, especially any other possible solutions - please let me know on Twitter or in the comments below. I’ll update the post with any major developments.</p>
+
+<p>Let me stress that huge pretrained models like BERT are an undeniable achievement, and did help to push the state-of-the-art on numerous tasks. Obviously, there is nothing wrong methodologically with <em>using</em> any <code class="highlighter-rouge">&lt;muppetName&gt;</code> as pretrained representations, as long as the paper is about something else and does not rest on any properties of <code class="highlighter-rouge">&lt;muppetName&gt;</code> that have not been fully validated. There is also nothing wrong with analysing <code class="highlighter-rouge">&lt;muppetName&gt;</code>: the steady stream of BERTology papers by itself suggests how little we understood about BERT while it was all over the leaderboards <a class="citation" href="#VoitaTalbotEtAl_2019_Analyzing_Multi-Head_Self-Attention_Specialized_Heads_Do_Heavy_Lifting_Rest_Can_Be_Pruned">(Voita, Talbot, Moiseev, Sennrich, &amp; Titov, 2019; Clark, Khandelwal, Levy, &amp; Manning, 2019; Coenen et al., 2019; Jawahar, Sagot, &amp; Seddah, n.d.; Lin, Tan, &amp; Frank, 2019)</a>.</p>
+
+<p>But we do have a methodological problem if a paper introduces another <code class="highlighter-rouge">&lt;muppetName&gt;</code> without factoring in its stability and the resources it took to train vs competition, and then everybody takes the leaderboard performance as indicator of a breakthrough architecture.</p>
+
+<p>Imagine that tomorrow we wake up to a paper presenting a Don’t-Even-Try-Net (model name © Olga Kovaleva), a new architecture that achieves superhuman performance on every NLP task after being trained for a year on every computer in North America. Even with the source code we would not be able to verify that claim. We could use the pretrained weights, but without multiple runs for ablation and stability evaluation the authors would <em>not</em> have proven the superiority of their approach. In a sense, they would be presenting a resource rather than a model.</p>
+
+<p>If we are to make actual progress, we need to make sure new systems get fame and awards only with rigorous proofs - including the multiple runs of training on the same data as the baselines, ablation studies, estimates of compute and stability. This would inherently encourage more hypothesis-driven research. For instance, the dependency objective in XLNet looks really interesting, and I would love to know how much advantage it actually confers on different tasks, given that dependency-based word embeddings turned out to be of limited use <a class="citation" href="#LiLiuEtAl_2017_Investigating_Different_Syntactic_Context_Types_and_Context_Representations_for_Learning_Word_Embeddings">(Li et al., 2017; Lapesa &amp; Evert, 2017)</a>.</p>
+
+<h2 id="update-of-22072019">Update of 22.07.2019</h2>
+
+<p>Oh wow, this post was retweeted over 100 times and <a href="http://newsletter.ruder.io/">made it to Sebastian Ruder’s NLP newsletter</a>! Clearly, the issue of fair evaluation of huge models resonates with the community deeply.</p>
+
+<p>Sebastian points out that Transformers make an important contribution in showing us the limitations of more-data-and-compute approach, and, ironically, also starting to encourage research on the leaner models. I fully agree with both points, and of course the Transformer in itself is an undeniable breakthrough. My point is simply that the current leaderboards implicitly encourage a blend of architectures, data and compute that are impossible to disentangle and replicate. If we are on a quest for the best possible NLP <em>model</em>, this is a problem we are going to have to solve.</p>
+
+<p>Another update from a later discussion with Sam Bowman: leaderboards where you win by whatever combination of means do have a place in the world. Like Kaggle, they stimulate competition in ML engineering for NLP, and the results they showcase may in themselves be interesting and useful. But by themselves they are not a proof of architecture superiority, which they are commonly mistaken for. It seems to me that it would be the easiest for the most influential leaderboards such as GLUE to change so as to help to correct this perception, since all eyes are on them, but I can also see why they may want to remain Kaggle-style.</p>
+
+<p><em>Model training cost clarification</em>. the price of training XLNet was estimated as follows: the paper states that it was trained on 512 TPU v3 chips for 2.5 days, i.e. 60 hours. <a href="https://cloud.google.com/tpu/pricing">Google on-demand price for TPU v-3</a> is currently $8, which amounts to $245,760 before fine-tuning. <a href="https://twitter.com/jekbradbury/status/1143397614093651969">James Bradbury points out</a> that authors could actually mean “devices” or “cores”, which would bring it down to $61,440 or $30,720, respectively. I would add that even in this most optimistic scenario the model would still cost <a href="https://www.glassdoor.com/Salaries/phd-student-salary-SRCH_KO0,11.htm">more than the stipend of the graduate student working on it</a>, and still be unrealistic for most labs.</p>
+
+<h2>***</h2>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><div class="text-justify">
+    <span id="ZhangHanEtAl_2019_ERNIE_Enhanced_Language_Representation_with_Informative_Entities">Zhang, Z., Han, X., Liu, Z., Jiang, X., Sun, M., &amp; Liu, Q. (2019). ERNIE: Enhanced Language Representation with Informative Entities. <i>ACL 2019</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('ZhangHanEtAl_2019_ERNIE_Enhanced')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1905.07129'">URL</button>
+    
+<div class="bibtex" id="ZhangHanEtAl_2019_ERNIE_Enhanced"><pre>@inproceedings{ZhangHanEtAl_2019_ERNIE_Enhanced_Language_Representation_with_Informative_Entities,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1905.07129},
+  title = {{{ERNIE}}: {{Enhanced Language Representation}} with {{Informative Entities}}},
+  shorttitle = {{{ERNIE}}},
+  booktitle = {{{ACL}} 2019},
+  url = {http://arxiv.org/abs/1905.07129},
+  author = {Zhang, Zhengyan and Han, Xu and Liu, Zhiyuan and Jiang, Xin and Sun, Maosong and Liu, Qun},
+  month = may,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1905.07129
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding">Yang, Z., Dai, Z., Yang, Y., Carbonell, J., Salakhutdinov, R., &amp; Le, Q. V. (2019). XLNet: Generalized Autoregressive Pretraining for Language Understanding. <i>ArXiv:1906.08237 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('YangDaiEtAl_2019_XLNet_Generalized')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1906.08237'">URL</button>
+    
+<div class="bibtex" id="YangDaiEtAl_2019_XLNet_Generalized"><pre>@article{YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.08237},
+  primaryclass = {cs},
+  title = {{{XLNet}}: {{Generalized Autoregressive Pretraining}} for {{Language Understanding}}},
+  shorttitle = {{{XLNet}}},
+  journal = {arXiv:1906.08237 [cs]},
+  url = {http://arxiv.org/abs/1906.08237},
+  author = {Yang, Zhilin and Dai, Zihang and Yang, Yiming and Carbonell, Jaime and Salakhutdinov, Ruslan and Le, Quoc V.},
+  month = jun,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1906.08237
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="WuFanEtAl_2019_Pay_Less_Attention_with_Lightweight_and_Dynamic_Convolutions">Wu, F., Fan, A., Baevski, A., Dauphin, Y., &amp; Auli, M. (2019). Pay Less Attention with Lightweight and Dynamic Convolutions. <i>International Conference on Learning Representations</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('WuFanEtAl_2019_Pay_Less')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://openreview.net/forum?id=SkVhlh09tX'">URL</button>
+    
+<div class="bibtex" id="WuFanEtAl_2019_Pay_Less"><pre>@inproceedings{WuFanEtAl_2019_Pay_Less_Attention_with_Lightweight_and_Dynamic_Convolutions,
+  title = {Pay {{Less Attention}} with {{Lightweight}} and {{Dynamic Convolutions}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  url = {https://openreview.net/forum?id=SkVhlh09tX},
+  author = {Wu, Felix and Fan, Angela and Baevski, Alexei and Dauphin, Yann and Auli, Michael},
+  year = {2019}
+}
+</pre>
+https://openreview.net/forum?id=SkVhlh09tX
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="VoitaTalbotEtAl_2019_Analyzing_Multi-Head_Self-Attention_Specialized_Heads_Do_Heavy_Lifting_Rest_Can_Be_Pruned">Voita, E., Talbot, D., Moiseev, F., Sennrich, R., &amp; Titov, I. (2019). Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned. <i>ArXiv:1905.09418 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('VoitaTalbotEtAl_2019_Analyzing_Multi-Head')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1905.09418'">URL</button>
+    
+<div class="bibtex" id="VoitaTalbotEtAl_2019_Analyzing_Multi-Head"><pre>@article{VoitaTalbotEtAl_2019_Analyzing_Multi-Head_Self-Attention_Specialized_Heads_Do_Heavy_Lifting_Rest_Can_Be_Pruned,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1905.09418},
+  primaryclass = {cs},
+  title = {Analyzing {{Multi}}-{{Head Self}}-{{Attention}}: {{Specialized Heads Do}} the {{Heavy Lifting}}, the {{Rest Can Be Pruned}}},
+  shorttitle = {Analyzing {{Multi}}-{{Head Self}}-{{Attention}}},
+  journal = {arXiv:1905.09418 [cs]},
+  url = {http://arxiv.org/abs/1905.09418},
+  author = {Voita, Elena and Talbot, David and Moiseev, Fedor and Sennrich, Rico and Titov, Ivan},
+  month = may,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1905.09418
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="StrubellGaneshEtAl_2019_Energy_and_Policy_Considerations_for_Deep_Learning_in_NLP">Strubell, E., Ganesh, A., &amp; McCallum, A. (2019). Energy and Policy Considerations for Deep Learning in NLP. <i>ACL 2019</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('StrubellGaneshEtAl_2019_Energy_and')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1906.02243'">URL</button>
+    
+<div class="bibtex" id="StrubellGaneshEtAl_2019_Energy_and"><pre>@inproceedings{StrubellGaneshEtAl_2019_Energy_and_Policy_Considerations_for_Deep_Learning_in_NLP,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.02243},
+  title = {Energy and {{Policy Considerations}} for {{Deep Learning}} in {{NLP}}},
+  booktitle = {{{ACL}} 2019},
+  url = {http://arxiv.org/abs/1906.02243},
+  author = {Strubell, Emma and Ganesh, Ananya and McCallum, Andrew},
+  month = jun,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1906.02243
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="RadfordWuEtAl_2019_Language_models_are_unsupervised_multitask_learners">Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., &amp; Sutskever, I. (2019). Language Models Are Unsupervised Multitask Learners. <i>OpenAI Blog</i>, <i>1</i>, 8.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('RadfordWuEtAl_2019_Language_models')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://openai.com/blog/better-language-models/'">URL</button>
+    
+<div class="bibtex" id="RadfordWuEtAl_2019_Language_models"><pre>@article{RadfordWuEtAl_2019_Language_models_are_unsupervised_multitask_learners,
+  title = {Language Models Are Unsupervised Multitask Learners},
+  volume = {1},
+  journal = {OpenAI Blog},
+  url = {https://openai.com/blog/better-language-models/},
+  author = {Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya},
+  year = {2019},
+  pages = {8}
+}
+</pre>
+https://openai.com/blog/better-language-models/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="LinTanEtAl_2019_Open_Sesame_Getting_Inside_BERTs_Linguistic_Knowledge">Lin, Y., Tan, Y. C., &amp; Frank, R. (2019). Open Sesame: Getting Inside BERT’s Linguistic Knowledge. <i>ArXiv:1906.01698 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('LinTanEtAl_2019_Open_Sesame')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1906.01698'">URL</button>
+    
+<div class="bibtex" id="LinTanEtAl_2019_Open_Sesame"><pre>@article{LinTanEtAl_2019_Open_Sesame_Getting_Inside_BERTs_Linguistic_Knowledge,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.01698},
+  primaryclass = {cs},
+  title = {Open {{Sesame}}: {{Getting Inside BERT}}'s {{Linguistic Knowledge}}},
+  shorttitle = {Open {{Sesame}}},
+  journal = {arXiv:1906.01698 [cs]},
+  url = {http://arxiv.org/abs/1906.01698},
+  author = {Lin, Yongjie and Tan, Yi Chern and Frank, Robert},
+  month = jun,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1906.01698
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="LiLiuEtAl_2017_Investigating_Different_Syntactic_Context_Types_and_Context_Representations_for_Learning_Word_Embeddings">Li, B., Liu, T., Zhao, Z., Tang, B., Drozd, A., Rogers, A., &amp; Du, X. (2017). Investigating Different Syntactic Context Types and Context Representations for Learning Word Embeddings. <i>Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing</i>, 2411–2421. Copenhagen, Denmark, September 7–11, 2017.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('LiLiuEtAl_2017_Investigating_Different')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://aclweb.org/anthology/D17-1257'">URL</button>
+    
+<div class="bibtex" id="LiLiuEtAl_2017_Investigating_Different"><pre>@inproceedings{LiLiuEtAl_2017_Investigating_Different_Syntactic_Context_Types_and_Context_Representations_for_Learning_Word_Embeddings,
+  address = {{Copenhagen, Denmark, September 7\textendash{}11, 2017}},
+  title = {Investigating Different Syntactic Context Types and Context Representations for Learning Word Embeddings},
+  booktitle = {Proceedings of the 2017 {{Conference}} on {{Empirical Methods}} in {{Natural Language Processing}}},
+  url = {http://aclweb.org/anthology/D17-1257},
+  author = {Li, Bofang and Liu, Tao and Zhao, Zhe and Tang, Buzhou and Drozd, Aleksandr and Rogers, Anna and Du, Xiaoyong},
+  year = {2017},
+  pages = {2411--2421}
+}
+</pre>
+http://aclweb.org/anthology/D17-1257
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="LapesaEvert_2017_Large-scale_evaluation_of_dependency-based_DSMs_Are_they_worth_the_effort">Lapesa, G., &amp; Evert, S. (2017). Large-Scale Evaluation of Dependency-Based DSMs: Are They Worth the Effort? <i>Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics (EACL)</i>, 394–400. Association for Computational Linguistics.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('LapesaEvert_2017_Large-scale_evaluation')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://www.aclweb.org/anthology/E17-2063'">URL</button>
+    
+<div class="bibtex" id="LapesaEvert_2017_Large-scale_evaluation"><pre>@inproceedings{LapesaEvert_2017_Large-scale_evaluation_of_dependency-based_DSMs_Are_they_worth_the_effort,
+  title = {Large-Scale Evaluation of Dependency-Based {{DSMs}}: {{Are}} They Worth the Effort?},
+  shorttitle = {Large-Scale Evaluation of Dependency-Based {{DSMs}}},
+  booktitle = {Proceedings of the 15th {{Conference}} of the {{European Chapter}} of the {{Association}} for {{Computational Linguistics}} ({{EACL}})},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://www.aclweb.org/anthology/E17-2063},
+  author = {Lapesa, Gabriella and Evert, Stefan},
+  year = {2017},
+  pages = {394-400}
+}
+</pre>
+http://www.aclweb.org/anthology/E17-2063
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Kahneman_2013_Thinking_fast_and_slow">Kahneman, D. (2013). <i>Thinking, Fast and Slow</i> (1st pbk. ed). New York: Farrar, Straus and Giroux.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Kahneman_2013_Thinking_fast')">BibTex</button>
+    
+<div class="bibtex" id="Kahneman_2013_Thinking_fast"><pre>@book{Kahneman_2013_Thinking_fast_and_slow,
+  address = {{New York}},
+  edition = {1st pbk. ed},
+  title = {Thinking, Fast and Slow},
+  isbn = {978-0-374-53355-7},
+  lccn = {BF441 .K238 2013},
+  publisher = {{Farrar, Straus and Giroux}},
+  author = {Kahneman, Daniel},
+  year = {2013}
+}
+</pre>
+
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="JawaharSagotEtAl_What_does_BERT_learn_about_structure_of_language">Jawahar, G., Sagot, B., &amp; Seddah, D. What Does BERT Learn about the Structure of Language? <i>ACL 2019</i>, 8.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('JawaharSagotEtAl_What_does_BERT')">BibTex</button>
+    
+<div class="bibtex" id="JawaharSagotEtAl_What_does_BERT"><pre>@inproceedings{JawaharSagotEtAl_What_does_BERT_learn_about_structure_of_language,
+  title = {What Does {{BERT}} Learn about the Structure of Language?},
+  language = {en},
+  booktitle = {{{ACL}} 2019},
+  author = {Jawahar, Ganesh and Sagot, Beno{\^i}t and Seddah, Djam{\'e}},
+  pages = {8}
+}
+</pre>
+
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Goldberg_2019_Assessing_BERTs_Syntactic_Abilities">Goldberg, Y. (2019). Assessing BERT’s Syntactic Abilities. <i>ArXiv:1901.05287 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Goldberg_2019_Assessing_BERTs')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1901.05287'">URL</button>
+    
+<div class="bibtex" id="Goldberg_2019_Assessing_BERTs"><pre>@article{Goldberg_2019_Assessing_BERTs_Syntactic_Abilities,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1901.05287},
+  primaryclass = {cs},
+  title = {Assessing {{BERT}}'s {{Syntactic Abilities}}},
+  journal = {arXiv:1901.05287 [cs]},
+  url = {http://arxiv.org/abs/1901.05287},
+  author = {Goldberg, Yoav},
+  month = jan,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1901.05287
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="FrankleCarbin_2019_Lottery_Ticket_Hypothesis_Finding_Sparse_Trainable_Neural_Networks">Frankle, J., &amp; Carbin, M. (2019). The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks. <i>International Conference on Learning Representations</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('FrankleCarbin_2019_Lottery_Ticket')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://openreview.net/forum?id=rJl-b3RcF7'">URL</button>
+    
+<div class="bibtex" id="FrankleCarbin_2019_Lottery_Ticket"><pre>@inproceedings{FrankleCarbin_2019_Lottery_Ticket_Hypothesis_Finding_Sparse_Trainable_Neural_Networks,
+  title = {The {{Lottery Ticket Hypothesis}}: {{Finding Sparse}}, {{Trainable Neural Networks}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  url = {https://openreview.net/forum?id=rJl-b3RcF7},
+  author = {Frankle, Jonathan and Carbin, Michael},
+  year = {2019}
+}
+</pre>
+https://openreview.net/forum?id=rJl-b3RcF7
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="EscartinReijersEtAl_2017_Ethical_Considerations_in_NLP_Shared_Tasks">Escartín, C. P., Reijers, W., Lynn, T., Moorkens, J., Way, A., &amp; Liu, C.-H. (2017). Ethical Considerations in NLP Shared Tasks. <i>Proceedings of the First ACL Workshop on Ethics in Natural Language Processing</i>, 66–73. https://doi.org/10.18653/v1/W17-1608</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('EscartinReijersEtAl_2017_Ethical_Considerations')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://aclweb.org/anthology/papers/W/W17/W17-1608/'">URL</button>
+    
+<div class="bibtex" id="EscartinReijersEtAl_2017_Ethical_Considerations"><pre>@inproceedings{EscartinReijersEtAl_2017_Ethical_Considerations_in_NLP_Shared_Tasks,
+  title = {Ethical {{Considerations}} in {{NLP Shared Tasks}}},
+  language = {en-us},
+  booktitle = {Proceedings of the {{First ACL Workshop}} on {{Ethics}} in {{Natural Language Processing}}},
+  doi = {10.18653/v1/W17-1608},
+  url = {https://aclweb.org/anthology/papers/W/W17/W17-1608/},
+  author = {Escart{\'i}n, Carla Parra and Reijers, Wessel and Lynn, Teresa and Moorkens, Joss and Way, Andy and Liu, Chao-Hong},
+  month = apr,
+  year = {2017},
+  pages = {66-73}
+}
+</pre>
+https://aclweb.org/anthology/papers/W/W17/W17-1608/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="DevlinChangEtAl_2019_BERT_Pre-training_of_Deep_Bidirectional_Transformers_for_Language_Understanding">Devlin, J., Chang, M.-W., Lee, K., &amp; Toutanova, K. (2019). BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding. <i>Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</i>, 4171–4186.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('DevlinChangEtAl_2019_BERT_Pre-training')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://aclweb.org/anthology/papers/N/N19/N19-1423/'">URL</button>
+    
+<div class="bibtex" id="DevlinChangEtAl_2019_BERT_Pre-training"><pre>@inproceedings{DevlinChangEtAl_2019_BERT_Pre-training_of_Deep_Bidirectional_Transformers_for_Language_Understanding,
+  title = {{{BERT}}: {{Pre}}-Training of {{Deep Bidirectional Transformers}} for {{Language Understanding}}},
+  shorttitle = {{{BERT}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://aclweb.org/anthology/papers/N/N19/N19-1423/},
+  author = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  month = jun,
+  year = {2019},
+  pages = {4171-4186}
+}
+</pre>
+https://aclweb.org/anthology/papers/N/N19/N19-1423/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Crane_2018_Questionable_Answers_in_Question_Answering_Research_Reproducibility_and_Variability_of_Published_Results">Crane, M. (2018). Questionable Answers in Question Answering Research: Reproducibility and Variability of Published Results. <i>Transactions of the Association for Computational Linguistics</i>, <i>6</i>, 241–252. https://doi.org/10.1162/tacl_a_00018</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Crane_2018_Questionable_Answers')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://aclweb.org/anthology/papers/Q/Q18/Q18-1018/'">URL</button>
+    
+<div class="bibtex" id="Crane_2018_Questionable_Answers"><pre>@article{Crane_2018_Questionable_Answers_in_Question_Answering_Research_Reproducibility_and_Variability_of_Published_Results,
+  title = {Questionable {{Answers}} in {{Question Answering Research}}: {{Reproducibility}} and {{Variability}} of {{Published Results}}},
+  volume = {6},
+  shorttitle = {Questionable {{Answers}} in {{Question Answering Research}}},
+  language = {en-us},
+  journal = {Transactions of the Association for Computational Linguistics},
+  doi = {10.1162/tacl_a_00018},
+  url = {https://aclweb.org/anthology/papers/Q/Q18/Q18-1018/},
+  author = {Crane, Matt},
+  year = {2018},
+  pages = {241-252}
+}
+</pre>
+https://aclweb.org/anthology/papers/Q/Q18/Q18-1018/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="CoenenReifEtAl_2019_Visualizing_and_Measuring_Geometry_of_BERT">Coenen, A., Reif, E., Yuan, A., Kim, B., Pearce, A., Viégas, F., &amp; Wattenberg, M. (2019). Visualizing and Measuring the Geometry of BERT. <i>ArXiv:1906.02715 [Cs, Stat]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('CoenenReifEtAl_2019_Visualizing_and')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1906.02715'">URL</button>
+    
+<div class="bibtex" id="CoenenReifEtAl_2019_Visualizing_and"><pre>@article{CoenenReifEtAl_2019_Visualizing_and_Measuring_Geometry_of_BERT,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.02715},
+  primaryclass = {cs, stat},
+  title = {Visualizing and {{Measuring}} the {{Geometry}} of {{BERT}}},
+  journal = {arXiv:1906.02715 [cs, stat]},
+  url = {http://arxiv.org/abs/1906.02715},
+  author = {Coenen, Andy and Reif, Emily and Yuan, Ann and Kim, Been and Pearce, Adam and Vi{\'e}gas, Fernanda and Wattenberg, Martin},
+  month = jun,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1906.02715
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="ClarkKhandelwalEtAl_2019_What_Does_BERT_Look_At_Analysis_of_BERTs_Attention">Clark, K., Khandelwal, U., Levy, O., &amp; Manning, C. D. (2019). What Does BERT Look At? An Analysis of BERT’s Attention. <i>ArXiv:1906.04341 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('ClarkKhandelwalEtAl_2019_What_Does')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1906.04341'">URL</button>
+    
+<div class="bibtex" id="ClarkKhandelwalEtAl_2019_What_Does"><pre>@article{ClarkKhandelwalEtAl_2019_What_Does_BERT_Look_At_Analysis_of_BERTs_Attention,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.04341},
+  primaryclass = {cs},
+  title = {What {{Does BERT Look At}}? {{An Analysis}} of {{BERT}}'s {{Attention}}},
+  shorttitle = {What {{Does BERT Look At}}?},
+  journal = {arXiv:1906.04341 [cs]},
+  url = {http://arxiv.org/abs/1906.04341},
+  author = {Clark, Kevin and Khandelwal, Urvashi and Levy, Omer and Manning, Christopher D.},
+  month = jun,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1906.04341
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li></ol>
+
+<h2 id="cite-this-post">Cite this post</h2>
+
+<p>If you’d like to cite this post, please use the following bibtex:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@misc{Rogers_2019_leaderboards,
+  title = { How the Transformers broke NLP leaderboards},
+  journal = {Hacking Semantics},
+  url = { https://hackingsemantics.xyz/2019/leaderboards/ },
+  author = {Rogers, Anna},
+  day = { 30 },
+  month = { Jun },
+  year = { 2019 }
+}
+</code></pre></div></div>
+
+<h2 id="leave-a-comment-twitter">Leave a comment (Twitter)</h2>
+
+<p><a href="https://twitter.com/annargrs/status/1152194347942731776">https://twitter.com/annargrs/status/1152194347942731776</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#academia" class="page__taxonomy-item" rel="tag">academia</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#methodology" class="page__taxonomy-item" rel="tag">methodology</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#squib" class="page__taxonomy-item" rel="tag">squib</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-06-30T22:00:47-04:00">June 30, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=annargrs&text=How+the+Transformers+broke+NLP+leaderboards%20https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fleaderboards%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fleaderboards%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fleaderboards%2F&title=How the Transformers broke NLP leaderboards" class="btn" title=" Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fleaderboards%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/why-blog/" class="pagination--pager" title="Why blog about NLP in 2019?
+">Previous</a>
+    
+    
+      <a href="/2019/analogies/" class="pagination--pager" title="On word analogies and negative results in NLP
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h2 class="page__comments-title">Comments</h2>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/nlp4linguists/" rel="permalink">How to teach NLP to non-CS-majors in 2 weeks?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">What I learned from organizing an introductory course on NLP for linguists at ESSLLI 2019.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/conversation/" rel="permalink">Talking to people outside your echo chamber: SocNLP challenges
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  10 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A post inspired by an Uber ride with a Trump supporter.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/analogies/" rel="permalink">On word analogies and negative results in NLP
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov’s word analogies.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/why-blog/" rel="permalink">Why blog about NLP in 2019?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Benefits of blogging for the academic souls.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="search" id="search" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Hacking semantics. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.<br/>
+  <!--a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a-->This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127096214-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127096214-2', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'annargrs/blog');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,811 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Why blog about NLP in 2019? - Hacking semantics</title>
+<meta name="description" content="Benefits of blogging for the academic souls.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hacking semantics">
+<meta property="og:title" content="Why blog about NLP in 2019?">
+<meta property="og:url" content="https://hackingsemantics.xyz/2019/why-blog/">
+
+
+  <meta property="og:description" content="Benefits of blogging for the academic souls.">
+
+
+
+  <meta property="og:image" content="https://hackingsemantics.xyz/assets/images/writing.png">
+
+
+
+  <meta name="twitter:site" content="@annargrs">
+  <meta name="twitter:title" content="Why blog about NLP in 2019?">
+  <meta name="twitter:description" content="Benefits of blogging for the academic souls.">
+  <meta name="twitter:url" content="https://hackingsemantics.xyz/2019/why-blog/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://hackingsemantics.xyz/assets/images/writing.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-06-23T17:00:47-04:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://hackingsemantics.xyz/2019/why-blog/">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hacking semantics Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+<!--bibtex hack-->
+<script>
+function showBibtex(bibDiv) {
+  var x = document.getElementById(bibDiv);
+  if (x.style.display === "none" || x.style.display === '') {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="icon" type="image/png" href="/assets/images/logo-3col.png">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" type="text/css">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo-3col.png" alt=""></a>
+        
+        <a class="site-title" href="/">Hacking Semantics</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >All Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/aro.png" alt="Anna Rogers" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Anna Rogers</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Thinking aloud: computational linguistics, cognition, AI and NLP
+      </p>
+    <!--p>Post-doctoral associate at <a href="">Text Machine Lab</a>, University of Massachusetts Lowell</p-->
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+
+      
+        <li>
+          <a href="http://www.cs.uml.edu/~arogers/" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i> Homepage
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--p>
+      
+        <li>
+          <a href="https://vine.co/u/doesn't matter" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-vine" aria-hidden="true"></i> Vine
+          </a>
+        </li>
+      
+      </p-->
+
+      
+        <li>
+          <a href="http://text-machine.cs.uml.edu/lab/">
+            <i class="fas fa-fw fa-university" aria-hidden="true"></i> UMass Lowell, <br/>Text Machine Lab
+          </a>
+        </li>
+      
+
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!--label for="ac-toc">Toggle Menu</label-->
+  <ul class="nav__items">
+    
+  </ul>
+</nav>
+    
+  
+
+
+<!-- stolen from here:
+https://www.gungorbudak.com/blog/2017/12/08/tags-cloud-sorted-by-post-count-for-jekyll-blogs-without-plugins/
+-->
+<!--div class="tag-cloud">
+
+
+
+
+    
+    
+    
+    
+    <span class="tag-size-5">
+        <a class="tag-link" href="/tags/#academia/" rel="tag">#academia</a> (5)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-2">
+        <a class="tag-link" href="/tags/#methodology/" rel="tag">#methodology</a> (2)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#negresults/" rel="tag">#negresults</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#review/" rel="tag">#review</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#socialNLP/" rel="tag">#socialNLP</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#teaching/" rel="tag">#teaching</a> (1)
+    </span>
+
+
+
+
+
+</div-->
+
+
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Why blog about NLP in 2019?">
+    <meta itemprop="description" content="Benefits of blogging for the academic souls.">
+    <meta itemprop="datePublished" content="June 23, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Why blog about NLP in 2019?
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  2 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <figure>
+	<img src="/assets/images/writing-2:1.png" />
+	<!--figcaption>Nothing in particular</figcaption-->
+</figure>
+
+<!--header:
+    image: /assets/images/writing.png -->
+
+<p>When I said I wanted to start a research blog, I got asked why - wasn’t it something from the nineties that nobody did anymore? That’s actually not an unreasonable question: nobody is even able to keep up with arXiv anymore, why introduce any more sources of long reads? Sure, big teams at DeepMind and Microsoft Research keep blogs, but they also have the resources to hire designers and editors.</p>
+
+<p>Still, despite the over-abundance of information, NLP blogging is definitely having a Renaissance moment. There are not only great technical blogs like <a href="https://towardsdatascience.com/">Towards Data Science</a>; many great minds are using it to talk about methodology and other community-wide issues. See, for example, the recent discussion of the issues in review process by <a href="https://medium.com/ai2-blog/5-steps-to-reconciling-pre-prints-and-blind-review-92a2d80d8735">Matt Gardner</a>, and interdisciplinarity in NLP by <a href="https://medium.com/@ryancotterell/what-interdisciplinarity-in-acl-means-to-me-f070121bfa85">Ryan Cotterell</a>.</p>
+
+<p>I think there are two reasons for this trend:</p>
+
+<ul>
+  <li>People use their blogs to increase the visibility of their work (as many blog posts are about research they’re done), and <strong>to do so in a way that does not involve dry, dull writing</strong> that too many of us seem to think is prerequisite for an accepted paper (see eg this recent discussion on Twitter). Also, blogs enable showing off your Jupyter notebooks, fancy interactive charts, and other cool stuff that won’t ever fit into a paper pdf.</li>
+  <li>People use their blogs as <strong>a platform to think aloud</strong>, hopefully get feedback and start important conversations in the NLP community. Heck, we’re trying to model human language, we need all the help we can get! These conversations count as “gray literature”: pre-publication snippets that are still <a href="https://patthomson.net/2017/12/14/can-i-cite-a-blog-post/">citable</a> if need be, and useful to shape the final publication.</li>
+</ul>
+
+<p>My goal is rather the latter (although who can resist a good shameless self-citation every now and then?) Thinking-aloud, thinking-in-writing is really the only way to think clearly. Here’s an anecdote of Richard Feynman, as narrated by Sonke Ahrens <a class="citation" href="#Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers">(Ahrens, 2017)</a>:</p>
+
+<blockquote>
+  <p>Richard Feynman once had a visitor in his office, a historian who wanted to interview him. When he spotted Feynman’s notebooks, he said how delighted he was to see such “wonderful records of Feynman’s thinking.” “No, no!” Feynman protested. “They aren’t a record of my thinking process. They are my thinking process. I actually did the work on the paper.” <br />
+  “Well,” the historian said, “the work was done in your head, but the record of it is still here.” “No, it’s not a record, not really. It’s working. You have to work on paper, and this is the paper.</p>
+</blockquote>
+
+<p>I don’t know about you, but this is 100% true of me: if I can’t spell something out, I don’t understand it - and if I never try, I won’t even see the holes in my argument. So…</p>
+
+<p>The blog is dead. Long live the blog!</p>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><div class="text-justify">
+    <span id="Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers">Ahrens, S. (2017). <i>How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking: For Students, Academics and Nonfiction Book Writers</i>. North Charleston, SC: CreateSpace.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Ahrens_2017_How_to')">BibTex</button>
+    
+<div class="bibtex" id="Ahrens_2017_How_to"><pre>@book{Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers,
+  address = {{North Charleston, SC}},
+  title = {How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking: For Students, Academics and Nonfiction Book Writers},
+  isbn = {978-1-5428-6650-7},
+  shorttitle = {How to Take Smart Notes},
+  language = {eng},
+  publisher = {{CreateSpace}},
+  author = {Ahrens, S{\"o}nke},
+  year = {2017}
+}
+</pre>
+
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li></ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#academia" class="page__taxonomy-item" rel="tag">academia</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#squib" class="page__taxonomy-item" rel="tag">squib</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-06-23T17:00:47-04:00">June 23, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=annargrs&text=Why+blog+about+NLP+in+2019%3F%20https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fwhy-blog%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fwhy-blog%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fwhy-blog%2F&title=Why blog about NLP in 2019?" class="btn" title=" Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fwhy-blog%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/2019/leaderboards/" class="pagination--pager" title="How the Transformers broke NLP leaderboards
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h2 class="page__comments-title">Comments</h2>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/nlp4linguists/" rel="permalink">How to teach NLP to non-CS-majors in 2 weeks?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">What I learned from organizing an introductory course on NLP for linguists at ESSLLI 2019.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/conversation/" rel="permalink">Talking to people outside your echo chamber: SocNLP challenges
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  10 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A post inspired by an Uber ride with a Trump supporter.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/analogies/" rel="permalink">On word analogies and negative results in NLP
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov’s word analogies.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/leaderboards/" rel="permalink">How the Transformers broke NLP leaderboards
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  11 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="search" id="search" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Hacking semantics. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.<br/>
+  <!--a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a-->This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127096214-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127096214-2', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'annargrs/blog');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+
+
+
+  </body>
+</html>

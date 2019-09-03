@@ -1,0 +1,1113 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Talking to people outside your echo chamber: SocNLP challenges - Hacking semantics</title>
+<meta name="description" content="A post inspired by an Uber ride with a Trump supporter.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hacking semantics">
+<meta property="og:title" content="Talking to people outside your echo chamber: SocNLP challenges">
+<meta property="og:url" content="https://hackingsemantics.xyz/2019/conversation/">
+
+
+  <meta property="og:description" content="A post inspired by an Uber ride with a Trump supporter.">
+
+
+
+  <meta property="og:image" content="https://hackingsemantics.xyz/assets/images/puzzle-connect.jpg">
+
+
+
+  <meta name="twitter:site" content="@annargrs">
+  <meta name="twitter:title" content="Talking to people outside your echo chamber: SocNLP challenges">
+  <meta name="twitter:description" content="A post inspired by an Uber ride with a Trump supporter.">
+  <meta name="twitter:url" content="https://hackingsemantics.xyz/2019/conversation/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://hackingsemantics.xyz/assets/images/puzzle-connect.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-07-21T11:00:47-04:00">
+
+
+
+
+
+
+<link rel="canonical" href="https://hackingsemantics.xyz/2019/conversation/">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hacking semantics Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+<!--bibtex hack-->
+<script>
+function showBibtex(bibDiv) {
+  var x = document.getElementById(bibDiv);
+  if (x.style.display === "none" || x.style.display === '') {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="icon" type="image/png" href="/assets/images/logo-3col.png">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" type="text/css">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo-3col.png" alt=""></a>
+        
+        <a class="site-title" href="/">Hacking Semantics</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >All Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/aro.png" alt="Anna Rogers" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Anna Rogers</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Thinking aloud: computational linguistics, cognition, AI and NLP
+      </p>
+    <!--p>Post-doctoral associate at <a href="">Text Machine Lab</a>, University of Massachusetts Lowell</p-->
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+
+      
+        <li>
+          <a href="http://www.cs.uml.edu/~arogers/" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i> Homepage
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--p>
+      
+        <li>
+          <a href="https://vine.co/u/doesn't matter" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-vine" aria-hidden="true"></i> Vine
+          </a>
+        </li>
+      
+      </p-->
+
+      
+        <li>
+          <a href="http://text-machine.cs.uml.edu/lab/">
+            <i class="fas fa-fw fa-university" aria-hidden="true"></i> UMass Lowell, <br/>Text Machine Lab
+          </a>
+        </li>
+      
+
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!--label for="ac-toc">Toggle Menu</label-->
+  <ul class="nav__items">
+    
+  </ul>
+</nav>
+    
+  
+
+
+<!-- stolen from here:
+https://www.gungorbudak.com/blog/2017/12/08/tags-cloud-sorted-by-post-count-for-jekyll-blogs-without-plugins/
+-->
+<!--div class="tag-cloud">
+
+
+
+
+    
+    
+    
+    
+    <span class="tag-size-5">
+        <a class="tag-link" href="/tags/#academia/" rel="tag">#academia</a> (5)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-2">
+        <a class="tag-link" href="/tags/#methodology/" rel="tag">#methodology</a> (2)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#negresults/" rel="tag">#negresults</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#review/" rel="tag">#review</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#socialNLP/" rel="tag">#socialNLP</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#teaching/" rel="tag">#teaching</a> (1)
+    </span>
+
+
+
+
+
+</div-->
+
+
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Talking to people outside your echo chamber: SocNLP challenges">
+    <meta itemprop="description" content="A post inspired by an Uber ride with a Trump supporter.">
+    <meta itemprop="datePublished" content="July 21, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Talking to people outside your echo chamber: SocNLP challenges
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  10 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> </h4></header>
+              <ul class="toc__menu">
+  <li><a href="#academics-and-populism">Academics and Populism</a></li>
+  <li><a href="#case-study-an-evangelical-trump-supporter">Case study: an evangelical Trump supporter</a></li>
+  <li><a href="#lessons-learned">Lessons learned</a></li>
+  <li><a href="#implications-for-computational-social-science">Implications for computational social science</a></li>
+  <li><a href="#">***</a></li>
+  <li><a href="#references">References</a></li>
+  <li><a href="#cite-this-post">Cite this post</a></li>
+  <li><a href="#leave-a-comment-twitter">Leave a comment (Twitter)</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <figure>
+	<img src="/assets/images/puzzle-connect.jpg" />
+</figure>
+
+<blockquote>
+  <p>This blog is NOT political, even though the story below will show some of my political views. I’m sharing it because it highlights a burning issue in computational social science that is getting nowhere near enough attention. Reader beware.</p>
+</blockquote>
+
+<h2 id="academics-and-populism">Academics and Populism</h2>
+
+<p>Like most researchers I know, I’ve been politically apathetic until a few years ago. Politicians were doing their stuff, I was doing mine, all according to the basic principles of representative democracy and everybody being professional.</p>
+
+<p>Then there came the populist wave, and more and more academics started wearing activist hats. If the elected politicians seem to have no idea what they are doing, the professional in us demands trying to do something about it. Isn’t it obvious that the world is complex and big decisions should be made by experts?</p>
+
+<p>Well, no. It’s obvious to you, the reader of my academic blog who probably has a PhD or two. Most of the world doesn’t have a PhD or two. These other people are angry about the world changing under their feet, frustrated with its complexity, scared. And all around they only see people like themselves. You, dear reader, are not represented there, for you have been living in your own bubble, and you have so far been completely irrelevant to their concerns.</p>
+
+<p>And then in comes the populist. He does one thing right: he addresses all the pent-up anger, frustration, fear of change. He promises a solution - an appealingly simple one. This solution runs against every bit of evidence that the experts have, but from the point of view of the people without PhDs that’s actually ok because (a) the experts get things wrong too, and (b) the experts are obviously not interested in addressing the above concerns of people without PhDs. If anything, it’s the expert’s work that’s making the world less and less comprehensible. And now there’s finally a guy who is actually talking to these people, for a change.</p>
+
+<p>The “solution” the people are offered will actually make their lives worse, not better - but they never took a statistics class. And so the populist is riding the anger wave to victory.</p>
+
+<p>The Brexit movie provides a helpful demonstration of what happens when we’re trying to fact-check the populist’s arguments. All we need to do is to prove the populist wrong, to get the facts straight, right?</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YpP6ZdsBgmE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="padding-top:1em; padding-bottom:1em;"></iframe>
+
+<p>No. Fact-checking won’t help because the populst is talking to the emotions of these people. <a href="https://qz.com/838321/nonviolent-communication-the-scientifically-proven-step-by-step-guide-to-having-a-breakthrough-conversation-across-party-lines/">Until the emotions are addressed, no facts will get through</a>.</p>
+
+<h2 id="case-study-an-evangelical-trump-supporter">Case study: an evangelical Trump supporter</h2>
+
+<p>Here’s an Uber ride I will never forget. I was in a new area (Buffalo, NY), I wanted to learn more about it, and the driver (let’s call him Dave) was very talkative. According to Dave, the place was very vibrant, with all kinds of jobs, opportunities, fun, and strong economy (it didn’t actually look like any of that to me, and Dave’s own car was quite beat-up). It was also full of good God-loving people who supported Trump.</p>
+
+<p>Among the theses that came my way in a steady stream, with almost no prompting, were the following:</p>
+
+<ul>
+  <li>Democrats are trying to impeach Trump because he is not allowing them to take the Word of God from schools and courts.</li>
+  <li>Trump is mentioned in Bible. He’s obviously the trumpet before the Judgement Day. There’s a prophecy of him ruling for 8 years.</li>
+  <li>Trump is fundamentally a good Christian who never did any of the bad stuff that the media are lying about.</li>
+  <li>All technology is evil (including Dave’s own car and his phone, except when he uses the phone for reading Bible). But Trump, thankfully, is taking the country back to 1800s when it was the richest country and everything was good and people worried about God and not stars in the sky.</li>
+</ul>
+
+<p>Dear reader of my academic blog with a PhD degree: I know what you’re thinking. But let’s try to resist the urge to dismiss Dave as a certifiable lunatic who shouldn’t be allowed to drive.</p>
+
+<p>I have to admit I am a terrible actress. I was unable to maintain a straight face, and was only saved by my hat and the fact that Dave was driving and watching the road rather than me.</p>
+
+<p>Still, I’m proud to say that I was able to not laugh, to not ridicule any of the above theses, to not sound as a militant atheist. To not come off as an elitist intellectual jerk with zero points of intersection with Dave’s version of reality. I did get out of his car with his saying it was nice talking to me.</p>
+
+<p>Why did I bother? Why should we all try harder for such an outcome? Simply because there are many more people like Dave than like you and me. And we all live in democracies, a.k.a. the worst form of government except all others. Unless our minority manages to share our knowledge in a way that would actually address the concerns and improve the lives of the frustrated majority, the populism is going to march on.</p>
+
+<p>It’s also worth pondering over the fact that we have more knowledge than Dave largely because we were luckier with where we were born. Many of his views are ridiculous, but he as a human being is not. I sincerely hope I don’t sound condescending or patronising in writing this, for that’s neither my intention nor sentiment. I think that we fundamentally share a desire for a better world and each other’s well-being, and we both believe we know how to help with that. We just dramatically disagree on the implementation.</p>
+
+<p>So, I took a deep breath and decided to try to get us to agree about something. I cautiously led the conversation to the evils of technology that is destroying the environment, and got him to say that Jesus would probably not want that. Then I threw in Trump’s pulling out of the Paris agreement. Dave wasn’t aware of either its existence or the fact of Trump’s pulling out. He said there must have been a good reason. I brought up the oil lobbying. Then his mind somehow jumped to oil in Iran and Israel (???), and I couldn’t bring him back before the car stopped.</p>
+
+<p>Dear reader, these conversations are much, much harder than talking even to your most bitter academic opponents. I am spoiled with people staying on track of the discussion, and even helpfully making conclusions from what has been agreed on. Neither was the case with Dave, and I did not know how to handle that.</p>
+
+<h2 id="lessons-learned">Lessons learned</h2>
+
+<p>Dave exists, and there are millions like him who will easily outvote the handful of us smarty pants. In doing so, they will be badly deceived, and the result will be bad for both them and us. And it will be partly the fault of us smarty pants who are not communicating at the right level and with the right kind of empathy. Needless to say, this goes far beyond Trump and US.</p>
+
+<p>In conversation with Dave, I only get the points for being able to sustain a civil conversation, and maybe for getting one new fact across. But here’s what I’d do differently next time.</p>
+
+<blockquote>
+  <p>1) <strong>Start from establishing empathy</strong>. That’s actually fairly easy, because life is hard for all of us, only in different ways.</p>
+</blockquote>
+
+<blockquote>
+  <p>2) <strong>Avoid non-starters</strong>. I did ask how come Christians vote for Trump with his self-admitted grabbing women. Dave was unwilling to believe anything coming from the press, and I probably sounded confrontational.</p>
+</blockquote>
+
+<blockquote>
+  <p>3) <strong>Mention being a researcher</strong>. Even if you fail to convey any information, hopefully there would be a memory of researchers being real and nice people, and not completely out of touch with the reality of Dave’s life. Most likely, he has no face for the broad category of “experts”, like I didn’t have a face for “evangelical Trump supporters”.</p>
+</blockquote>
+
+<blockquote>
+  <p>4) <strong>Practice the poker face</strong>.</p>
+</blockquote>
+
+<p>People inherently prefer simplicity and coherence. We all build our own biased model of the world as we go, and we will try to just ignore/discard any facts not fitting in. Sawing doubt is only possible by presenting conflicting evidence on something that a mind is not yet cemented against. In this case, it turns out that Dave does NOT actually follow news obsessively, and facts that come from a friendly-looking concrete person rather than the abstract enemy-of-the-people-press might get in - given that the empathy has been established.</p>
+
+<p>What I did do right was <strong>reframing</strong>. Dave and I both care about environmental issues, but taking his perspective (religious) made it easier to bring in new facts. Here’a <a href="https://www.ted.com/talks/robb_willer_how_to_have_better_political_conversations">a great TEDx talk on the technique, with a conservative/liberal case study</a>.</p>
+
+<h2 id="implications-for-computational-social-science">Implications for computational social science</h2>
+
+<p>So, we’ve known about the echo chamber effects <a class="citation" href="#Pariser_2011_Beware_online_filter_bubbles">(Pariser, 2011; Pariser, 2011)</a> for a while. Still, nothing much seems to be happening. In fact, even when the users are shown just how coccooned they are, the diversity of their connections does not increase <a class="citation" href="#GillaniYuanEtAl_2018_Me_My_Echo_Chamber_and_I_Introspection_on_Social_Media_Polarization">(Gillani, Yuan, Saveski, Vosoughi, &amp; Roy, 2018)</a>.</p>
+
+<p>There are several successful projects for starting conversations across political spectrum, such as <a href="https://www.hifromtheotherside.com/">Hi From The Other Side</a> and <a href="https://fiskkit.com/">Fiskitt</a>.  <a href="https://www.kialo.com/">Kialo</a> is an excellent debate tool. There are also a few tools for visualizing the bubbles, such as <a href="http://graphics.wsj.com/blue-feed-red-feed/">Blue Feed, Red Feed by Wall Street Journal</a>, <a href="www.readacrosstheaisle.com">Read Across the Aisle</a>, <a href="https://www.allsides.com/unbiased-balanced-news">All sides</a>. Multiple organizations are now engaged in fact-checking and flagging clickbait and fake news stories, e.g. <a href="https://www.factcheck.org/fake-news/">FactCheck.org</a>. Still, all these efforts only target the people who actively self-select and already assume the other side is worth talking to. Dave would probably not be there.</p>
+
+<p>If the trouble starts on social media, and most people don’t go anywhere else, this is where the changes need to happen. That depends on the goodwill of companies whose business fundamentally depends on echo chambers. But let’s say they do want to change <a class="citation" href="#Greene_2019_How_Twitter_shapes_global_public_conversation_Jack_Dorsey_speaks_at_TED2019">(Greene, 2019)</a>. How is it even possible, after everybody got so used to the mental comfort of their echo chambers? How can we reach out beyond the slim margin of people who are already open-minded enough to sign up for “Hi from the other side”?</p>
+
+<p>I don’t have the answers, but here are some ideas of how NLP could help.</p>
+
+<ul>
+  <li>
+    <p>Matching people from opposing communities who have better chances of finding a common ground, to facilitate cross-bubble conversation. For instance, it is more difficult for me to find a common ground with Dave than for someone who is progressive, but also religious.</p>
+  </li>
+  <li>
+    <p>Tracking the sources of funding for polytical ads, and displaying those alongside with the ad, prominently: the organization, what it lobbies for, known polytical connections.</p>
+  </li>
+  <li>
+    <p>We know very little about the actual effectiveness of targeted advertising. Each campaign is unique and impossible to repeat, and it’s equally impossible to tell precisely how effective its tactics were. For instance, there is an opinion that Cambridge Analytica problem was overblown because the effectiveness of targeting based on personality traits is unclear <a class="citation" href="#Chen_2018_Cambridge_Analyticas_Facebook_data_abuse_shouldnt_get_credit_for_Trump">(Chen, 2018)</a>. To me, it looks like a rashed conclusion, since the election results were very close, and the process can never be reproduced.</p>
+  </li>
+  <li>
+    <p>A lot of time and money is invested into factchecking, but it’s not effectiveness is unclear <a class="citation" href="#DeCarbonnel_2019_Exclusive_Echo_chambers_-_Fake_news_fact-checks_hobbled_by_low">(De Carbonnel, 2019)</a>. We need more research on how that could be enhanced. See above: the conversation has to start with empathy, simply correcting the facts probably will not work at all.</p>
+  </li>
+  <li>
+    <p>Cesar Hidalgo (MIT) suggests a “flip feed” button that would show you stories from the other side <a class="citation" href="#Adee_2016_How_can_Facebook_and_its_users_burst_filter_bubble">(Adee, 2016)</a>. Clearly, if you’re in a bubble, there’s already an algorithm that knows what your bubble is. I’d argue that it could be more productive to not completely flip the feed, but to gradually widen it with bridge stories.</p>
+  </li>
+  <li>
+    <p>We need more research into not just detection of hate speech and abuse, but in ways to promote constructive conversations. Non-experts could probably use more tools for visualizing and connecting the evidence that’s coming in. Experts definitely need some kind of reminders to humanize and empathize, rather than only drown the non-experts in facts.</p>
+  </li>
+</ul>
+
+<p>For the last point, let’s all start offline. When we are lucky to meet a Dave, let’s just try to do a better job of reaching out. We’ve only got this one planet. We need his help, and he needs ours.</p>
+
+<h2>***</h2>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><div class="text-justify">
+    <span id="Pariser_2011_filter_bubble_what_Internet_is_hiding_from_you">Pariser, E. (2011). <i>The Filter Bubble: What the Internet Is Hiding from You</i>. New York, NY: Penguin Press.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Pariser_2011_filter_bubble')">BibTex</button>
+    
+<div class="bibtex" id="Pariser_2011_filter_bubble"><pre>@book{Pariser_2011_filter_bubble_what_Internet_is_hiding_from_you,
+  address = {{New York, NY}},
+  title = {The Filter Bubble: What the {{Internet}} Is Hiding from You},
+  isbn = {978-1-59420-300-8 978-0-14-312123-7},
+  shorttitle = {The Filter Bubble},
+  language = {English},
+  publisher = {{Penguin Press}},
+  author = {Pariser, Eli},
+  year = {2011}
+}
+</pre>
+
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Pariser_2011_Beware_online_filter_bubbles">Pariser, E. (2011). <i>Beware Online "Filter Bubbles"</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Pariser_2011_Beware_online')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles'">URL</button>
+    
+<div class="bibtex" id="Pariser_2011_Beware_online"><pre>@misc{Pariser_2011_Beware_online_filter_bubbles,
+  title = {Beware Online "Filter Bubbles"},
+  language = {en},
+  url = {https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles},
+  author = {Pariser, Eli},
+  year = {2011}
+}
+</pre>
+https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Greene_2019_How_Twitter_shapes_global_public_conversation_Jack_Dorsey_speaks_at_TED2019">Greene, B. (2019). How Twitter Shapes Global Public Conversation: Jack Dorsey Speaks at TED2019.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Greene_2019_How_Twitter')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://blog.ted.com/how-twitter-shapes-global-public-conversation-jack-dorsey-speaks-at-ted2019/'">URL</button>
+    
+<div class="bibtex" id="Greene_2019_How_Twitter"><pre>@misc{Greene_2019_How_Twitter_shapes_global_public_conversation_Jack_Dorsey_speaks_at_TED2019,
+  title = {How {{Twitter}} Shapes Global Public Conversation: {{Jack Dorsey}} Speaks at {{TED2019}}},
+  shorttitle = {How {{Twitter}} Shapes Global Public Conversation},
+  language = {en},
+  journal = {TED Blog},
+  url = {https://blog.ted.com/how-twitter-shapes-global-public-conversation-jack-dorsey-speaks-at-ted2019/},
+  author = {Greene, Brown},
+  month = apr,
+  year = {2019}
+}
+</pre>
+https://blog.ted.com/how-twitter-shapes-global-public-conversation-jack-dorsey-speaks-at-ted2019/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="GillaniYuanEtAl_2018_Me_My_Echo_Chamber_and_I_Introspection_on_Social_Media_Polarization">Gillani, N., Yuan, A., Saveski, M., Vosoughi, S., &amp; Roy, D. (2018). Me, My Echo Chamber, and I: Introspection on Social Media Polarization. <i>Proceedings of the 2018 World Wide Web Conference</i>, 823–831. https://doi.org/10.1145/3178876.3186130</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('GillaniYuanEtAl_2018_Me_My')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://doi.org/10.1145/3178876.3186130'">URL</button>
+    
+<div class="bibtex" id="GillaniYuanEtAl_2018_Me_My"><pre>@inproceedings{GillaniYuanEtAl_2018_Me_My_Echo_Chamber_and_I_Introspection_on_Social_Media_Polarization,
+  address = {{Republic and Canton of Geneva, Switzerland}},
+  series = {{{WWW}} '18},
+  title = {Me, {{My Echo Chamber}}, and {{I}}: {{Introspection}} on {{Social Media Polarization}}},
+  isbn = {978-1-4503-5639-8},
+  shorttitle = {Me, {{My Echo Chamber}}, and {{I}}},
+  booktitle = {Proceedings of the 2018 {{World Wide Web Conference}}},
+  publisher = {{International World Wide Web Conferences Steering Committee}},
+  doi = {10.1145/3178876.3186130},
+  url = {https://doi.org/10.1145/3178876.3186130},
+  author = {Gillani, Nabeel and Yuan, Ann and Saveski, Martin and Vosoughi, Soroush and Roy, Deb},
+  year = {2018},
+  pages = {823--831}
+}
+</pre>
+https://doi.org/10.1145/3178876.3186130
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="DeCarbonnel_2019_Exclusive_Echo_chambers_-_Fake_news_fact-checks_hobbled_by_low">De Carbonnel, A. (2019). Exclusive: Echo Chambers - Fake News Fact-Checks Hobbled by Low... <i>Reuters</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('DeCarbonnel_2019_Exclusive_Echo')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.reuters.com/article/us-eu-disinformation-exclusive-idUSKCN1U60PT'">URL</button>
+    
+<div class="bibtex" id="DeCarbonnel_2019_Exclusive_Echo"><pre>@article{DeCarbonnel_2019_Exclusive_Echo_chambers_-_Fake_news_fact-checks_hobbled_by_low,
+  title = {Exclusive: {{Echo}} Chambers - {{Fake}} News Fact-Checks Hobbled by Low...},
+  shorttitle = {Exclusive},
+  language = {en},
+  journal = {Reuters},
+  url = {https://www.reuters.com/article/us-eu-disinformation-exclusive-idUSKCN1U60PT},
+  author = {De Carbonnel, Alissa},
+  month = jul,
+  year = {2019}
+}
+</pre>
+https://www.reuters.com/article/us-eu-disinformation-exclusive-idUSKCN1U60PT
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Chen_2018_Cambridge_Analyticas_Facebook_data_abuse_shouldnt_get_credit_for_Trump">Chen, A. (2018). Cambridge Analytica’s Facebook Data Abuse Shouldn’t Get Credit for Trump.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Chen_2018_Cambridge_Analyticas')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.theverge.com/2018/3/20/17138854/cambridge-analytica-facebook-data-trump-campaign-psychographic-microtargeting'">URL</button>
+    
+<div class="bibtex" id="Chen_2018_Cambridge_Analyticas"><pre>@misc{Chen_2018_Cambridge_Analyticas_Facebook_data_abuse_shouldnt_get_credit_for_Trump,
+  title = {Cambridge {{Analytica}}'s {{Facebook}} Data Abuse Shouldn't Get Credit for {{Trump}}},
+  journal = {The Verge},
+  url = {https://www.theverge.com/2018/3/20/17138854/cambridge-analytica-facebook-data-trump-campaign-psychographic-microtargeting},
+  author = {Chen, Angela},
+  month = mar,
+  year = {2018}
+}
+</pre>
+https://www.theverge.com/2018/3/20/17138854/cambridge-analytica-facebook-data-trump-campaign-psychographic-microtargeting
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Adee_2016_How_can_Facebook_and_its_users_burst_filter_bubble">Adee, S. (2016). How Can Facebook and Its Users Burst the ’Filter Bubble’?</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Adee_2016_How_can')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.newscientist.com/article/2113246-how-can-facebook-and-its-users-burst-the-filter-bubble/'">URL</button>
+    
+<div class="bibtex" id="Adee_2016_How_can"><pre>@misc{Adee_2016_How_can_Facebook_and_its_users_burst_filter_bubble,
+  title = {How Can {{Facebook}} and Its Users Burst the 'Filter Bubble'?},
+  language = {en-US},
+  journal = {New Scientist},
+  url = {https://www.newscientist.com/article/2113246-how-can-facebook-and-its-users-burst-the-filter-bubble/},
+  author = {Adee, Sally},
+  month = nov,
+  year = {2016}
+}
+</pre>
+https://www.newscientist.com/article/2113246-how-can-facebook-and-its-users-burst-the-filter-bubble/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li></ol>
+
+<h2 id="cite-this-post">Cite this post</h2>
+
+<p>If you’d like to cite this post, please use the following bibtex:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@misc{Rogers_2019_conversation,
+  title = { Talking to people outside your echo chamber: SocNLP challenges},
+  journal = {Hacking Semantics},
+  url = { https://hackingsemantics.xyz/2019/conversation/ },
+  author = {Rogers, Anna},
+  day = { 21 },
+  month = { Jul },
+  year = { 2019 }
+}
+</code></pre></div></div>
+
+<h2 id="leave-a-comment-twitter">Leave a comment (Twitter)</h2>
+
+<p><a href="https://twitter.com/annargrs/status/1153027705413296131">https://twitter.com/annargrs/status/1153027705413296131</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#academia" class="page__taxonomy-item" rel="tag">academia</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#socialnlp" class="page__taxonomy-item" rel="tag">socialNLP</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#squib" class="page__taxonomy-item" rel="tag">squib</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-07-21T11:00:47-04:00">July 21, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=annargrs&text=Talking+to+people+outside+your+echo+chamber%3A+SocNLP+challenges%20https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fconversation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fconversation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fconversation%2F&title=Talking to people outside your echo chamber: SocNLP challenges" class="btn" title=" Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fconversation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/analogies/" class="pagination--pager" title="On word analogies and negative results in NLP
+">Previous</a>
+    
+    
+      <a href="/2019/nlp4linguists/" class="pagination--pager" title="How to teach NLP to non-CS-majors in 2 weeks?
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h2 class="page__comments-title">Comments</h2>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/nlp4linguists/" rel="permalink">How to teach NLP to non-CS-majors in 2 weeks?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">What I learned from organizing an introductory course on NLP for linguists at ESSLLI 2019.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/analogies/" rel="permalink">On word analogies and negative results in NLP
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov’s word analogies.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/leaderboards/" rel="permalink">How the Transformers broke NLP leaderboards
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  11 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/why-blog/" rel="permalink">Why blog about NLP in 2019?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Benefits of blogging for the academic souls.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="search" id="search" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Hacking semantics. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.<br/>
+  <!--a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a-->This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127096214-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127096214-2', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'annargrs/blog');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+
+
+
+  </body>
+</html>

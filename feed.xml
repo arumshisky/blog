@@ -1,0 +1,2113 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://hackingsemantics.xyz/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hackingsemantics.xyz/" rel="alternate" type="text/html" /><updated>2019-09-03T10:02:49-04:00</updated><id>https://hackingsemantics.xyz/feed.xml</id><title type="html">Hacking semantics</title><subtitle>A Blog about NLP, Computational Linguistics, Deep Learning, Cognitive Science, and AI.</subtitle><author><name>Anna Rogers</name><uri>http://www.cs.uml.edu/~arogers/</uri></author><entry><title type="html">How to teach NLP to non-CS-majors in 2 weeks?</title><link href="https://hackingsemantics.xyz/2019/nlp4linguists/" rel="alternate" type="text/html" title="How to teach NLP to non-CS-majors in 2 weeks?" /><published>2019-09-02T17:00:47-04:00</published><updated>2019-09-02T17:00:47-04:00</updated><id>https://hackingsemantics.xyz/2019/nlp4linguists</id><content type="html" xml:base="https://hackingsemantics.xyz/2019/nlp4linguists/">&lt;p&gt;I strongly believe that getting machines to understand natural language, if at all possible, will require much interdisciplinary collaboration. It’s not clear whether NLP models should be biologically plausible or explicitly encode any linguistic structures – but we do know that language is a very complex thing, and no discipline has been able to solve all the problems on its own.&lt;/p&gt;
+
+&lt;p&gt;Don’t take just my word for it. Here’s &lt;a href=&quot;https://allenai.org/ai2-israel/&quot;&gt;Yoav Goldberg’s&lt;/a&gt; slide from his &lt;a href=&quot;https://www.youtube.com/watch?v=e12danHhlic&quot;&gt;SpacyIRL 2019 talk&lt;/a&gt;: the future NLP will require both linguistic and machine learning expertise.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/goldberg-spacyirl.png&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Consider also the raising investment in cross-disciplinary programs in all kinds of data science, aimed to train the new “bilingual” task force. &lt;a href=&quot;https://www.slideshare.net/StateofAIReport/state-of-ai-report-2019-151804430&quot;&gt;State of AI 2019&lt;/a&gt; reports the following:&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/state-of-ai-report-2019-48-1024.jpg&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;So, we need to train this new taskforce. Great idea, right? Let’s just do it.&lt;/p&gt;
+
+&lt;h1 id=&quot;why-cross-disciplinary-programs-are-hard&quot;&gt;Why cross-disciplinary programs are hard.&lt;/h1&gt;
+
+&lt;p&gt;The problem is, of course, that true interdisciplinarity requires working knowledge of more than one field. This comes at the time when both arXiv and conferences are exploding, and we can barely keep up with the literature even within one narrow sub-field of NLP. Now, imagine that NLP is your second field, and in addition to the arXiv insanity, you also need to keep track of all the latest research on linguistic typology or whatever your original field is.&lt;/p&gt;
+
+&lt;p&gt;Moreover, it’s not just about reading more literature. It’s also learning a different mindset, a different way to set and solve problems. In case of NLP for linguistics, it takes time to start seeing everything as “tasks”, and to formulate research hypotheses in a such a way that they could be proved or falsified by ML experiments.&lt;/p&gt;
+
+&lt;p&gt;In case of NLP for linguistics, it also involves acquiring a whole lot of technical knowledge that should have come from a large series of undergraduate courses – all in your spare time. Somebody willing to do this must have not only above-average dedication and amount of spare time, but also unusual willingness to look beyond the basic tenets of one’s original discipline. This is objectively hard, and not for everyone.&lt;/p&gt;
+
+&lt;h1 id=&quot;case-study-introductory-nlp-at-esslli-2019&quot;&gt;Case study: Introductory NLP at ESSLLI 2019&lt;/h1&gt;
+
+&lt;p&gt;Backgound: I’ve taught in both CS and linguistics university programs before, and I’m told I’m a pretty good lecturer. I have some experience developing curricula, and, most importantly, I’m someone who made the transition from cognitive semantics to a machine learning lab.&lt;/p&gt;
+
+&lt;p&gt;With all of that, I came to &lt;a href=&quot;https://esslli2019.folli.info/welcome-to-esslli-2019/&quot;&gt;ESSLLI&lt;/a&gt; to teach a 2-week introductory NLP course for theoretical linguists, confident I knew how to do this right.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-original-plan&quot;&gt;The original plan&lt;/h2&gt;
+
+&lt;p&gt;In week 1 my goal was to provide the minimal skill set for getting, processing, and experimenting with textual data with Python, as well as fundamentals of machine learning. In week 2 I aimed to cover the basic neural architectures and the latest issues in evaluation and creation of datasets. I assumed that the students would have only the basic Python skills from an online course (such as &lt;a href=&quot;https://www.edx.org/course/6-00-1x-introduction-to-computer-science-and-programming-using-python-3&quot;&gt;this excellent edX course&lt;/a&gt; that I started from myself).&lt;/p&gt;
+
+&lt;p&gt;Sounds doable, right? I had very positive feedback for my proposal and, as an ex-linguist, I thought I knew what I was getting into.&lt;/p&gt;
+
+&lt;p&gt;Of course, the Murphy law did not fail to apply. Here are some things I learned the hard way.&lt;/p&gt;
+
+&lt;h2 id=&quot;problem-1-the-pool-of-students-is-incredibly-diverse&quot;&gt;Problem 1: the pool of students is incredibly diverse.&lt;/h2&gt;
+
+&lt;p&gt;ESSLLI is a very unique environment where you can meet literally anybody. I was preparing with the linguists in mind, but I found that my class had also physicists, mathematicians, and philosophers (at least 2 of each). Some of the linguists also had much more coding experience than others.&lt;/p&gt;
+
+&lt;p&gt;However, this is not only a problem for ESSLLI, and would probably would apply to any elective NLP or data science course. For example, I have just taught a UMass introductory Data Science course aimed at business majors, and I had everybody from chemists to political science.&lt;/p&gt;
+
+&lt;p&gt;This means two things for the lecturer:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;at any point you can safely assume that a part of the audience is either bored or confused.&lt;/li&gt;
+  &lt;li&gt;at any point you can get any kind of question, from something very basic to something you can’t even answer on the spot.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To balance out boredom and confusion, and also to acknowledge the impossibility of humans attending to any one thing for 90 minutes straight, my strategy was to split the class into a short lecture (~30-40 min out of 90) and a hands-on tutorial in Jupyter. I prepared the lectures with the confused part of the audience in mind, and I assumed that the bored part will just dive into Jupyter and keep themselves occupied.&lt;/p&gt;
+
+&lt;p&gt;Still, I was definitely not prepared for everything:&lt;/p&gt;
+
+&lt;div style=&quot;margin: 3em auto !important;&quot;&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Teaching an intro PyTorch tutorial at ESSLLI. Audience is 80% linguists, and I start very confident I know how to talk to former colleagues.&lt;br /&gt;&lt;br /&gt;A question halfway into the tutorial:&lt;br /&gt;- Sorry, what is &amp;quot;GPU&amp;quot;?&lt;br /&gt;&lt;br /&gt;(Sound of my brain overclocking to reassess the rest of the material)&lt;/p&gt;&amp;mdash; Anna Rogers (@annargrs) &lt;a href=&quot;https://twitter.com/annargrs/status/1161237977638625281?ref_src=twsrc%5Etfw&quot;&gt;August 13, 2019&lt;/a&gt;&lt;/blockquote&gt; &lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;problem-2-basic-python-is-not-enough&quot;&gt;Problem 2: basic Python is not enough&lt;/h2&gt;
+
+&lt;p&gt;I assumed that the students would have taken an online Python course, which in my mind implied familiarity with functions and classes.&lt;/p&gt;
+
+&lt;p&gt;What I should have realized is that object-oriented programming is not something that a beginner is going to be able to actually use after just a set of exercises. I know many non-CS researchers who rely on Python heavily for daily experimentation - and manage to do most of it procedurally, in Jupyter notebooks. They might write a few functions to load/save their data that they copy-paste routinely, but they’re not going anywhere near classes. They really don’t need it for what they do.&lt;/p&gt;
+
+&lt;p&gt;What this means for an NLP course is that if your deep learning framework relies on relatively complex programming constructs like classes, your students will be stuck with programming before they can even start to get stuck with partial derivatives. I chose vanilla PyTorch, with the goal of showing the students all the building blocks of a simple feed-forward network. My code was heavily commented, and they were able to run it, but I honestly have no idea how much of it could possibly sink in.&lt;/p&gt;
+
+&lt;p&gt;I’m still debating with myself whether I should have just gone with &lt;a href=&quot;https://www.fast.ai/&quot;&gt;fast.ai&lt;/a&gt;. If the goal is to just give people tools to run pre-packaged models, then it would definitely be achieved much more efficiently than what I did. But if the goal is, eventually, research, then awareness of all the individual components is certainly to be encouraged.&lt;/p&gt;
+
+&lt;h2 id=&quot;problem-3-emerging-curricula-mess&quot;&gt;Problem 3: emerging-curricula mess&lt;/h2&gt;
+
+&lt;p&gt;At the time that I got my ESSLLI proposal accepted, I did one thing very wrong: I did not try to check what other courses there were, and whether there was potential overlap. The result was that in both weeks of ESSLLI there were two courses with partly overlapping material, that the majority of students taking my classes also attended, and I had to frantically reorganize and add material. In my case, I ended up relying on other people for the overview of fancy neural nets, and using the time for more datasets and methodology discussion, which nobody else was doing.&lt;/p&gt;
+
+&lt;p&gt;On the one hand, this is to be expected from a summer school which is a unique, throw-everyone-together event - but I would strongly suspect that an emerging data science program would also have some mess in curricula, because… well… this is all emerging disciplines, and NLP in particular changes so fast that if I were to come to ESSLLI again next year I’d have to replace at least 20% of the material.&lt;/p&gt;
+
+&lt;p&gt;The takeaway here is that interdisciplinary programs require also above-average attention to the overall curriculum structure, seeing how your piece fits with everything else that your target students are taking, and NLP in particular requires above-average monitoring of the recent developments. Say, if tomorrow graph neural networks top all leaderboards, we’ll have to somehow teach them.&lt;/p&gt;
+
+&lt;p&gt;PyTorch actually helped me to make this point. The students installed version 1.1 in week 1, and by the time we got to week 2 the version 1.2 was already out.&lt;/p&gt;
+
+&lt;h2 id=&quot;problem-4-introduction-to-nlp-is-actually-at-least-3-courses&quot;&gt;Problem 4: “Introduction to NLP” is actually at least 3 courses.&lt;/h2&gt;
+
+&lt;p&gt;This was a big misconception on my part. I really needed to teach 3 different things, all in the space of a single course:&lt;/p&gt;
+
+&lt;p&gt;1) The data part: formats, pre-processing, pipeline components, available resources, potential effects, biases and artifacts. By now, this should clearly be a course in itself, and the one where the linguists can immediately make the most difference.&lt;/p&gt;
+
+&lt;p&gt;2) The machine learning part: the fundamentals of machine learning experiments, variance/bias, linear and logistic regression, basic neural nets, rnns, attention…&lt;/p&gt;
+
+&lt;p&gt;3) The actual NLP, which comes at the intersection of (1) and (2). Discussing the latest cool stuff such as &lt;a href=&quot;https://thegradient.pub/nlps-clever-hans-moment-has-arrived/&quot;&gt;the BERT meltdown&lt;/a&gt; is really not feasible without both of them.&lt;/p&gt;
+
+&lt;p&gt;If possible, I would perhaps sub-split distributional meaning representations as a course separate from (3), with a gentle primer on linear algebra. That one has to be really gentle, and not longer than 30 minutes at a time. I did make a desperate attempt to run through matrix factorization in half a lecture, as I believe it’s important to think of word2vec&amp;amp;co in context of count-based baselines. I really appreciate the bravery of my students who still showed up on the next day.&lt;/p&gt;
+
+&lt;p&gt;Overall, in the course of 10 90-minute lectures and tutorials, I was able to fit maybe 15-30% of each of these courses. If I were to develop a curriculum for the next year’s ESSLLI, I’d try to make sure that there would be a course for (1) and (2) independently, in week 1, so that in week 2 someone would proceed with the actual NLP.&lt;/p&gt;
+
+&lt;h1 id=&quot;to-conclude&quot;&gt;To conclude&lt;/h1&gt;
+
+&lt;p&gt;So this is what I learned the hard way, and I hope might be helpful for other people working on cross-disciplinary courses. My materials are available on the &lt;a href=&quot;https://sites.google.com/view/esslli2019-nlp/home&quot;&gt;course website&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’d like to thank ESSLLI organizers, the great city of Riga (with its fantastic food), and, of course, all of my very brave students.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/esslli2019.jpg&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I’m particularly grateful to the students who came up later and shared their stories. A few of them were in strong computational programs, but many were theoretical linguists, language teachers, translators, students of literature, in departments without a single computational linguist, with no one to ask for advice. These are the people who keep struggling with online coding courses in their spare time, and nobody’s there to tell them that it’s totally normal to spend 5 hours hunting for a silly bug. At least 50% of the class were women, which means 2x impostor syndrome. Rather than getting recognized for their attempt to go across the fence, they feel like they’re wasting time on something they will never be able to do well.&lt;/p&gt;
+
+&lt;p&gt;I know this, because that’s exactly how I felt for a really long time, too.&lt;/p&gt;</content><author><name>Anna Rogers</name><uri>http://www.cs.uml.edu/~arogers/</uri></author><category term="academia" /><category term="teaching" /><summary type="html">What I learned from organizing an introductory course on NLP for linguists at ESSLLI 2019.</summary></entry><entry><title type="html">Talking to people outside your echo chamber: SocNLP challenges</title><link href="https://hackingsemantics.xyz/2019/conversation/" rel="alternate" type="text/html" title="Talking to people outside your echo chamber: SocNLP challenges" /><published>2019-07-21T11:00:47-04:00</published><updated>2019-07-21T11:00:47-04:00</updated><id>https://hackingsemantics.xyz/2019/conversation</id><content type="html" xml:base="https://hackingsemantics.xyz/2019/conversation/">&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/puzzle-connect.jpg&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This blog is NOT political, even though the story below will show some of my political views. I’m sharing it because it highlights a burning issue in computational social science that is getting nowhere near enough attention. Reader beware.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;academics-and-populism&quot;&gt;Academics and Populism&lt;/h2&gt;
+
+&lt;p&gt;Like most researchers I know, I’ve been politically apathetic until a few years ago. Politicians were doing their stuff, I was doing mine, all according to the basic principles of representative democracy and everybody being professional.&lt;/p&gt;
+
+&lt;p&gt;Then there came the populist wave, and more and more academics started wearing activist hats. If the elected politicians seem to have no idea what they are doing, the professional in us demands trying to do something about it. Isn’t it obvious that the world is complex and big decisions should be made by experts?&lt;/p&gt;
+
+&lt;p&gt;Well, no. It’s obvious to you, the reader of my academic blog who probably has a PhD or two. Most of the world doesn’t have a PhD or two. These other people are angry about the world changing under their feet, frustrated with its complexity, scared. And all around they only see people like themselves. You, dear reader, are not represented there, for you have been living in your own bubble, and you have so far been completely irrelevant to their concerns.&lt;/p&gt;
+
+&lt;p&gt;And then in comes the populist. He does one thing right: he addresses all the pent-up anger, frustration, fear of change. He promises a solution - an appealingly simple one. This solution runs against every bit of evidence that the experts have, but from the point of view of the people without PhDs that’s actually ok because (a) the experts get things wrong too, and (b) the experts are obviously not interested in addressing the above concerns of people without PhDs. If anything, it’s the expert’s work that’s making the world less and less comprehensible. And now there’s finally a guy who is actually talking to these people, for a change.&lt;/p&gt;
+
+&lt;p&gt;The “solution” the people are offered will actually make their lives worse, not better - but they never took a statistics class. And so the populist is riding the anger wave to victory.&lt;/p&gt;
+
+&lt;p&gt;The Brexit movie provides a helpful demonstration of what happens when we’re trying to fact-check the populist’s arguments. All we need to do is to prove the populist wrong, to get the facts straight, right?&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YpP6ZdsBgmE&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot; style=&quot;padding-top:1em; padding-bottom:1em;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;No. Fact-checking won’t help because the populst is talking to the emotions of these people. &lt;a href=&quot;https://qz.com/838321/nonviolent-communication-the-scientifically-proven-step-by-step-guide-to-having-a-breakthrough-conversation-across-party-lines/&quot;&gt;Until the emotions are addressed, no facts will get through&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;case-study-an-evangelical-trump-supporter&quot;&gt;Case study: an evangelical Trump supporter&lt;/h2&gt;
+
+&lt;p&gt;Here’s an Uber ride I will never forget. I was in a new area (Buffalo, NY), I wanted to learn more about it, and the driver (let’s call him Dave) was very talkative. According to Dave, the place was very vibrant, with all kinds of jobs, opportunities, fun, and strong economy (it didn’t actually look like any of that to me, and Dave’s own car was quite beat-up). It was also full of good God-loving people who supported Trump.&lt;/p&gt;
+
+&lt;p&gt;Among the theses that came my way in a steady stream, with almost no prompting, were the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Democrats are trying to impeach Trump because he is not allowing them to take the Word of God from schools and courts.&lt;/li&gt;
+  &lt;li&gt;Trump is mentioned in Bible. He’s obviously the trumpet before the Judgement Day. There’s a prophecy of him ruling for 8 years.&lt;/li&gt;
+  &lt;li&gt;Trump is fundamentally a good Christian who never did any of the bad stuff that the media are lying about.&lt;/li&gt;
+  &lt;li&gt;All technology is evil (including Dave’s own car and his phone, except when he uses the phone for reading Bible). But Trump, thankfully, is taking the country back to 1800s when it was the richest country and everything was good and people worried about God and not stars in the sky.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Dear reader of my academic blog with a PhD degree: I know what you’re thinking. But let’s try to resist the urge to dismiss Dave as a certifiable lunatic who shouldn’t be allowed to drive.&lt;/p&gt;
+
+&lt;p&gt;I have to admit I am a terrible actress. I was unable to maintain a straight face, and was only saved by my hat and the fact that Dave was driving and watching the road rather than me.&lt;/p&gt;
+
+&lt;p&gt;Still, I’m proud to say that I was able to not laugh, to not ridicule any of the above theses, to not sound as a militant atheist. To not come off as an elitist intellectual jerk with zero points of intersection with Dave’s version of reality. I did get out of his car with his saying it was nice talking to me.&lt;/p&gt;
+
+&lt;p&gt;Why did I bother? Why should we all try harder for such an outcome? Simply because there are many more people like Dave than like you and me. And we all live in democracies, a.k.a. the worst form of government except all others. Unless our minority manages to share our knowledge in a way that would actually address the concerns and improve the lives of the frustrated majority, the populism is going to march on.&lt;/p&gt;
+
+&lt;p&gt;It’s also worth pondering over the fact that we have more knowledge than Dave largely because we were luckier with where we were born. Many of his views are ridiculous, but he as a human being is not. I sincerely hope I don’t sound condescending or patronising in writing this, for that’s neither my intention nor sentiment. I think that we fundamentally share a desire for a better world and each other’s well-being, and we both believe we know how to help with that. We just dramatically disagree on the implementation.&lt;/p&gt;
+
+&lt;p&gt;So, I took a deep breath and decided to try to get us to agree about something. I cautiously led the conversation to the evils of technology that is destroying the environment, and got him to say that Jesus would probably not want that. Then I threw in Trump’s pulling out of the Paris agreement. Dave wasn’t aware of either its existence or the fact of Trump’s pulling out. He said there must have been a good reason. I brought up the oil lobbying. Then his mind somehow jumped to oil in Iran and Israel (???), and I couldn’t bring him back before the car stopped.&lt;/p&gt;
+
+&lt;p&gt;Dear reader, these conversations are much, much harder than talking even to your most bitter academic opponents. I am spoiled with people staying on track of the discussion, and even helpfully making conclusions from what has been agreed on. Neither was the case with Dave, and I did not know how to handle that.&lt;/p&gt;
+
+&lt;h2 id=&quot;lessons-learned&quot;&gt;Lessons learned&lt;/h2&gt;
+
+&lt;p&gt;Dave exists, and there are millions like him who will easily outvote the handful of us smarty pants. In doing so, they will be badly deceived, and the result will be bad for both them and us. And it will be partly the fault of us smarty pants who are not communicating at the right level and with the right kind of empathy. Needless to say, this goes far beyond Trump and US.&lt;/p&gt;
+
+&lt;p&gt;In conversation with Dave, I only get the points for being able to sustain a civil conversation, and maybe for getting one new fact across. But here’s what I’d do differently next time.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1) &lt;strong&gt;Start from establishing empathy&lt;/strong&gt;. That’s actually fairly easy, because life is hard for all of us, only in different ways.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2) &lt;strong&gt;Avoid non-starters&lt;/strong&gt;. I did ask how come Christians vote for Trump with his self-admitted grabbing women. Dave was unwilling to believe anything coming from the press, and I probably sounded confrontational.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;3) &lt;strong&gt;Mention being a researcher&lt;/strong&gt;. Even if you fail to convey any information, hopefully there would be a memory of researchers being real and nice people, and not completely out of touch with the reality of Dave’s life. Most likely, he has no face for the broad category of “experts”, like I didn’t have a face for “evangelical Trump supporters”.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;4) &lt;strong&gt;Practice the poker face&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;People inherently prefer simplicity and coherence. We all build our own biased model of the world as we go, and we will try to just ignore/discard any facts not fitting in. Sawing doubt is only possible by presenting conflicting evidence on something that a mind is not yet cemented against. In this case, it turns out that Dave does NOT actually follow news obsessively, and facts that come from a friendly-looking concrete person rather than the abstract enemy-of-the-people-press might get in - given that the empathy has been established.&lt;/p&gt;
+
+&lt;p&gt;What I did do right was &lt;strong&gt;reframing&lt;/strong&gt;. Dave and I both care about environmental issues, but taking his perspective (religious) made it easier to bring in new facts. Here’a &lt;a href=&quot;https://www.ted.com/talks/robb_willer_how_to_have_better_political_conversations&quot;&gt;a great TEDx talk on the technique, with a conservative/liberal case study&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;implications-for-computational-social-science&quot;&gt;Implications for computational social science&lt;/h2&gt;
+
+&lt;p&gt;So, we’ve known about the echo chamber effects &lt;a class=&quot;citation&quot; href=&quot;#Pariser_2011_Beware_online_filter_bubbles&quot;&gt;(Pariser, 2011; Pariser, 2011)&lt;/a&gt; for a while. Still, nothing much seems to be happening. In fact, even when the users are shown just how coccooned they are, the diversity of their connections does not increase &lt;a class=&quot;citation&quot; href=&quot;#GillaniYuanEtAl_2018_Me_My_Echo_Chamber_and_I_Introspection_on_Social_Media_Polarization&quot;&gt;(Gillani, Yuan, Saveski, Vosoughi, &amp;amp; Roy, 2018)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are several successful projects for starting conversations across political spectrum, such as &lt;a href=&quot;https://www.hifromtheotherside.com/&quot;&gt;Hi From The Other Side&lt;/a&gt; and &lt;a href=&quot;https://fiskkit.com/&quot;&gt;Fiskitt&lt;/a&gt;.  &lt;a href=&quot;https://www.kialo.com/&quot;&gt;Kialo&lt;/a&gt; is an excellent debate tool. There are also a few tools for visualizing the bubbles, such as &lt;a href=&quot;http://graphics.wsj.com/blue-feed-red-feed/&quot;&gt;Blue Feed, Red Feed by Wall Street Journal&lt;/a&gt;, &lt;a href=&quot;www.readacrosstheaisle.com&quot;&gt;Read Across the Aisle&lt;/a&gt;, &lt;a href=&quot;https://www.allsides.com/unbiased-balanced-news&quot;&gt;All sides&lt;/a&gt;. Multiple organizations are now engaged in fact-checking and flagging clickbait and fake news stories, e.g. &lt;a href=&quot;https://www.factcheck.org/fake-news/&quot;&gt;FactCheck.org&lt;/a&gt;. Still, all these efforts only target the people who actively self-select and already assume the other side is worth talking to. Dave would probably not be there.&lt;/p&gt;
+
+&lt;p&gt;If the trouble starts on social media, and most people don’t go anywhere else, this is where the changes need to happen. That depends on the goodwill of companies whose business fundamentally depends on echo chambers. But let’s say they do want to change &lt;a class=&quot;citation&quot; href=&quot;#Greene_2019_How_Twitter_shapes_global_public_conversation_Jack_Dorsey_speaks_at_TED2019&quot;&gt;(Greene, 2019)&lt;/a&gt;. How is it even possible, after everybody got so used to the mental comfort of their echo chambers? How can we reach out beyond the slim margin of people who are already open-minded enough to sign up for “Hi from the other side”?&lt;/p&gt;
+
+&lt;p&gt;I don’t have the answers, but here are some ideas of how NLP could help.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Matching people from opposing communities who have better chances of finding a common ground, to facilitate cross-bubble conversation. For instance, it is more difficult for me to find a common ground with Dave than for someone who is progressive, but also religious.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Tracking the sources of funding for polytical ads, and displaying those alongside with the ad, prominently: the organization, what it lobbies for, known polytical connections.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We know very little about the actual effectiveness of targeted advertising. Each campaign is unique and impossible to repeat, and it’s equally impossible to tell precisely how effective its tactics were. For instance, there is an opinion that Cambridge Analytica problem was overblown because the effectiveness of targeting based on personality traits is unclear &lt;a class=&quot;citation&quot; href=&quot;#Chen_2018_Cambridge_Analyticas_Facebook_data_abuse_shouldnt_get_credit_for_Trump&quot;&gt;(Chen, 2018)&lt;/a&gt;. To me, it looks like a rashed conclusion, since the election results were very close, and the process can never be reproduced.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A lot of time and money is invested into factchecking, but it’s not effectiveness is unclear &lt;a class=&quot;citation&quot; href=&quot;#DeCarbonnel_2019_Exclusive_Echo_chambers_-_Fake_news_fact-checks_hobbled_by_low&quot;&gt;(De Carbonnel, 2019)&lt;/a&gt;. We need more research on how that could be enhanced. See above: the conversation has to start with empathy, simply correcting the facts probably will not work at all.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Cesar Hidalgo (MIT) suggests a “flip feed” button that would show you stories from the other side &lt;a class=&quot;citation&quot; href=&quot;#Adee_2016_How_can_Facebook_and_its_users_burst_filter_bubble&quot;&gt;(Adee, 2016)&lt;/a&gt;. Clearly, if you’re in a bubble, there’s already an algorithm that knows what your bubble is. I’d argue that it could be more productive to not completely flip the feed, but to gradually widen it with bridge stories.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We need more research into not just detection of hate speech and abuse, but in ways to promote constructive conversations. Non-experts could probably use more tools for visualizing and connecting the evidence that’s coming in. Experts definitely need some kind of reminders to humanize and empathize, rather than only drown the non-experts in facts.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For the last point, let’s all start offline. When we are lucky to meet a Dave, let’s just try to do a better job of reaching out. We’ve only got this one planet. We need his help, and he needs ours.&lt;/p&gt;
+
+&lt;h2&gt;***&lt;/h2&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Pariser_2011_filter_bubble_what_Internet_is_hiding_from_you&quot;&gt;Pariser, E. (2011). &lt;i&gt;The Filter Bubble: What the Internet Is Hiding from You&lt;/i&gt;. New York, NY: Penguin Press.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Pariser_2011_filter_bubble')&quot;&gt;BibTex&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Pariser_2011_filter_bubble&quot;&gt;&lt;pre&gt;@book{Pariser_2011_filter_bubble_what_Internet_is_hiding_from_you,
+  address = {{New York, NY}},
+  title = {The Filter Bubble: What the {{Internet}} Is Hiding from You},
+  isbn = {978-1-59420-300-8 978-0-14-312123-7},
+  shorttitle = {The Filter Bubble},
+  language = {English},
+  publisher = {{Penguin Press}},
+  author = {Pariser, Eli},
+  year = {2011}
+}
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Pariser_2011_Beware_online_filter_bubbles&quot;&gt;Pariser, E. (2011). &lt;i&gt;Beware Online &quot;Filter Bubbles&quot;&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Pariser_2011_Beware_online')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Pariser_2011_Beware_online&quot;&gt;&lt;pre&gt;@misc{Pariser_2011_Beware_online_filter_bubbles,
+  title = {Beware Online &quot;Filter Bubbles&quot;},
+  language = {en},
+  url = {https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles},
+  author = {Pariser, Eli},
+  year = {2011}
+}
+&lt;/pre&gt;
+https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Greene_2019_How_Twitter_shapes_global_public_conversation_Jack_Dorsey_speaks_at_TED2019&quot;&gt;Greene, B. (2019). How Twitter Shapes Global Public Conversation: Jack Dorsey Speaks at TED2019.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Greene_2019_How_Twitter')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://blog.ted.com/how-twitter-shapes-global-public-conversation-jack-dorsey-speaks-at-ted2019/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Greene_2019_How_Twitter&quot;&gt;&lt;pre&gt;@misc{Greene_2019_How_Twitter_shapes_global_public_conversation_Jack_Dorsey_speaks_at_TED2019,
+  title = {How {{Twitter}} Shapes Global Public Conversation: {{Jack Dorsey}} Speaks at {{TED2019}}},
+  shorttitle = {How {{Twitter}} Shapes Global Public Conversation},
+  language = {en},
+  journal = {TED Blog},
+  url = {https://blog.ted.com/how-twitter-shapes-global-public-conversation-jack-dorsey-speaks-at-ted2019/},
+  author = {Greene, Brown},
+  month = apr,
+  year = {2019}
+}
+&lt;/pre&gt;
+https://blog.ted.com/how-twitter-shapes-global-public-conversation-jack-dorsey-speaks-at-ted2019/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;GillaniYuanEtAl_2018_Me_My_Echo_Chamber_and_I_Introspection_on_Social_Media_Polarization&quot;&gt;Gillani, N., Yuan, A., Saveski, M., Vosoughi, S., &amp;amp; Roy, D. (2018). Me, My Echo Chamber, and I: Introspection on Social Media Polarization. &lt;i&gt;Proceedings of the 2018 World Wide Web Conference&lt;/i&gt;, 823–831. https://doi.org/10.1145/3178876.3186130&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('GillaniYuanEtAl_2018_Me_My')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://doi.org/10.1145/3178876.3186130'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;GillaniYuanEtAl_2018_Me_My&quot;&gt;&lt;pre&gt;@inproceedings{GillaniYuanEtAl_2018_Me_My_Echo_Chamber_and_I_Introspection_on_Social_Media_Polarization,
+  address = {{Republic and Canton of Geneva, Switzerland}},
+  series = {{{WWW}} '18},
+  title = {Me, {{My Echo Chamber}}, and {{I}}: {{Introspection}} on {{Social Media Polarization}}},
+  isbn = {978-1-4503-5639-8},
+  shorttitle = {Me, {{My Echo Chamber}}, and {{I}}},
+  booktitle = {Proceedings of the 2018 {{World Wide Web Conference}}},
+  publisher = {{International World Wide Web Conferences Steering Committee}},
+  doi = {10.1145/3178876.3186130},
+  url = {https://doi.org/10.1145/3178876.3186130},
+  author = {Gillani, Nabeel and Yuan, Ann and Saveski, Martin and Vosoughi, Soroush and Roy, Deb},
+  year = {2018},
+  pages = {823--831}
+}
+&lt;/pre&gt;
+https://doi.org/10.1145/3178876.3186130
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;DeCarbonnel_2019_Exclusive_Echo_chambers_-_Fake_news_fact-checks_hobbled_by_low&quot;&gt;De Carbonnel, A. (2019). Exclusive: Echo Chambers - Fake News Fact-Checks Hobbled by Low... &lt;i&gt;Reuters&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('DeCarbonnel_2019_Exclusive_Echo')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.reuters.com/article/us-eu-disinformation-exclusive-idUSKCN1U60PT'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;DeCarbonnel_2019_Exclusive_Echo&quot;&gt;&lt;pre&gt;@article{DeCarbonnel_2019_Exclusive_Echo_chambers_-_Fake_news_fact-checks_hobbled_by_low,
+  title = {Exclusive: {{Echo}} Chambers - {{Fake}} News Fact-Checks Hobbled by Low...},
+  shorttitle = {Exclusive},
+  language = {en},
+  journal = {Reuters},
+  url = {https://www.reuters.com/article/us-eu-disinformation-exclusive-idUSKCN1U60PT},
+  author = {De Carbonnel, Alissa},
+  month = jul,
+  year = {2019}
+}
+&lt;/pre&gt;
+https://www.reuters.com/article/us-eu-disinformation-exclusive-idUSKCN1U60PT
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Chen_2018_Cambridge_Analyticas_Facebook_data_abuse_shouldnt_get_credit_for_Trump&quot;&gt;Chen, A. (2018). Cambridge Analytica’s Facebook Data Abuse Shouldn’t Get Credit for Trump.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Chen_2018_Cambridge_Analyticas')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.theverge.com/2018/3/20/17138854/cambridge-analytica-facebook-data-trump-campaign-psychographic-microtargeting'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Chen_2018_Cambridge_Analyticas&quot;&gt;&lt;pre&gt;@misc{Chen_2018_Cambridge_Analyticas_Facebook_data_abuse_shouldnt_get_credit_for_Trump,
+  title = {Cambridge {{Analytica}}'s {{Facebook}} Data Abuse Shouldn't Get Credit for {{Trump}}},
+  journal = {The Verge},
+  url = {https://www.theverge.com/2018/3/20/17138854/cambridge-analytica-facebook-data-trump-campaign-psychographic-microtargeting},
+  author = {Chen, Angela},
+  month = mar,
+  year = {2018}
+}
+&lt;/pre&gt;
+https://www.theverge.com/2018/3/20/17138854/cambridge-analytica-facebook-data-trump-campaign-psychographic-microtargeting
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Adee_2016_How_can_Facebook_and_its_users_burst_filter_bubble&quot;&gt;Adee, S. (2016). How Can Facebook and Its Users Burst the ’Filter Bubble’?&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Adee_2016_How_can')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.newscientist.com/article/2113246-how-can-facebook-and-its-users-burst-the-filter-bubble/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Adee_2016_How_can&quot;&gt;&lt;pre&gt;@misc{Adee_2016_How_can_Facebook_and_its_users_burst_filter_bubble,
+  title = {How Can {{Facebook}} and Its Users Burst the 'Filter Bubble'?},
+  language = {en-US},
+  journal = {New Scientist},
+  url = {https://www.newscientist.com/article/2113246-how-can-facebook-and-its-users-burst-the-filter-bubble/},
+  author = {Adee, Sally},
+  month = nov,
+  year = {2016}
+}
+&lt;/pre&gt;
+https://www.newscientist.com/article/2113246-how-can-facebook-and-its-users-burst-the-filter-bubble/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;
+
+&lt;h2 id=&quot;cite-this-post&quot;&gt;Cite this post&lt;/h2&gt;
+
+&lt;p&gt;If you’d like to cite this post, please use the following bibtex:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@misc{Rogers_2019_conversation,
+  title = { Talking to people outside your echo chamber: SocNLP challenges},
+  journal = {Hacking Semantics},
+  url = { https://hackingsemantics.xyz/2019/conversation/ },
+  author = {Rogers, Anna},
+  day = { 21 },
+  month = { Jul },
+  year = { 2019 }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;leave-a-comment-twitter&quot;&gt;Leave a comment (Twitter)&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/annargrs/status/1153027705413296131&quot;&gt;https://twitter.com/annargrs/status/1153027705413296131&lt;/a&gt;&lt;/p&gt;</content><author><name>Anna Rogers</name><uri>http://www.cs.uml.edu/~arogers/</uri></author><category term="academia" /><category term="socialNLP" /><summary type="html">A post inspired by an Uber ride with a Trump supporter.</summary></entry><entry><title type="html">On word analogies and negative results in NLP</title><link href="https://hackingsemantics.xyz/2019/analogies/" rel="alternate" type="text/html" title="On word analogies and negative results in NLP" /><published>2019-07-07T12:00:47-04:00</published><updated>2019-07-11T05:00:47-04:00</updated><id>https://hackingsemantics.xyz/2019/analogies</id><content type="html" xml:base="https://hackingsemantics.xyz/2019/analogies/">&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/analogy-header.png&quot; /&gt;
+	&lt;!--figcaption&gt; some figure &lt;/figcaption--&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;In real world, fake news spread faster than facts. People’s attention is caught by sensational, exaggerated, clickbait-y messages like “5.23 million more immigrants are moving to the UK”. Any subsequent fact-checking messages look less sensational and they will not reach as many people. Once the damage is done, it’s done.&lt;/p&gt;
+
+&lt;p&gt;Thank God this never happens in academia. Right?&lt;/p&gt;
+
+&lt;p&gt;Wrong.&lt;/p&gt;
+
+&lt;p&gt;Experts are as susceptible as the rest of the populace - see for example Daniel Kahneman’s account of an author of a statistics textbook who readily went with stereotype rather than provided base rate information &lt;a class=&quot;citation&quot; href=&quot;#Kahneman_2013_Thinking_fast_and_slow&quot;&gt;(Kahneman, 2013)&lt;/a&gt;. Maybe we - researchers - have it even worse, because we also have to publish-or-perish. The publication treadmill demands eye-catching, breakthrough results that can’t possibly be produced at the required speed. We rarely have the problem of people deliberately faking results, but… how shall I put it… there isn’t exactly an incentive to triple-check things before they land on Arxiv. If you happen to be right, you get to be the first to publish that, and if you’re wrong - no shame in it, you can always revise.&lt;/p&gt;
+
+&lt;p&gt;The readers are not necessarily triple-checking either. For an academic publication it would require much more than a google search, so we rarely bother unless we’re reviewing or replicating. The worst case scenario is when the shiny but hasty result also conforms to your own intuitions about how things should work - i.e. when you’re told something you want to believe anyway.&lt;/p&gt;
+
+&lt;p&gt;I think this is what happened to word analogies &lt;a class=&quot;citation&quot; href=&quot;#MikolovChenEtAl_2013_Efficient_estimation_of_word_representations_in_vector_space&quot;&gt;(Mikolov, Chen, Corrado, &amp;amp; Dean, 2013)&lt;/a&gt;. Its &lt;a href=&quot;https://scholar.google.com/citations?hl=en&amp;amp;user=oBu8kMMAAAAJ&quot;&gt;over 11K citations&lt;/a&gt; are mostly due to the hugely popular word2vec architecture, but the idea of word analogies rode the same wave. A separate paper on “linguistic regularities” &lt;a class=&quot;citation&quot; href=&quot;#MikolovYihEtAl_2013_Linguistic_Regularities_in_Continuous_Space_Word_Representations&quot;&gt;(Mikolov, Yih, &amp;amp; Zweig, 2013)&lt;/a&gt; currently has extra 2K citations.&lt;/p&gt;
+
+&lt;p&gt;These citations are not just something from 2013 either. Because it’s so tempting to believe that language really works this way, the word analogies are still everywhere. Only in June 2019, I heard them mentioned in the first 10 minutes of a NAACL invited talk, in a word embeddings lecture in the &lt;a href=&quot;http://ciss.deephack.me/&quot;&gt;CISS dialogue summer school&lt;/a&gt;, and all over Twitter. It just soo makes sense that language relations are all neat and regular like this:&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/analogy-mikolov.png&quot; class=&quot;width70&quot; /&gt;
+	&lt;!--figcaption&gt;some figure&lt;/figcaption--&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;However, that may be too good to be true.&lt;/p&gt;
+
+&lt;h2 id=&quot;all-things-wrong-with-word-analogies&quot;&gt;All things wrong with word analogies.&lt;/h2&gt;
+
+&lt;p&gt;To the best of my knowledge, the first suspicions about vector offset arose when it didn’t work for lexicographic relations &lt;a class=&quot;citation&quot; href=&quot;#KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces&quot;&gt;(Köper, Scheible, &amp;amp; im Walde, 2015)&lt;/a&gt; - a pattern later confirmed by &lt;a class=&quot;citation&quot; href=&quot;#KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It&quot;&gt;(Karpinska, Li, Rogers, &amp;amp; Drozd, 2018)&lt;/a&gt;. Then the BATS dataset &lt;a class=&quot;citation&quot; href=&quot;#GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt&quot;&gt;(Gladkova, Drozd, &amp;amp; Matsuoka, 2016)&lt;/a&gt; offered a larger balanced sample of 40 relations, among which the vector offset worked well only on those that happened to be included in the original Google dataset.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/analogy-bats2.png&quot; /&gt;
+	&lt;figcaption&gt;When does the vector offset work? 40 relations from the BATS dataset&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;So why doesn’t it generalize, if language relations are so neat and regular? Well, it turns out that it wouldn’t have worked in the first place if the 3 source words were not excluded from the set of possible answers. In the original formulation, the solution to &lt;script type=&quot;math/tex&quot;&gt;king-man+woman&lt;/script&gt; should be &lt;script type=&quot;math/tex&quot;&gt;queen&lt;/script&gt;, given that the vectors &lt;script type=&quot;math/tex&quot;&gt;king&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;man&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;woman&lt;/script&gt; are excluded from the set of possible answers. Tal Linzen showed that for some relations you get considerable accuracy by simply getting the nearest neighbor of &lt;script type=&quot;math/tex&quot;&gt;woman&lt;/script&gt; word, or the one most similar to both &lt;script type=&quot;math/tex&quot;&gt;woman&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;king&lt;/script&gt; (without &lt;script type=&quot;math/tex&quot;&gt;man&lt;/script&gt;) &lt;a class=&quot;citation&quot; href=&quot;#Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies&quot;&gt;(Linzen, 2016)&lt;/a&gt;. And here’s what happens if you don’t exclude any of them &lt;a class=&quot;citation&quot; href=&quot;#RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors&quot;&gt;(Rogers, Drozd, &amp;amp; Li, 2017)&lt;/a&gt;:&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/analogy-honest.png&quot; class=&quot;width60&quot; /&gt; 
+	&lt;figcaption&gt;Share of BATS analogy questions in which the vector the closest to the predicted vector is one of the source vectors (a,a', b), the target vector b', or some other vector. In most cases the result is simply the vector b (&quot;woman&quot;).
+	&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;If in most cases the predicted vector is the closest to the source &lt;script type=&quot;math/tex&quot;&gt;woman&lt;/script&gt; vector, it means that the vector offset is simply too small to induce a meaning shift on its own. And that means that adding it will not get you somewhere significantly different. Which means you’re staying in the neighborhood of the original vectors.&lt;/p&gt;
+
+&lt;p&gt;Here are some more experiments showing that if the source vectors &lt;script type=&quot;math/tex&quot;&gt;a&lt;/script&gt; (“man”), &lt;script type=&quot;math/tex&quot;&gt;a'&lt;/script&gt; (king), and &lt;script type=&quot;math/tex&quot;&gt;b&lt;/script&gt; (“woman”) are excluded, your likelihood to succeed depends on how close the correct answer is to the source words &lt;a class=&quot;citation&quot; href=&quot;#RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors&quot;&gt;(Rogers, Drozd, &amp;amp; Li, 2017)&lt;/a&gt;:&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/analogy-sim-bias.png&quot; /&gt;
+	&lt;figcaption&gt;The share of BATS analogy questions predicted successfully vs similarity of the target vector to the source vectors&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;One could object that this is due to bad word embeddings, and ideal embeddings would have every possible relation encoded so that it would be recoverable from vector offset. That remains to be shown empirically, but from theoretical perspective it is not likely to happen:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Semantically, the idea of manipulating vector differences is reminiscent of componential analysis of the 1950s, and there are good reasons why that is no longer actively developed. For example, does “man” + “unmarried” as definition of “bachelor” apply to Pope?&lt;/li&gt;
+  &lt;li&gt;Distributionally, even seemingly perfect analogy between &lt;em&gt;cat:cats&lt;/em&gt; and &lt;em&gt;table:tables&lt;/em&gt; are never perfect. For example, &lt;em&gt;turn the tables&lt;/em&gt; is not the same as &lt;em&gt;turn the table&lt;/em&gt;, they will appear in different contexts - but that difference does not apply to &lt;em&gt;cat:cats&lt;/em&gt;. Given hundreds of such differences, why would we expect the aggregate representations to always perfectly line up? And if they did, would that even be a good representation of language semantics? If we are to ever have good language generation, we need to be able to take into account such nuances, not to discard them.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To sum up: several research papers brought up good reasons to doubt the efficacy of vector offset. If the formulation of vector offset excludes the source vectors, it will appear to work for the small original dataset, where much of its success can be attributed to basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations.&lt;/p&gt;
+
+&lt;h2 id=&quot;lack-of-impact-on-further-research&quot;&gt;(Lack of) impact on further research&lt;/h2&gt;
+
+&lt;p&gt;The focus of this post is not just the above negative evidence about vector offset, but the fact that these multiple reports of negative results never reached the same audience of thousands of researchers who were impressed by the original Mikolov’s paper.&lt;/p&gt;
+
+&lt;p&gt;Obviously, I’m impartial here because some of this work is mine, but isn’t it just counter-productive for the field in general? If there are serious updates to a widely cited but too-good-to-be-true paper, it is in everybody’s interest for those updates to travel fast. They could save people the effort of either doing the same work again, or the wasted effort of building on the original untested assumption. Right?&lt;/p&gt;
+
+&lt;p&gt;Well, the problem with publishing negative results is well-known, and perhaps it’s not coincidental that only one of the above papers even made it to one of the main conferences. However, there are now two ACL, one COLING, and one best-paper-mention ICML paper that provide mathematical proofs for why the vector offset &lt;em&gt;should&lt;/em&gt; work &lt;a class=&quot;citation&quot; href=&quot;#GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity&quot;&gt;(Gittens, Achlioptas, &amp;amp; Mahoney, 2017; Hakami, Hayashi, &amp;amp; Bollegala, 2018; Ethayarajh, Duvenaud, &amp;amp; Hirst, 2019; Allen &amp;amp; Hospedales, 2019)&lt;/a&gt;. Go figure. Only one paper also took a mathematical perspective, but bravely arrived at the opposite conclusion &lt;a class=&quot;citation&quot; href=&quot;#Schluter_2018_Word_Analogy_Testing_Caveat&quot;&gt;(Schluter, 2018)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Obviously, these positions need to be reconciled in the future. I am fully open to the possibility that the vector offset does indeed work, and the above negative evidence is somehow wrong. That would actually be great for everybody, as it would mean that we already have an intuitive, cheap, and reliable way to perform analogical reasoning. But that still needs to be shown, and so far the papers providing proofs for vector offset did not address the available negative evidence.&lt;/p&gt;
+
+&lt;p&gt;Consider that if the negative evidence is correct, this has serious implications for the field. It would mean that we are pursuing a simplistic model of linguistic relations that is not representative of most of language. For instance, the vector offset attracted the attention of researchers on fairness/bias, and many practitioners actually use it in earnest. Here’s a NIPS paper that started from accepting that the underlying vector offset mechanism works: &lt;a class=&quot;citation&quot; href=&quot;#BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings&quot;&gt;(Bolukbasi, Chang, Zou, Saligrama, &amp;amp; Kalai, 2016)&lt;/a&gt;. But this one didn’t: &lt;a class=&quot;citation&quot; href=&quot;#NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor&quot;&gt;(Nissim, van Noord, &amp;amp; van der Goot, 2019)&lt;/a&gt;. Let me quote the authors on what it would mean to make social conclusions on the basis of unreliable metrics:&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/analogy-nissim.png&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;To conclude: analogical reasoning is an incredibly important aspect of human reasoning, and we &lt;em&gt;have&lt;/em&gt; to get it right if we’re ever to arrive at general AI. So far, from what I’ve seen, linear vector offsets in word embeddings are not the right way to think of it. But there are plenty of other directions, including better methods for analogical reasoning &lt;a class=&quot;citation&quot; href=&quot;#DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen&quot;&gt;(Drozd, Gladkova, &amp;amp; Matsuoka, 2016; Vine, Geva, &amp;amp; Bruza, 2018; Bouraoui, Jameel, &amp;amp; Schockaert, 2018; Dufter &amp;amp; Schütze, 2019)&lt;/a&gt; and specialized representations for analogous pairs &lt;a class=&quot;citation&quot; href=&quot;#WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space&quot;&gt;(Washio &amp;amp; Kato, 2018; Joshi, Choi, Levy, Weld, &amp;amp; Zettlemoyer, 2018; Hakami &amp;amp; Bollegala, 2019; Camacho-Collados, Espinosa-Anke, &amp;amp; Schockaert, 2019)&lt;/a&gt;. If we’re not married to the ideal of natural language with impossibly regular relations, shouldn’t we try to maximize the research effort in more promising directions?&lt;/p&gt;
+
+&lt;h2 id=&quot;how-we-can-encourage-fact-checking-of-widespread-claims&quot;&gt;How we can encourage fact-checking of widespread claims&lt;/h2&gt;
+
+&lt;p&gt;The problem with vector offset is not unique. Its components are (1) a shiny result that is intuitively appealing and becomes too-famous-to-be-questioned, (2) the low visibility of negative results, even when they are available. In NLP, the latter problem is aggravated by the insane Arxiv pace. When you work on “a truth universally accepted”, and you can’t even keep up with the list of papers that you &lt;em&gt;want&lt;/em&gt; to read, why would you bother searching for papers nobody cited?&lt;/p&gt;
+
+&lt;p&gt;It is admittedly hard to make negative results sexy, but in high-profile cases I think it is doable. Why don’t we have an &lt;strong&gt;impactful-negative-result award category at ACL conferences&lt;/strong&gt;, to encourage fact-checking of at least the most widely-accepted assumptions? This would:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;increase the awareness of widespread problems, so that people do not build on shaky assumptions;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;identify high-profile research directions where more hands are needed next year, thus stimulating the overall progress in NLP;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;help with reproducibility crisis by encouraging replication studies and reporting of negative results.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example, in NAACL 2019 there were several interesting papers that could definitely be considered for such an award. A few personal favorites:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;exposing the lack of transfer between QA datasets &lt;a class=&quot;citation&quot; href=&quot;#Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC&quot;&gt;(Yatskar, 2019)&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;limitations of attention as “explaining” mechanism &lt;a class=&quot;citation&quot; href=&quot;#JainWallace_2019_Attention_is_not_Explanation&quot;&gt;(Jain &amp;amp; Wallace, 2019)&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;multimodal QA systems that work better by simply ignoring some of the input modalities &lt;a class=&quot;citation&quot; href=&quot;#ThomasonGordonEtAl_2019_Shifting_Baseline_Single_Modality_Performance_on_Visual_Navigation_QA&quot;&gt;(Thomason, Gordon, &amp;amp; Bisk, 2019)&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2 out of 3 of these great papers were posters, and I can not imagine how many more did not even make it through review. I would argue that it sends a message to the people doing this important work, and it is the wrong message.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, imagine that such an award existed, and was granted, say, to &lt;a class=&quot;citation&quot; href=&quot;#Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC&quot;&gt;(Yatskar, 2019)&lt;/a&gt;. Then everybody in the final session got to hear about the lack of transfer between 3 popular QA datasets. QA is one of the most popular tasks, so wouldn’t it be good for the community to highlight the problem, so that next year more people focus on solving QA rather than particular datasets? Perhaps the impactful-negative-result paper could also be chosen so as to match next year’s theme.&lt;/p&gt;
+
+&lt;h2&gt;***&lt;/h2&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word_Embeddings&quot;&gt;Camacho-Collados, J., Espinosa-Anke, L., &amp;amp; Schockaert, S. (2019). Relational Word Embeddings. &lt;i&gt;ACL 2019&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1906.01373'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word&quot;&gt;&lt;pre&gt;@article{Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word_Embeddings,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.01373},
+  title = {Relational {{Word Embeddings}}},
+  journal = {ACL 2019},
+  url = {http://arxiv.org/abs/1906.01373},
+  author = {{Camacho-Collados}, Jose and {Espinosa-Anke}, Luis and Schockaert, Steven},
+  month = jun,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1906.01373
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC&quot;&gt;Yatskar, M. (2019). A Qualitative Comparison of CoQA, SQuAD 2.0 and QuAC. &lt;i&gt;Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)&lt;/i&gt;, 2318–2323.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Yatskar_2019_Qualitative_Comparison')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/papers/N/N19/N19-1241/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Yatskar_2019_Qualitative_Comparison&quot;&gt;&lt;pre&gt;@inproceedings{Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC,
+  title = {A {{Qualitative Comparison}} of {{CoQA}}, {{SQuAD}} 2.0 and {{QuAC}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://www.aclweb.org/anthology/papers/N/N19/N19-1241/},
+  author = {Yatskar, Mark},
+  month = jun,
+  year = {2019},
+  pages = {2318-2323}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/papers/N/N19/N19-1241/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space&quot;&gt;Washio, K., &amp;amp; Kato, T. (2018). Neural Latent Relational Analysis to Capture Lexical Semantic Relations in a Vector Space. &lt;i&gt;Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing&lt;/i&gt;, 594–600. Brussels, Belgium: Association for Computational Linguistics.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('WashioKato_2018_Neural_Latent')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://aclweb.org/anthology/D18-1058'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;WashioKato_2018_Neural_Latent&quot;&gt;&lt;pre&gt;@inproceedings{WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space,
+  address = {{Brussels, Belgium}},
+  title = {Neural {{Latent Relational Analysis}} to {{Capture Lexical Semantic Relations}} in a {{Vector Space}}},
+  booktitle = {Proceedings of the 2018 {{Conference}} on {{Empirical Methods}} in {{Natural Language Processing}}},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://aclweb.org/anthology/D18-1058},
+  author = {Washio, Koki and Kato, Tsuneaki},
+  year = {2018},
+  pages = {594-600}
+}
+&lt;/pre&gt;
+http://aclweb.org/anthology/D18-1058
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;VineGevaEtAl_2018_Unsupervised_Mining_of_Analogical_Frames_by_Constraint_Satisfaction&quot;&gt;Vine, L. D., Geva, S., &amp;amp; Bruza, P. (2018). Unsupervised Mining of Analogical Frames by Constraint Satisfaction. &lt;i&gt;Proceedings of the Australasian Language Technology Association Workshop 2018&lt;/i&gt;, 34–43.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('VineGevaEtAl_2018_Unsupervised_Mining')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/papers/U/U18/U18-1004/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;VineGevaEtAl_2018_Unsupervised_Mining&quot;&gt;&lt;pre&gt;@inproceedings{VineGevaEtAl_2018_Unsupervised_Mining_of_Analogical_Frames_by_Constraint_Satisfaction,
+  title = {Unsupervised {{Mining}} of {{Analogical Frames}} by {{Constraint Satisfaction}}},
+  language = {en-us},
+  booktitle = {Proceedings of the {{Australasian Language Technology Association Workshop}} 2018},
+  url = {https://www.aclweb.org/anthology/papers/U/U18/U18-1004/},
+  author = {Vine, Lance De and Geva, Shlomo and Bruza, Peter},
+  month = dec,
+  year = {2018},
+  pages = {34-43}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/papers/U/U18/U18-1004/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;ThomasonGordonEtAl_2019_Shifting_Baseline_Single_Modality_Performance_on_Visual_Navigation_QA&quot;&gt;Thomason, J., Gordon, D., &amp;amp; Bisk, Y. (2019). Shifting the Baseline: Single Modality Performance on Visual Navigation &amp;amp; QA. &lt;i&gt;Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)&lt;/i&gt;, 1977–1983.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('ThomasonGordonEtAl_2019_Shifting_Baseline')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/papers/N/N19/N19-1197/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;ThomasonGordonEtAl_2019_Shifting_Baseline&quot;&gt;&lt;pre&gt;@inproceedings{ThomasonGordonEtAl_2019_Shifting_Baseline_Single_Modality_Performance_on_Visual_Navigation_QA,
+  title = {Shifting the {{Baseline}}: {{Single Modality Performance}} on {{Visual Navigation}} \&amp;amp; {{QA}}},
+  shorttitle = {Shifting the {{Baseline}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://www.aclweb.org/anthology/papers/N/N19/N19-1197/},
+  author = {Thomason, Jesse and Gordon, Daniel and Bisk, Yonatan},
+  month = jun,
+  year = {2019},
+  pages = {1977-1983}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/papers/N/N19/N19-1197/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Schluter_2018_Word_Analogy_Testing_Caveat&quot;&gt;Schluter, N. (2018). The Word Analogy Testing Caveat. &lt;i&gt;Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers)&lt;/i&gt;, 242–246. https://doi.org/10.18653/v1/N18-2039&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Schluter_2018_Word_Analogy')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/papers/N/N18/N18-2039/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Schluter_2018_Word_Analogy&quot;&gt;&lt;pre&gt;@inproceedings{Schluter_2018_Word_Analogy_Testing_Caveat,
+  title = {The {{Word Analogy Testing Caveat}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2018 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 2 ({{Short Papers}})},
+  doi = {10.18653/v1/N18-2039},
+  url = {https://www.aclweb.org/anthology/papers/N/N18/N18-2039/},
+  author = {Schluter, Natalie},
+  month = jun,
+  year = {2018},
+  pages = {242-246}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/papers/N/N18/N18-2039/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors&quot;&gt;Rogers, A., Drozd, A., &amp;amp; Li, B. (2017). The (Too Many) Problems of Analogical Reasoning with Word Vectors. &lt;i&gt;Proceedings of the 6th Joint Conference on Lexical and Computational Semantics (* SEM 2017)&lt;/i&gt;, 135–148.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('RogersDrozdEtAl_2017_Too_Many')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://www.aclweb.org/anthology/S17-1017'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;RogersDrozdEtAl_2017_Too_Many&quot;&gt;&lt;pre&gt;@inproceedings{RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors,
+  title = {The ({{Too Many}}) {{Problems}} of {{Analogical Reasoning}} with {{Word Vectors}}},
+  booktitle = {Proceedings of the 6th {{Joint Conference}} on {{Lexical}} and {{Computational Semantics}} (* {{SEM}} 2017)},
+  url = {http://www.aclweb.org/anthology/S17-1017},
+  author = {Rogers, Anna and Drozd, Aleksandr and Li, Bofang},
+  year = {2017},
+  keywords = {peer-reviewed},
+  pages = {135--148}
+}
+&lt;/pre&gt;
+http://www.aclweb.org/anthology/S17-1017
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor&quot;&gt;Nissim, M., van Noord, R., &amp;amp; van der Goot, R. (2019). Fair Is Better than Sensational:Man Is to Doctor as Woman Is to Doctor. &lt;i&gt;ArXiv:1905.09866 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('NissimvanNoordEtAl_2019_Fair_is')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1905.09866'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;NissimvanNoordEtAl_2019_Fair_is&quot;&gt;&lt;pre&gt;@article{NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1905.09866},
+  primaryclass = {cs},
+  title = {Fair Is {{Better}} than {{Sensational}}:{{Man}} Is to {{Doctor}} as {{Woman}} Is to {{Doctor}}},
+  shorttitle = {Fair Is {{Better}} than {{Sensational}}},
+  journal = {arXiv:1905.09866 [cs]},
+  url = {http://arxiv.org/abs/1905.09866},
+  author = {Nissim, Malvina and {van Noord}, Rik and {van der Goot}, Rob},
+  month = may,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1905.09866
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;MikolovYihEtAl_2013_Linguistic_Regularities_in_Continuous_Space_Word_Representations&quot;&gt;Mikolov, T., Yih, W.-tau, &amp;amp; Zweig, G. (2013). Linguistic Regularities in Continuous Space Word Representations. &lt;i&gt;Proceedings of NAACL-HLT 2013&lt;/i&gt;, 746–751. Atlanta, Georgia, 9–14 June 2013.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('MikolovYihEtAl_2013_Linguistic_Regularities')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/N13-1090'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;MikolovYihEtAl_2013_Linguistic_Regularities&quot;&gt;&lt;pre&gt;@inproceedings{MikolovYihEtAl_2013_Linguistic_Regularities_in_Continuous_Space_Word_Representations,
+  address = {{Atlanta, Georgia, 9\textendash{}14 June 2013}},
+  title = {Linguistic {{Regularities}} in {{Continuous Space Word Representations}}.},
+  booktitle = {Proceedings of {{NAACL}}-{{HLT}} 2013},
+  url = {https://www.aclweb.org/anthology/N13-1090},
+  author = {Mikolov, Tomas and Yih, Wen-tau and Zweig, Geoffrey},
+  year = {2013},
+  keywords = {_Sasha},
+  pages = {746--751}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/N13-1090
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;MikolovChenEtAl_2013_Efficient_estimation_of_word_representations_in_vector_space&quot;&gt;Mikolov, T., Chen, K., Corrado, G., &amp;amp; Dean, J. (2013). Efficient Estimation of Word Representations in Vector Space. &lt;i&gt;Proceedings of International Conference on Learning Representations (ICLR)&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('MikolovChenEtAl_2013_Efficient_estimation')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://arxiv.org/pdf/1301.3781'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;MikolovChenEtAl_2013_Efficient_estimation&quot;&gt;&lt;pre&gt;@inproceedings{MikolovChenEtAl_2013_Efficient_estimation_of_word_representations_in_vector_space,
+  title = {Efficient Estimation of Word Representations in Vector Space},
+  booktitle = {Proceedings of {{International Conference}} on {{Learning Representations}} ({{ICLR}})},
+  url = {https://arxiv.org/pdf/1301.3781},
+  author = {Mikolov, Tomas and Chen, Kai and Corrado, Greg and Dean, Jeffrey},
+  year = {2013}
+}
+&lt;/pre&gt;
+https://arxiv.org/pdf/1301.3781
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies&quot;&gt;Linzen, T. (2016). Issues in Evaluating Semantic Spaces Using Word Analogies. &lt;i&gt;Proceedings of the First Workshop on Evaluating Vector Space Representations for NLP&lt;/i&gt;. https://doi.org/http://dx.doi.org/10.18653/v1/W16-2503&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Linzen_2016_Issues_in')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://anthology.aclweb.org/W16-2503'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Linzen_2016_Issues_in&quot;&gt;&lt;pre&gt;@inproceedings{Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies,
+  title = {Issues in Evaluating Semantic Spaces Using Word Analogies.},
+  booktitle = {Proceedings of the {{First Workshop}} on {{Evaluating Vector Space Representations}} for {{NLP}}},
+  publisher = {{Association for Computational Linguistics}},
+  doi = {http://dx.doi.org/10.18653/v1/W16-2503},
+  url = {http://anthology.aclweb.org/W16-2503},
+  author = {Linzen, Tal},
+  year = {2016}
+}
+&lt;/pre&gt;
+http://anthology.aclweb.org/W16-2503
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces&quot;&gt;Köper, M., Scheible, C., &amp;amp; im Walde, S. S. (2015). Multilingual Reliability and &quot;Semantic&quot; Structure of Continuous Word Spaces. &lt;i&gt;Proceedings of the 11th International Conference on Computational Semantics&lt;/i&gt;, 40–45. Association for Computational Linguistics.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('KoperScheibleEtAl_2015_Multilingual_reliability')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://www.aclweb.org/anthology/W15-01#page=56'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;KoperScheibleEtAl_2015_Multilingual_reliability&quot;&gt;&lt;pre&gt;@inproceedings{KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces,
+  title = {Multilingual Reliability and &quot;Semantic&quot; Structure of Continuous Word Spaces},
+  booktitle = {Proceedings of the 11th {{International Conference}} on {{Computational Semantics}}},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://www.aclweb.org/anthology/W15-01\#page=56},
+  author = {K{\&quot;o}per, Maximilian and Scheible, Christian and {im Walde}, Sabine Schulte},
+  year = {2015},
+  pages = {40-45}
+}
+&lt;/pre&gt;
+http://www.aclweb.org/anthology/W15-01#page=56
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It&quot;&gt;Karpinska, M., Li, B., Rogers, A., &amp;amp; Drozd, A. (2018). Subcharacter Information in Japanese Embeddings: When Is It Worth It? &lt;i&gt;Proceedings of the Workshop on the Relevance of Linguistic Structure in Neural Architectures for NLP&lt;/i&gt;, 28–37. Melbourne, Australia: Association for Computational Linguistics.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('KarpinskaLiEtAl_2018_Subcharacter_Information')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://aclweb.org/anthology/W18-2905'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;KarpinskaLiEtAl_2018_Subcharacter_Information&quot;&gt;&lt;pre&gt;@inproceedings{KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It,
+  address = {{Melbourne, Australia}},
+  title = {Subcharacter {{Information}} in {{Japanese Embeddings}}: {{When Is It Worth It}}?},
+  booktitle = {Proceedings of the {{Workshop}} on the {{Relevance}} of {{Linguistic Structure}} in {{Neural Architectures}} for {{NLP}}},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://aclweb.org/anthology/W18-2905},
+  author = {Karpinska, Marzena and Li, Bofang and Rogers, Anna and Drozd, Aleksandr},
+  year = {2018},
+  pages = {28-37}
+}
+&lt;/pre&gt;
+http://aclweb.org/anthology/W18-2905
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Kahneman_2013_Thinking_fast_and_slow&quot;&gt;Kahneman, D. (2013). &lt;i&gt;Thinking, Fast and Slow&lt;/i&gt; (1st pbk. ed). New York: Farrar, Straus and Giroux.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Kahneman_2013_Thinking_fast')&quot;&gt;BibTex&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Kahneman_2013_Thinking_fast&quot;&gt;&lt;pre&gt;@book{Kahneman_2013_Thinking_fast_and_slow,
+  address = {{New York}},
+  edition = {1st pbk. ed},
+  title = {Thinking, Fast and Slow},
+  isbn = {978-0-374-53355-7},
+  lccn = {BF441 .K238 2013},
+  publisher = {{Farrar, Straus and Giroux}},
+  author = {Kahneman, Daniel},
+  year = {2013}
+}
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;JoshiChoiEtAl_2018_pair2vec_Compositional_Word-Pair_Embeddings_for_Cross-Sentence_Inference&quot;&gt;Joshi, M., Choi, E., Levy, O., Weld, D. S., &amp;amp; Zettlemoyer, L. (2018). Pair2vec: Compositional Word-Pair Embeddings for Cross-Sentence Inference. &lt;i&gt;ArXiv:1810.08854 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('JoshiChoiEtAl_2018_pair2vec_Compositional')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1810.08854'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;JoshiChoiEtAl_2018_pair2vec_Compositional&quot;&gt;&lt;pre&gt;@article{JoshiChoiEtAl_2018_pair2vec_Compositional_Word-Pair_Embeddings_for_Cross-Sentence_Inference,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1810.08854},
+  primaryclass = {cs},
+  title = {Pair2vec: {{Compositional Word}}-{{Pair Embeddings}} for {{Cross}}-{{Sentence Inference}}},
+  shorttitle = {Pair2vec},
+  journal = {arXiv:1810.08854 [cs]},
+  url = {http://arxiv.org/abs/1810.08854},
+  author = {Joshi, Mandar and Choi, Eunsol and Levy, Omer and Weld, Daniel S. and Zettlemoyer, Luke},
+  month = oct,
+  year = {2018}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1810.08854
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;JainWallace_2019_Attention_is_not_Explanation&quot;&gt;Jain, S., &amp;amp; Wallace, B. C. (2019). Attention Is Not Explanation. &lt;i&gt;Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)&lt;/i&gt;, 3543–3556.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('JainWallace_2019_Attention_is')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://aclweb.org/anthology/papers/N/N19/N19-1357/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;JainWallace_2019_Attention_is&quot;&gt;&lt;pre&gt;@inproceedings{JainWallace_2019_Attention_is_not_Explanation,
+  title = {Attention Is Not {{Explanation}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://aclweb.org/anthology/papers/N/N19/N19-1357/},
+  author = {Jain, Sarthak and Wallace, Byron C.},
+  month = jun,
+  year = {2019},
+  pages = {3543-3556}
+}
+&lt;/pre&gt;
+https://aclweb.org/anthology/papers/N/N19/N19-1357/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;HakamiHayashiEtAl_2018_Why_does_PairDiff_work&quot;&gt;Hakami, H., Hayashi, K., &amp;amp; Bollegala, D. (2018). Why Does PairDiff Work? - A Mathematical Analysis of Bilinear Relational Compositional Operators for Analogy Detection. &lt;i&gt;Proceedings of the 27th International Conference on Computational Linguistics&lt;/i&gt;, 2493–2504.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('HakamiHayashiEtAl_2018_Why_does')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/papers/C/C18/C18-1211/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;HakamiHayashiEtAl_2018_Why_does&quot;&gt;&lt;pre&gt;@inproceedings{HakamiHayashiEtAl_2018_Why_does_PairDiff_work,
+  title = {Why Does {{PairDiff}} Work? - {{A Mathematical Analysis}} of {{Bilinear Relational Compositional Operators}} for {{Analogy Detection}}},
+  shorttitle = {Why Does {{PairDiff}} Work?},
+  language = {en-us},
+  booktitle = {Proceedings of the 27th {{International Conference}} on {{Computational Linguistics}}},
+  url = {https://www.aclweb.org/anthology/papers/C/C18/C18-1211/},
+  author = {Hakami, Huda and Hayashi, Kohei and Bollegala, Danushka},
+  month = aug,
+  year = {2018},
+  pages = {2493-2504}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/papers/C/C18/C18-1211/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;HakamiBollegala_2019_Learning_Relation_Representations_from_Word_Representations&quot;&gt;Hakami, H., &amp;amp; Bollegala, D. (2019). Learning Relation Representations from Word Representations. &lt;i&gt;AKBC 2019&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('HakamiBollegala_2019_Learning_Relation')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://openreview.net/forum?id=r1e3WW5aTX&amp;amp;noteId=BklR5HOySN'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;HakamiBollegala_2019_Learning_Relation&quot;&gt;&lt;pre&gt;@inproceedings{HakamiBollegala_2019_Learning_Relation_Representations_from_Word_Representations,
+  title = {Learning {{Relation Representations}} from {{Word Representations}}},
+  booktitle = {{{AKBC}} 2019},
+  url = {https://openreview.net/forum?id=r1e3WW5aTX\&amp;amp;noteId=BklR5HOySN},
+  author = {Hakami, Huda and Bollegala, Danushka},
+  year = {2019}
+}
+&lt;/pre&gt;
+https://openreview.net/forum?id=r1e3WW5aTX&amp;amp;noteId=BklR5HOySN
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt&quot;&gt;Gladkova, A., Drozd, A., &amp;amp; Matsuoka, S. (2016). Analogy-Based Detection of Morphological and Semantic Relations with Word Embeddings: What Works and What Doesn’t. &lt;i&gt;Proceedings of the NAACL-HLT SRW&lt;/i&gt;, 47–54. https://doi.org/10.18653/v1/N16-2002&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('GladkovaDrozdEtAl_2016_Analogybased_detection')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/N/N16/N16-2002.pdf'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;GladkovaDrozdEtAl_2016_Analogybased_detection&quot;&gt;&lt;pre&gt;@inproceedings{GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt,
+  address = {{San Diego, California, June 12-17, 2016}},
+  title = {Analogy-Based Detection of Morphological and Semantic Relations with Word Embeddings: What Works and What Doesn't.},
+  booktitle = {Proceedings of the {{NAACL}}-{{HLT SRW}}},
+  publisher = {{ACL}},
+  doi = {10.18653/v1/N16-2002},
+  url = {https://www.aclweb.org/anthology/N/N16/N16-2002.pdf},
+  author = {Gladkova, Anna and Drozd, Aleksandr and Matsuoka, Satoshi},
+  year = {2016},
+  keywords = {peer-reviewed},
+  pages = {47-54}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/N/N16/N16-2002.pdf
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity&quot;&gt;Gittens, A., Achlioptas, D., &amp;amp; Mahoney, M. W. (2017). Skip-Gram - Zipf + Uniform = Vector Additivity. &lt;i&gt;Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)&lt;/i&gt;, 69–76. https://doi.org/10.18653/v1/P17-1007&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('GittensAchlioptasEtAl_2017_SkipGram_Zipf')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/papers/P/P17/P17-1007/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;GittensAchlioptasEtAl_2017_SkipGram_Zipf&quot;&gt;&lt;pre&gt;@inproceedings{GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity,
+  title = {Skip-{{Gram}} - {{Zipf}} + {{Uniform}} = {{Vector Additivity}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 55th {{Annual Meeting}} of the {{Association}} for {{Computational Linguistics}} ({{Volume}} 1: {{Long Papers}})},
+  doi = {10.18653/v1/P17-1007},
+  url = {https://www.aclweb.org/anthology/papers/P/P17/P17-1007/},
+  author = {Gittens, Alex and Achlioptas, Dimitris and Mahoney, Michael W.},
+  month = jul,
+  year = {2017},
+  pages = {69-76}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/papers/P/P17/P17-1007/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies&quot;&gt;Ethayarajh, K., Duvenaud, D., &amp;amp; Hirst, G. (2019). Towards Understanding Linear Word Analogies. &lt;i&gt;To Appear in ACL 2019&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('EthayarajhDuvenaudEtAl_2019_Towards_Understanding')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1810.04882'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;EthayarajhDuvenaudEtAl_2019_Towards_Understanding&quot;&gt;&lt;pre&gt;@article{EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1810.04882},
+  title = {Towards {{Understanding Linear Word Analogies}}},
+  journal = {To appear in ACL 2019},
+  url = {http://arxiv.org/abs/1810.04882},
+  author = {Ethayarajh, Kawin and Duvenaud, David and Hirst, Graeme},
+  month = oct,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1810.04882
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;DufterSchutze_2019_Analytical_Methods_for_Interpretable_Ultradense_Word_Embeddings&quot;&gt;Dufter, P., &amp;amp; Schütze, H. (2019). Analytical Methods for Interpretable Ultradense Word Embeddings. &lt;i&gt;ArXiv:1904.08654 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('DufterSchutze_2019_Analytical_Methods')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1904.08654'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;DufterSchutze_2019_Analytical_Methods&quot;&gt;&lt;pre&gt;@article{DufterSchutze_2019_Analytical_Methods_for_Interpretable_Ultradense_Word_Embeddings,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1904.08654},
+  primaryclass = {cs},
+  title = {Analytical {{Methods}} for {{Interpretable Ultradense Word Embeddings}}},
+  journal = {arXiv:1904.08654 [cs]},
+  url = {http://arxiv.org/abs/1904.08654},
+  author = {Dufter, Philipp and Sch{\&quot;u}tze, Hinrich},
+  month = apr,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1904.08654
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen&quot;&gt;Drozd, A., Gladkova, A., &amp;amp; Matsuoka, S. (2016). Word Embeddings, Analogies, and Machine Learning: Beyond King - Man + Woman = Queen. &lt;i&gt;Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers&lt;/i&gt;, 3519–3530. Osaka, Japan, December 11-17.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('DrozdGladkovaEtAl_2016_Word_embeddings')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/C/C16/C16-1332.pdf'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;DrozdGladkovaEtAl_2016_Word_embeddings&quot;&gt;&lt;pre&gt;@inproceedings{DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen,
+  address = {{Osaka, Japan, December 11-17}},
+  title = {Word Embeddings, Analogies, and Machine Learning: Beyond King - Man + Woman = Queen},
+  shorttitle = {Word {{Embeddings}}, {{Analogies}}, and {{Machine Learning}}},
+  booktitle = {Proceedings of {{COLING}} 2016, the 26th {{International Conference}} on {{Computational Linguistics}}: {{Technical Papers}}},
+  url = {https://www.aclweb.org/anthology/C/C16/C16-1332.pdf},
+  author = {Drozd, Aleksandr and Gladkova, Anna and Matsuoka, Satoshi},
+  year = {2016},
+  keywords = {peer-reviewed},
+  pages = {3519--3530}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/C/C16/C16-1332.pdf
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;BouraouiJameelEtAl_2018_Relation_Induction_in_Word_Embeddings_Revisited&quot;&gt;Bouraoui, Z., Jameel, S., &amp;amp; Schockaert, S. (2018). Relation Induction in Word Embeddings Revisited. &lt;i&gt;Proceedings of the 27th International Conference on Computational Linguistics&lt;/i&gt;, 1627–1637.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('BouraouiJameelEtAl_2018_Relation_Induction')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://www.aclweb.org/anthology/papers/C/C18/C18-1138/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;BouraouiJameelEtAl_2018_Relation_Induction&quot;&gt;&lt;pre&gt;@inproceedings{BouraouiJameelEtAl_2018_Relation_Induction_in_Word_Embeddings_Revisited,
+  title = {Relation {{Induction}} in {{Word Embeddings Revisited}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 27th {{International Conference}} on {{Computational Linguistics}}},
+  url = {https://www.aclweb.org/anthology/papers/C/C18/C18-1138/},
+  author = {Bouraoui, Zied and Jameel, Shoaib and Schockaert, Steven},
+  month = aug,
+  year = {2018},
+  pages = {1627-1637}
+}
+&lt;/pre&gt;
+https://www.aclweb.org/anthology/papers/C/C18/C18-1138/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings&quot;&gt;Bolukbasi, T., Chang, K.-W., Zou, J., Saligrama, V., &amp;amp; Kalai, A. (2016). Man Is to Computer Programmer As Woman Is to Homemaker? Debiasing Word Embeddings. &lt;i&gt;Proceedings of the 30th International Conference on Neural Information Processing Systems&lt;/i&gt;, 4356–4364. USA: Curran Associates Inc.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('BolukbasiChangEtAl_2016_Man_is')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://dl.acm.org/citation.cfm?id=3157382.3157584'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;BolukbasiChangEtAl_2016_Man_is&quot;&gt;&lt;pre&gt;@inproceedings{BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings,
+  address = {{USA}},
+  series = {{{NIPS}}'16},
+  title = {Man Is to {{Computer Programmer As Woman}} Is to {{Homemaker}}? {{Debiasing Word Embeddings}}},
+  isbn = {978-1-5108-3881-9},
+  shorttitle = {Man Is to {{Computer Programmer As Woman}} Is to {{Homemaker}}?},
+  booktitle = {Proceedings of the 30th {{International Conference}} on {{Neural Information Processing Systems}}},
+  publisher = {{Curran Associates Inc.}},
+  url = {http://dl.acm.org/citation.cfm?id=3157382.3157584},
+  author = {Bolukbasi, Tolga and Chang, Kai-Wei and Zou, James and Saligrama, Venkatesh and Kalai, Adam},
+  year = {2016},
+  pages = {4356--4364}
+}
+&lt;/pre&gt;
+http://dl.acm.org/citation.cfm?id=3157382.3157584
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;AllenHospedales_2019_Analogies_Explained_Towards_Understanding_Word_Embeddings&quot;&gt;Allen, C., &amp;amp; Hospedales, T. (2019). Analogies Explained: Towards Understanding Word Embeddings. &lt;i&gt;ArXiv:1901.09813 [Cs, Stat]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('AllenHospedales_2019_Analogies_Explained')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1901.09813'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;AllenHospedales_2019_Analogies_Explained&quot;&gt;&lt;pre&gt;@article{AllenHospedales_2019_Analogies_Explained_Towards_Understanding_Word_Embeddings,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1901.09813},
+  primaryclass = {cs, stat},
+  title = {Analogies {{Explained}}: {{Towards Understanding Word Embeddings}}},
+  shorttitle = {Analogies {{Explained}}},
+  journal = {arXiv:1901.09813 [cs, stat]},
+  url = {http://arxiv.org/abs/1901.09813},
+  author = {Allen, Carl and Hospedales, Timothy},
+  month = jan,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1901.09813
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;
+
+&lt;h2 id=&quot;cite-this-post&quot;&gt;Cite this post&lt;/h2&gt;
+
+&lt;p&gt;If you’d like to cite this post, please use the following bibtex:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@misc{Rogers_2019_analogies,
+  title = { On word analogies and negative results in NLP},
+  journal = {Hacking Semantics},
+  url = { https://hackingsemantics.xyz/2019/analogies/ },
+  author = {Rogers, Anna},
+  day = { 07 },
+  month = { Jul },
+  year = { 2019 }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Anna Rogers</name><uri>http://www.cs.uml.edu/~arogers/</uri></author><category term="academia" /><category term="methodology" /><category term="negresults" /><category term="review" /><summary type="html">Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov's word analogies.</summary></entry><entry><title type="html">How the Transformers broke NLP leaderboards</title><link href="https://hackingsemantics.xyz/2019/leaderboards/" rel="alternate" type="text/html" title="How the Transformers broke NLP leaderboards" /><published>2019-06-30T22:00:47-04:00</published><updated>2019-06-30T22:00:47-04:00</updated><id>https://hackingsemantics.xyz/2019/leaderboards</id><content type="html" xml:base="https://hackingsemantics.xyz/2019/leaderboards/">&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/compete.png&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This post summarizes some of the recent XLNet-prompted discussions on Twitter and offline. Idea credits go to Yoav Goldberg, Sam Bowman, Jason Weston, Alexis Conneau, Ted Pedersen, fellow members of Text Machine Lab, and many others. Any misconfiguration of those ideas is my own.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A big reason why NLP is such an actively developed area is the leaderboards: they are the core of multiple shared tasks, benchmark systems like GLUE, and individual datasets such as SQUAD and AllenAI datasets. Leaderboards stimulate competitions between engineering teams, helping them to develop better and better models to tackle human language.&lt;/p&gt;
+
+&lt;p&gt;Or do they?&lt;/p&gt;
+
+&lt;h2 id=&quot;so-whats-wrong-with-the-leaderboards&quot;&gt;So what’s wrong with the leaderboards?&lt;/h2&gt;
+
+&lt;p&gt;Typically a leaderboard for an NLP task X looks roughly as follows:&lt;/p&gt;
+
+&lt;div class=&quot;table-wrapper&quot;&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;System&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;Citation&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;Performance&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;System A&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;Smith et al. 2018&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;76.05&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;System B&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;Li et al. 2018&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;75.85&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;System C&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;Petrov et al. 2018&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;75.62&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;This format is followed both by online leaderboards (such as the GLUE benchmark), and academic papers (when comparing the proposed model to the baselines).&lt;/p&gt;
+
+&lt;p&gt;Now, the test performance of the model is far from the only thing that make it novel or even interesting, but it is the only thing that is in the leaderboard. Since DL is such a big zoo with different architectures, there is no standard way to present additional information such as model parameters and training data. In the papers, sometimes these details are in the methodology section, sometimes in the appendices, sometimes in the comments on github repo or nowhere at all. In an online leaderboard, the details of each system can only be retrieved from the link to the paper (if one is available), or by going through the code in the repository.&lt;/p&gt;
+
+&lt;p&gt;In an increasingly busy world, how many of us actually look for those details, unless we are reviewing or re-implementing? The simple leaderboard already gives us the information we most care about: who SOTA-ed. Generally, our minds are lazy and tend to receive such messages uncritically, ignoring any caveats even they are immediately present &lt;a class=&quot;citation&quot; href=&quot;#Kahneman_2013_Thinking_fast_and_slow&quot;&gt;(Kahneman, 2013)&lt;/a&gt;. And if we have to actively hunt for the caveats… well, no chance. The winner receives all the Twitter hype, potentially &lt;a href=&quot;https://medium.com/@ryancotterell/we-should-anonymize-model-names-during-peer-review-bcab0cc78946&quot;&gt;gaining unfair advantage in the blind review&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There has been a lot of discussion of the dangers of the SOTA-centric approach. If the reader’s main takeaway is going to be the leaderboard, that increases the perception that the publication-worthiness is only achieved by beating the SOTA. That perception results in a flood of papers with marginal and often unreproducible performance gains &lt;a class=&quot;citation&quot; href=&quot;#Crane_2018_Questionable_Answers_in_Question_Answering_Research_Reproducibility_and_Variability_of_Published_Results&quot;&gt;(Crane, 2018)&lt;/a&gt;. It also creates a huge problem for shared tasks, when non-winners feel like it’s not even worth their while to write the paper on their work &lt;a class=&quot;citation&quot; href=&quot;#EscartinReijersEtAl_2017_Ethical_Considerations_in_NLP_Shared_Tasks&quot;&gt;(Escartín et al., 2017)&lt;/a&gt;, see also &lt;a href=&quot;https://medium.com/@tpederse/semeval-discussions-naacl-2019-4b73cd6734c0&quot;&gt;the recent discussion of the issue by Ted Pedersen&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;The focus of this post is yet another problem with the leaderboards that is relatively recent. Its cause is simple: fundamentally, &lt;strong&gt;a model may be better than its competitors by building better representations from the available data - or it may simply use more data, and/or throw a deeper network at it&lt;/strong&gt;. When we have a paper presenting a new model that also uses more data/compute than its competitors, credit attribution becomes hard.&lt;/p&gt;
+
+&lt;p&gt;The most popular NLP leaderboards are currently dominated by Transformer-based models. BERT &lt;a class=&quot;citation&quot; href=&quot;#DevlinChangEtAl_2019_BERT_Pre-training_of_Deep_Bidirectional_Transformers_for_Language_Understanding&quot;&gt;(Devlin, Chang, Lee, &amp;amp; Toutanova, 2019)&lt;/a&gt; received the best paper award at NAACL 2019 after months of holding SOTA on many leaderboards. Now the hot topic is XLNet &lt;a class=&quot;citation&quot; href=&quot;#YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding&quot;&gt;(Yang et al., 2019)&lt;/a&gt; that is said to overtake BERT on GLUE and some other benchmarks. Other Transformers include GPT-2 &lt;a class=&quot;citation&quot; href=&quot;#RadfordWuEtAl_2019_Language_models_are_unsupervised_multitask_learners&quot;&gt;(Radford et al., 2019)&lt;/a&gt;, ERNIE &lt;a class=&quot;citation&quot; href=&quot;#ZhangHanEtAl_2019_ERNIE_Enhanced_Language_Representation_with_Informative_Entities&quot;&gt;(Zhang et al., 2019)&lt;/a&gt;, and the list is growing.&lt;/p&gt;
+
+&lt;p&gt;The problem we’re starting to face is that these models are HUGE. While the source code is available, in reality it is beyond the means of an average lab to reproduce these results, or to produce anything comparable. For instance, XLNet is trained on 32B tokens, and the price of using 500 TPUs for 2 days is over $250,000. Even fine-tuning this model is getting expensive.&lt;/p&gt;
+
+&lt;h2 id=&quot;wait-this-was-supposed-to-happen&quot;&gt;Wait, this was supposed to happen!&lt;/h2&gt;
+
+&lt;p&gt;On the one hand, this trend looks predictable, even inevitable: people with more resources &lt;em&gt;will&lt;/em&gt; use more resources to get better performance. One could even argue that a huge model proves its scalability and fulfils the inherent promise of deep learning, i.e. being able to learn more complex patterns from more information. Nobody knows how much data we actually need to solve a given NLP task, but more should be better, and limiting data seems counter-productive.&lt;/p&gt;
+
+&lt;p&gt;On that view - well, from now on top-tier NLP research is going to be something possible only for industry. Academics will have to somehow up their game, either by getting more grants or by collaborating with high-performance computing centers. They are also welcome to switch to analysis, building something on top of the industry-provided huge models, or making datasets.&lt;/p&gt;
+
+&lt;p&gt;However, in terms of overall progress in NLP that might not be the best thing to do. Here is why.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-huge-models--leaderboards--trouble&quot;&gt;Why huge models + leaderboards = trouble&lt;/h2&gt;
+
+&lt;p&gt;The chief problem with the huge models is simply this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;“More data &amp;amp; compute = SOTA” is NOT research news&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If leaderboards are to highlight the actual progress, we need to incentivize new architectures rather than teams outspending each other. Obviously, huge pretrained models are valuable, but unless the authors show that their system consistently behaves differently from its competition with comparable data &amp;amp; compute, it is not clear whether they are presenting a model or a resource.&lt;/p&gt;
+
+&lt;p&gt;Furthermore, much of this research is not reproducible: nobody is going to spend $250,000 just to repeat XLNet training. Given the fact that its ablation study showed only 1-2% gain over BERT in 3 datasets out of 4 &lt;a class=&quot;citation&quot; href=&quot;#YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding&quot;&gt;(Yang et al., 2019)&lt;/a&gt;, we don’t actually know for sure that its masking strategy is more successful than BERT’s.&lt;/p&gt;
+
+&lt;p&gt;At the same time, the development of leaner models is dis-incentivized, as their task is fundamentally harder and the leaderboard-oriented community only rewards the SOTA. That, in its turn, prices out of competitions academic teams, which will not result in students becoming better engineers when they graduate.&lt;/p&gt;
+
+&lt;p&gt;Last but not the least, huge DL models are often overparametrized &lt;a class=&quot;citation&quot; href=&quot;#FrankleCarbin_2019_Lottery_Ticket_Hypothesis_Finding_Sparse_Trainable_Neural_Networks&quot;&gt;(Frankle &amp;amp; Carbin, 2019; Wu, Fan, Baevski, Dauphin, &amp;amp; Auli, 2019)&lt;/a&gt;. As an example, the smaller version of BERT achieves better scores on a number of syntax-testing experiments than the larger one &lt;a class=&quot;citation&quot; href=&quot;#Goldberg_2019_Assessing_BERTs_Syntactic_Abilities&quot;&gt;(Goldberg, 2019)&lt;/a&gt;. The fact that DL models require a lot of compute is not necessarily a bad thing in itself, but &lt;em&gt;wasting&lt;/em&gt; compute is not ideal for the environment &lt;a class=&quot;citation&quot; href=&quot;#StrubellGaneshEtAl_2019_Energy_and_Policy_Considerations_for_Deep_Learning_in_NLP&quot;&gt;(Strubell, Ganesh, &amp;amp; McCallum, 2019)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;possible-solutions&quot;&gt;Possible solutions&lt;/h2&gt;
+
+&lt;p&gt;NLP leaderboards are in real danger of turning into something where we give up on reproducibility and just watch one Google model outperform another Google model every couple of months. To avoid that, &lt;strong&gt;the leaderboards need to change&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;!-- However, it is hard to do fairly, because DL architectures are such a big zoo: the impact of the training time, size and nature of the training data, number and impact of individual parameters may vary widely across architectures, so fixing any one of these may disadvantage a class of models.  --&gt;
+
+&lt;p&gt;In principle, there are two possible solutions:&lt;/p&gt;
+
+&lt;p&gt;1) For a specific task, it should be possible to &lt;strong&gt;provide a standard training corpus, and limit the amount of compute to that used by a strong baseline&lt;/strong&gt;. If the baseline is itself something like BERT, this will incentivize the development of models that make better use of resources. If a system uses pre-trained representations (word embeddings, BERT, etc.), the size of pre-training data should be factored into the final score.&lt;/p&gt;
+
+&lt;p&gt;2) For a suite of tasks like GLUE, we could &lt;strong&gt;let the participants use however much data&amp;amp;compute they wanted, but factor that into the final score&lt;/strong&gt;. The leaderboard itself should make it immediately clear what is the performance of a model over the baseline relative to the amount of resources it consumed.&lt;/p&gt;
+
+&lt;p&gt;Both of these approaches require a reliable way to estimate the computation cost. At the minimum, it could be the inference time as estimated by the task organizers. Aleksandr Drozd (RIKEN CCS) suggests the best way is to just report the FLOPs count, which seems to be already possible for both &lt;a href=&quot;https://github.com/Lyken17/pytorch-OpCounter&quot;&gt;PyTorch&lt;/a&gt; and &lt;a href=&quot;https://medium.com/@fanzongshaoxing/model-flops-measurement-in-tensorflow-a84084bbb3b5&quot;&gt;TensorFlow&lt;/a&gt;. Perhaps it would also be possible to build a general service for shared tasks that would receive a DL model, train it for one epoch on one batch of data, and provide the researchers with the estimate.&lt;/p&gt;
+
+&lt;p&gt;Estimating the training data is also not straightforward: a plain text corpus should be worth less than an annotated corpus or Freebase. However, this should be possible to weigh. For example, unstructured data could be estimated as raw token count &lt;script type=&quot;math/tex&quot;&gt;N&lt;/script&gt;, augmented/parsed data - as &lt;script type=&quot;math/tex&quot;&gt;aN&lt;/script&gt;, and structured data such as dictionaries - as &lt;script type=&quot;math/tex&quot;&gt;N^2&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;One counter-argument to the above is that some models may inherently require more data than others, and can only be fairly evaluated in large-scale experiments. But even in this case, a convincing paper would need to show that the new model can “hold” more data than its competitors, and so multiple rounds of training all models on the same data are still necessary.&lt;/p&gt;
+
+&lt;h2 id=&quot;summing-up&quot;&gt;Summing up&lt;/h2&gt;
+
+&lt;p&gt;This is the leaderboard discussion so far, and it’s far from over. If you have anything to add, especially any other possible solutions - please let me know on Twitter or in the comments below. I’ll update the post with any major developments.&lt;/p&gt;
+
+&lt;p&gt;Let me stress that huge pretrained models like BERT are an undeniable achievement, and did help to push the state-of-the-art on numerous tasks. Obviously, there is nothing wrong methodologically with &lt;em&gt;using&lt;/em&gt; any &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;muppetName&amp;gt;&lt;/code&gt; as pretrained representations, as long as the paper is about something else and does not rest on any properties of &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;muppetName&amp;gt;&lt;/code&gt; that have not been fully validated. There is also nothing wrong with analysing &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;muppetName&amp;gt;&lt;/code&gt;: the steady stream of BERTology papers by itself suggests how little we understood about BERT while it was all over the leaderboards &lt;a class=&quot;citation&quot; href=&quot;#VoitaTalbotEtAl_2019_Analyzing_Multi-Head_Self-Attention_Specialized_Heads_Do_Heavy_Lifting_Rest_Can_Be_Pruned&quot;&gt;(Voita, Talbot, Moiseev, Sennrich, &amp;amp; Titov, 2019; Clark, Khandelwal, Levy, &amp;amp; Manning, 2019; Coenen et al., 2019; Jawahar, Sagot, &amp;amp; Seddah, n.d.; Lin, Tan, &amp;amp; Frank, 2019)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;But we do have a methodological problem if a paper introduces another &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;muppetName&amp;gt;&lt;/code&gt; without factoring in its stability and the resources it took to train vs competition, and then everybody takes the leaderboard performance as indicator of a breakthrough architecture.&lt;/p&gt;
+
+&lt;p&gt;Imagine that tomorrow we wake up to a paper presenting a Don’t-Even-Try-Net (model name © Olga Kovaleva), a new architecture that achieves superhuman performance on every NLP task after being trained for a year on every computer in North America. Even with the source code we would not be able to verify that claim. We could use the pretrained weights, but without multiple runs for ablation and stability evaluation the authors would &lt;em&gt;not&lt;/em&gt; have proven the superiority of their approach. In a sense, they would be presenting a resource rather than a model.&lt;/p&gt;
+
+&lt;p&gt;If we are to make actual progress, we need to make sure new systems get fame and awards only with rigorous proofs - including the multiple runs of training on the same data as the baselines, ablation studies, estimates of compute and stability. This would inherently encourage more hypothesis-driven research. For instance, the dependency objective in XLNet looks really interesting, and I would love to know how much advantage it actually confers on different tasks, given that dependency-based word embeddings turned out to be of limited use &lt;a class=&quot;citation&quot; href=&quot;#LiLiuEtAl_2017_Investigating_Different_Syntactic_Context_Types_and_Context_Representations_for_Learning_Word_Embeddings&quot;&gt;(Li et al., 2017; Lapesa &amp;amp; Evert, 2017)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;update-of-22072019&quot;&gt;Update of 22.07.2019&lt;/h2&gt;
+
+&lt;p&gt;Oh wow, this post was retweeted over 100 times and &lt;a href=&quot;http://newsletter.ruder.io/&quot;&gt;made it to Sebastian Ruder’s NLP newsletter&lt;/a&gt;! Clearly, the issue of fair evaluation of huge models resonates with the community deeply.&lt;/p&gt;
+
+&lt;p&gt;Sebastian points out that Transformers make an important contribution in showing us the limitations of more-data-and-compute approach, and, ironically, also starting to encourage research on the leaner models. I fully agree with both points, and of course the Transformer in itself is an undeniable breakthrough. My point is simply that the current leaderboards implicitly encourage a blend of architectures, data and compute that are impossible to disentangle and replicate. If we are on a quest for the best possible NLP &lt;em&gt;model&lt;/em&gt;, this is a problem we are going to have to solve.&lt;/p&gt;
+
+&lt;p&gt;Another update from a later discussion with Sam Bowman: leaderboards where you win by whatever combination of means do have a place in the world. Like Kaggle, they stimulate competition in ML engineering for NLP, and the results they showcase may in themselves be interesting and useful. But by themselves they are not a proof of architecture superiority, which they are commonly mistaken for. It seems to me that it would be the easiest for the most influential leaderboards such as GLUE to change so as to help to correct this perception, since all eyes are on them, but I can also see why they may want to remain Kaggle-style.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Model training cost clarification&lt;/em&gt;. the price of training XLNet was estimated as follows: the paper states that it was trained on 512 TPU v3 chips for 2.5 days, i.e. 60 hours. &lt;a href=&quot;https://cloud.google.com/tpu/pricing&quot;&gt;Google on-demand price for TPU v-3&lt;/a&gt; is currently $8, which amounts to $245,760 before fine-tuning. &lt;a href=&quot;https://twitter.com/jekbradbury/status/1143397614093651969&quot;&gt;James Bradbury points out&lt;/a&gt; that authors could actually mean “devices” or “cores”, which would bring it down to $61,440 or $30,720, respectively. I would add that even in this most optimistic scenario the model would still cost &lt;a href=&quot;https://www.glassdoor.com/Salaries/phd-student-salary-SRCH_KO0,11.htm&quot;&gt;more than the stipend of the graduate student working on it&lt;/a&gt;, and still be unrealistic for most labs.&lt;/p&gt;
+
+&lt;h2&gt;***&lt;/h2&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;ZhangHanEtAl_2019_ERNIE_Enhanced_Language_Representation_with_Informative_Entities&quot;&gt;Zhang, Z., Han, X., Liu, Z., Jiang, X., Sun, M., &amp;amp; Liu, Q. (2019). ERNIE: Enhanced Language Representation with Informative Entities. &lt;i&gt;ACL 2019&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('ZhangHanEtAl_2019_ERNIE_Enhanced')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1905.07129'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;ZhangHanEtAl_2019_ERNIE_Enhanced&quot;&gt;&lt;pre&gt;@inproceedings{ZhangHanEtAl_2019_ERNIE_Enhanced_Language_Representation_with_Informative_Entities,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1905.07129},
+  title = {{{ERNIE}}: {{Enhanced Language Representation}} with {{Informative Entities}}},
+  shorttitle = {{{ERNIE}}},
+  booktitle = {{{ACL}} 2019},
+  url = {http://arxiv.org/abs/1905.07129},
+  author = {Zhang, Zhengyan and Han, Xu and Liu, Zhiyuan and Jiang, Xin and Sun, Maosong and Liu, Qun},
+  month = may,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1905.07129
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding&quot;&gt;Yang, Z., Dai, Z., Yang, Y., Carbonell, J., Salakhutdinov, R., &amp;amp; Le, Q. V. (2019). XLNet: Generalized Autoregressive Pretraining for Language Understanding. &lt;i&gt;ArXiv:1906.08237 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('YangDaiEtAl_2019_XLNet_Generalized')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1906.08237'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;YangDaiEtAl_2019_XLNet_Generalized&quot;&gt;&lt;pre&gt;@article{YangDaiEtAl_2019_XLNet_Generalized_Autoregressive_Pretraining_for_Language_Understanding,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.08237},
+  primaryclass = {cs},
+  title = {{{XLNet}}: {{Generalized Autoregressive Pretraining}} for {{Language Understanding}}},
+  shorttitle = {{{XLNet}}},
+  journal = {arXiv:1906.08237 [cs]},
+  url = {http://arxiv.org/abs/1906.08237},
+  author = {Yang, Zhilin and Dai, Zihang and Yang, Yiming and Carbonell, Jaime and Salakhutdinov, Ruslan and Le, Quoc V.},
+  month = jun,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1906.08237
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;WuFanEtAl_2019_Pay_Less_Attention_with_Lightweight_and_Dynamic_Convolutions&quot;&gt;Wu, F., Fan, A., Baevski, A., Dauphin, Y., &amp;amp; Auli, M. (2019). Pay Less Attention with Lightweight and Dynamic Convolutions. &lt;i&gt;International Conference on Learning Representations&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('WuFanEtAl_2019_Pay_Less')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://openreview.net/forum?id=SkVhlh09tX'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;WuFanEtAl_2019_Pay_Less&quot;&gt;&lt;pre&gt;@inproceedings{WuFanEtAl_2019_Pay_Less_Attention_with_Lightweight_and_Dynamic_Convolutions,
+  title = {Pay {{Less Attention}} with {{Lightweight}} and {{Dynamic Convolutions}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  url = {https://openreview.net/forum?id=SkVhlh09tX},
+  author = {Wu, Felix and Fan, Angela and Baevski, Alexei and Dauphin, Yann and Auli, Michael},
+  year = {2019}
+}
+&lt;/pre&gt;
+https://openreview.net/forum?id=SkVhlh09tX
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;VoitaTalbotEtAl_2019_Analyzing_Multi-Head_Self-Attention_Specialized_Heads_Do_Heavy_Lifting_Rest_Can_Be_Pruned&quot;&gt;Voita, E., Talbot, D., Moiseev, F., Sennrich, R., &amp;amp; Titov, I. (2019). Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned. &lt;i&gt;ArXiv:1905.09418 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('VoitaTalbotEtAl_2019_Analyzing_Multi-Head')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1905.09418'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;VoitaTalbotEtAl_2019_Analyzing_Multi-Head&quot;&gt;&lt;pre&gt;@article{VoitaTalbotEtAl_2019_Analyzing_Multi-Head_Self-Attention_Specialized_Heads_Do_Heavy_Lifting_Rest_Can_Be_Pruned,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1905.09418},
+  primaryclass = {cs},
+  title = {Analyzing {{Multi}}-{{Head Self}}-{{Attention}}: {{Specialized Heads Do}} the {{Heavy Lifting}}, the {{Rest Can Be Pruned}}},
+  shorttitle = {Analyzing {{Multi}}-{{Head Self}}-{{Attention}}},
+  journal = {arXiv:1905.09418 [cs]},
+  url = {http://arxiv.org/abs/1905.09418},
+  author = {Voita, Elena and Talbot, David and Moiseev, Fedor and Sennrich, Rico and Titov, Ivan},
+  month = may,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1905.09418
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;StrubellGaneshEtAl_2019_Energy_and_Policy_Considerations_for_Deep_Learning_in_NLP&quot;&gt;Strubell, E., Ganesh, A., &amp;amp; McCallum, A. (2019). Energy and Policy Considerations for Deep Learning in NLP. &lt;i&gt;ACL 2019&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('StrubellGaneshEtAl_2019_Energy_and')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1906.02243'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;StrubellGaneshEtAl_2019_Energy_and&quot;&gt;&lt;pre&gt;@inproceedings{StrubellGaneshEtAl_2019_Energy_and_Policy_Considerations_for_Deep_Learning_in_NLP,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.02243},
+  title = {Energy and {{Policy Considerations}} for {{Deep Learning}} in {{NLP}}},
+  booktitle = {{{ACL}} 2019},
+  url = {http://arxiv.org/abs/1906.02243},
+  author = {Strubell, Emma and Ganesh, Ananya and McCallum, Andrew},
+  month = jun,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1906.02243
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;RadfordWuEtAl_2019_Language_models_are_unsupervised_multitask_learners&quot;&gt;Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., &amp;amp; Sutskever, I. (2019). Language Models Are Unsupervised Multitask Learners. &lt;i&gt;OpenAI Blog&lt;/i&gt;, &lt;i&gt;1&lt;/i&gt;, 8.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('RadfordWuEtAl_2019_Language_models')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://openai.com/blog/better-language-models/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;RadfordWuEtAl_2019_Language_models&quot;&gt;&lt;pre&gt;@article{RadfordWuEtAl_2019_Language_models_are_unsupervised_multitask_learners,
+  title = {Language Models Are Unsupervised Multitask Learners},
+  volume = {1},
+  journal = {OpenAI Blog},
+  url = {https://openai.com/blog/better-language-models/},
+  author = {Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya},
+  year = {2019},
+  pages = {8}
+}
+&lt;/pre&gt;
+https://openai.com/blog/better-language-models/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;LinTanEtAl_2019_Open_Sesame_Getting_Inside_BERTs_Linguistic_Knowledge&quot;&gt;Lin, Y., Tan, Y. C., &amp;amp; Frank, R. (2019). Open Sesame: Getting Inside BERT’s Linguistic Knowledge. &lt;i&gt;ArXiv:1906.01698 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('LinTanEtAl_2019_Open_Sesame')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1906.01698'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;LinTanEtAl_2019_Open_Sesame&quot;&gt;&lt;pre&gt;@article{LinTanEtAl_2019_Open_Sesame_Getting_Inside_BERTs_Linguistic_Knowledge,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.01698},
+  primaryclass = {cs},
+  title = {Open {{Sesame}}: {{Getting Inside BERT}}'s {{Linguistic Knowledge}}},
+  shorttitle = {Open {{Sesame}}},
+  journal = {arXiv:1906.01698 [cs]},
+  url = {http://arxiv.org/abs/1906.01698},
+  author = {Lin, Yongjie and Tan, Yi Chern and Frank, Robert},
+  month = jun,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1906.01698
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;LiLiuEtAl_2017_Investigating_Different_Syntactic_Context_Types_and_Context_Representations_for_Learning_Word_Embeddings&quot;&gt;Li, B., Liu, T., Zhao, Z., Tang, B., Drozd, A., Rogers, A., &amp;amp; Du, X. (2017). Investigating Different Syntactic Context Types and Context Representations for Learning Word Embeddings. &lt;i&gt;Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing&lt;/i&gt;, 2411–2421. Copenhagen, Denmark, September 7–11, 2017.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('LiLiuEtAl_2017_Investigating_Different')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://aclweb.org/anthology/D17-1257'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;LiLiuEtAl_2017_Investigating_Different&quot;&gt;&lt;pre&gt;@inproceedings{LiLiuEtAl_2017_Investigating_Different_Syntactic_Context_Types_and_Context_Representations_for_Learning_Word_Embeddings,
+  address = {{Copenhagen, Denmark, September 7\textendash{}11, 2017}},
+  title = {Investigating Different Syntactic Context Types and Context Representations for Learning Word Embeddings},
+  booktitle = {Proceedings of the 2017 {{Conference}} on {{Empirical Methods}} in {{Natural Language Processing}}},
+  url = {http://aclweb.org/anthology/D17-1257},
+  author = {Li, Bofang and Liu, Tao and Zhao, Zhe and Tang, Buzhou and Drozd, Aleksandr and Rogers, Anna and Du, Xiaoyong},
+  year = {2017},
+  pages = {2411--2421}
+}
+&lt;/pre&gt;
+http://aclweb.org/anthology/D17-1257
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;LapesaEvert_2017_Large-scale_evaluation_of_dependency-based_DSMs_Are_they_worth_the_effort&quot;&gt;Lapesa, G., &amp;amp; Evert, S. (2017). Large-Scale Evaluation of Dependency-Based DSMs: Are They Worth the Effort? &lt;i&gt;Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics (EACL)&lt;/i&gt;, 394–400. Association for Computational Linguistics.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('LapesaEvert_2017_Large-scale_evaluation')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://www.aclweb.org/anthology/E17-2063'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;LapesaEvert_2017_Large-scale_evaluation&quot;&gt;&lt;pre&gt;@inproceedings{LapesaEvert_2017_Large-scale_evaluation_of_dependency-based_DSMs_Are_they_worth_the_effort,
+  title = {Large-Scale Evaluation of Dependency-Based {{DSMs}}: {{Are}} They Worth the Effort?},
+  shorttitle = {Large-Scale Evaluation of Dependency-Based {{DSMs}}},
+  booktitle = {Proceedings of the 15th {{Conference}} of the {{European Chapter}} of the {{Association}} for {{Computational Linguistics}} ({{EACL}})},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://www.aclweb.org/anthology/E17-2063},
+  author = {Lapesa, Gabriella and Evert, Stefan},
+  year = {2017},
+  pages = {394-400}
+}
+&lt;/pre&gt;
+http://www.aclweb.org/anthology/E17-2063
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Kahneman_2013_Thinking_fast_and_slow&quot;&gt;Kahneman, D. (2013). &lt;i&gt;Thinking, Fast and Slow&lt;/i&gt; (1st pbk. ed). New York: Farrar, Straus and Giroux.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Kahneman_2013_Thinking_fast')&quot;&gt;BibTex&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Kahneman_2013_Thinking_fast&quot;&gt;&lt;pre&gt;@book{Kahneman_2013_Thinking_fast_and_slow,
+  address = {{New York}},
+  edition = {1st pbk. ed},
+  title = {Thinking, Fast and Slow},
+  isbn = {978-0-374-53355-7},
+  lccn = {BF441 .K238 2013},
+  publisher = {{Farrar, Straus and Giroux}},
+  author = {Kahneman, Daniel},
+  year = {2013}
+}
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;JawaharSagotEtAl_What_does_BERT_learn_about_structure_of_language&quot;&gt;Jawahar, G., Sagot, B., &amp;amp; Seddah, D. What Does BERT Learn about the Structure of Language? &lt;i&gt;ACL 2019&lt;/i&gt;, 8.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('JawaharSagotEtAl_What_does_BERT')&quot;&gt;BibTex&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;JawaharSagotEtAl_What_does_BERT&quot;&gt;&lt;pre&gt;@inproceedings{JawaharSagotEtAl_What_does_BERT_learn_about_structure_of_language,
+  title = {What Does {{BERT}} Learn about the Structure of Language?},
+  language = {en},
+  booktitle = {{{ACL}} 2019},
+  author = {Jawahar, Ganesh and Sagot, Beno{\^i}t and Seddah, Djam{\'e}},
+  pages = {8}
+}
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Goldberg_2019_Assessing_BERTs_Syntactic_Abilities&quot;&gt;Goldberg, Y. (2019). Assessing BERT’s Syntactic Abilities. &lt;i&gt;ArXiv:1901.05287 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Goldberg_2019_Assessing_BERTs')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1901.05287'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Goldberg_2019_Assessing_BERTs&quot;&gt;&lt;pre&gt;@article{Goldberg_2019_Assessing_BERTs_Syntactic_Abilities,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1901.05287},
+  primaryclass = {cs},
+  title = {Assessing {{BERT}}'s {{Syntactic Abilities}}},
+  journal = {arXiv:1901.05287 [cs]},
+  url = {http://arxiv.org/abs/1901.05287},
+  author = {Goldberg, Yoav},
+  month = jan,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1901.05287
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;FrankleCarbin_2019_Lottery_Ticket_Hypothesis_Finding_Sparse_Trainable_Neural_Networks&quot;&gt;Frankle, J., &amp;amp; Carbin, M. (2019). The Lottery Ticket Hypothesis: Finding Sparse, Trainable Neural Networks. &lt;i&gt;International Conference on Learning Representations&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('FrankleCarbin_2019_Lottery_Ticket')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://openreview.net/forum?id=rJl-b3RcF7'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;FrankleCarbin_2019_Lottery_Ticket&quot;&gt;&lt;pre&gt;@inproceedings{FrankleCarbin_2019_Lottery_Ticket_Hypothesis_Finding_Sparse_Trainable_Neural_Networks,
+  title = {The {{Lottery Ticket Hypothesis}}: {{Finding Sparse}}, {{Trainable Neural Networks}}},
+  booktitle = {International {{Conference}} on {{Learning Representations}}},
+  url = {https://openreview.net/forum?id=rJl-b3RcF7},
+  author = {Frankle, Jonathan and Carbin, Michael},
+  year = {2019}
+}
+&lt;/pre&gt;
+https://openreview.net/forum?id=rJl-b3RcF7
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;EscartinReijersEtAl_2017_Ethical_Considerations_in_NLP_Shared_Tasks&quot;&gt;Escartín, C. P., Reijers, W., Lynn, T., Moorkens, J., Way, A., &amp;amp; Liu, C.-H. (2017). Ethical Considerations in NLP Shared Tasks. &lt;i&gt;Proceedings of the First ACL Workshop on Ethics in Natural Language Processing&lt;/i&gt;, 66–73. https://doi.org/10.18653/v1/W17-1608&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('EscartinReijersEtAl_2017_Ethical_Considerations')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://aclweb.org/anthology/papers/W/W17/W17-1608/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;EscartinReijersEtAl_2017_Ethical_Considerations&quot;&gt;&lt;pre&gt;@inproceedings{EscartinReijersEtAl_2017_Ethical_Considerations_in_NLP_Shared_Tasks,
+  title = {Ethical {{Considerations}} in {{NLP Shared Tasks}}},
+  language = {en-us},
+  booktitle = {Proceedings of the {{First ACL Workshop}} on {{Ethics}} in {{Natural Language Processing}}},
+  doi = {10.18653/v1/W17-1608},
+  url = {https://aclweb.org/anthology/papers/W/W17/W17-1608/},
+  author = {Escart{\'i}n, Carla Parra and Reijers, Wessel and Lynn, Teresa and Moorkens, Joss and Way, Andy and Liu, Chao-Hong},
+  month = apr,
+  year = {2017},
+  pages = {66-73}
+}
+&lt;/pre&gt;
+https://aclweb.org/anthology/papers/W/W17/W17-1608/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;DevlinChangEtAl_2019_BERT_Pre-training_of_Deep_Bidirectional_Transformers_for_Language_Understanding&quot;&gt;Devlin, J., Chang, M.-W., Lee, K., &amp;amp; Toutanova, K. (2019). BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding. &lt;i&gt;Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)&lt;/i&gt;, 4171–4186.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('DevlinChangEtAl_2019_BERT_Pre-training')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://aclweb.org/anthology/papers/N/N19/N19-1423/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;DevlinChangEtAl_2019_BERT_Pre-training&quot;&gt;&lt;pre&gt;@inproceedings{DevlinChangEtAl_2019_BERT_Pre-training_of_Deep_Bidirectional_Transformers_for_Language_Understanding,
+  title = {{{BERT}}: {{Pre}}-Training of {{Deep Bidirectional Transformers}} for {{Language Understanding}}},
+  shorttitle = {{{BERT}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://aclweb.org/anthology/papers/N/N19/N19-1423/},
+  author = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  month = jun,
+  year = {2019},
+  pages = {4171-4186}
+}
+&lt;/pre&gt;
+https://aclweb.org/anthology/papers/N/N19/N19-1423/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Crane_2018_Questionable_Answers_in_Question_Answering_Research_Reproducibility_and_Variability_of_Published_Results&quot;&gt;Crane, M. (2018). Questionable Answers in Question Answering Research: Reproducibility and Variability of Published Results. &lt;i&gt;Transactions of the Association for Computational Linguistics&lt;/i&gt;, &lt;i&gt;6&lt;/i&gt;, 241–252. https://doi.org/10.1162/tacl_a_00018&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Crane_2018_Questionable_Answers')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'https://aclweb.org/anthology/papers/Q/Q18/Q18-1018/'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Crane_2018_Questionable_Answers&quot;&gt;&lt;pre&gt;@article{Crane_2018_Questionable_Answers_in_Question_Answering_Research_Reproducibility_and_Variability_of_Published_Results,
+  title = {Questionable {{Answers}} in {{Question Answering Research}}: {{Reproducibility}} and {{Variability}} of {{Published Results}}},
+  volume = {6},
+  shorttitle = {Questionable {{Answers}} in {{Question Answering Research}}},
+  language = {en-us},
+  journal = {Transactions of the Association for Computational Linguistics},
+  doi = {10.1162/tacl_a_00018},
+  url = {https://aclweb.org/anthology/papers/Q/Q18/Q18-1018/},
+  author = {Crane, Matt},
+  year = {2018},
+  pages = {241-252}
+}
+&lt;/pre&gt;
+https://aclweb.org/anthology/papers/Q/Q18/Q18-1018/
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;CoenenReifEtAl_2019_Visualizing_and_Measuring_Geometry_of_BERT&quot;&gt;Coenen, A., Reif, E., Yuan, A., Kim, B., Pearce, A., Viégas, F., &amp;amp; Wattenberg, M. (2019). Visualizing and Measuring the Geometry of BERT. &lt;i&gt;ArXiv:1906.02715 [Cs, Stat]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('CoenenReifEtAl_2019_Visualizing_and')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1906.02715'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;CoenenReifEtAl_2019_Visualizing_and&quot;&gt;&lt;pre&gt;@article{CoenenReifEtAl_2019_Visualizing_and_Measuring_Geometry_of_BERT,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.02715},
+  primaryclass = {cs, stat},
+  title = {Visualizing and {{Measuring}} the {{Geometry}} of {{BERT}}},
+  journal = {arXiv:1906.02715 [cs, stat]},
+  url = {http://arxiv.org/abs/1906.02715},
+  author = {Coenen, Andy and Reif, Emily and Yuan, Ann and Kim, Been and Pearce, Adam and Vi{\'e}gas, Fernanda and Wattenberg, Martin},
+  month = jun,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1906.02715
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;ClarkKhandelwalEtAl_2019_What_Does_BERT_Look_At_Analysis_of_BERTs_Attention&quot;&gt;Clark, K., Khandelwal, U., Levy, O., &amp;amp; Manning, C. D. (2019). What Does BERT Look At? An Analysis of BERT’s Attention. &lt;i&gt;ArXiv:1906.04341 [Cs]&lt;/i&gt;.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('ClarkKhandelwalEtAl_2019_What_Does')&quot;&gt;BibTex&lt;/button&gt;
+    
+    &lt;button class=&quot;btn--success&quot; onclick=&quot;window.location.href = 'http://arxiv.org/abs/1906.04341'&quot;&gt;URL&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;ClarkKhandelwalEtAl_2019_What_Does&quot;&gt;&lt;pre&gt;@article{ClarkKhandelwalEtAl_2019_What_Does_BERT_Look_At_Analysis_of_BERTs_Attention,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.04341},
+  primaryclass = {cs},
+  title = {What {{Does BERT Look At}}? {{An Analysis}} of {{BERT}}'s {{Attention}}},
+  shorttitle = {What {{Does BERT Look At}}?},
+  journal = {arXiv:1906.04341 [cs]},
+  url = {http://arxiv.org/abs/1906.04341},
+  author = {Clark, Kevin and Khandelwal, Urvashi and Levy, Omer and Manning, Christopher D.},
+  month = jun,
+  year = {2019}
+}
+&lt;/pre&gt;
+http://arxiv.org/abs/1906.04341
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;
+
+&lt;h2 id=&quot;cite-this-post&quot;&gt;Cite this post&lt;/h2&gt;
+
+&lt;p&gt;If you’d like to cite this post, please use the following bibtex:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@misc{Rogers_2019_leaderboards,
+  title = { How the Transformers broke NLP leaderboards},
+  journal = {Hacking Semantics},
+  url = { https://hackingsemantics.xyz/2019/leaderboards/ },
+  author = {Rogers, Anna},
+  day = { 30 },
+  month = { Jun },
+  year = { 2019 }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;leave-a-comment-twitter&quot;&gt;Leave a comment (Twitter)&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/annargrs/status/1152194347942731776&quot;&gt;https://twitter.com/annargrs/status/1152194347942731776&lt;/a&gt;&lt;/p&gt;</content><author><name>Anna Rogers</name><uri>http://www.cs.uml.edu/~arogers/</uri></author><category term="academia" /><category term="methodology" /><summary type="html">With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?</summary></entry><entry><title type="html">Why blog about NLP in 2019?</title><link href="https://hackingsemantics.xyz/2019/why-blog/" rel="alternate" type="text/html" title="Why blog about NLP in 2019?" /><published>2019-06-23T17:00:47-04:00</published><updated>2019-06-23T17:00:47-04:00</updated><id>https://hackingsemantics.xyz/2019/why-blog</id><content type="html" xml:base="https://hackingsemantics.xyz/2019/why-blog/">&lt;figure&gt;
+	&lt;img src=&quot;/assets/images/writing-2:1.png&quot; /&gt;
+	&lt;!--figcaption&gt;Nothing in particular&lt;/figcaption--&gt;
+&lt;/figure&gt;
+
+&lt;!--header:
+    image: /assets/images/writing.png --&gt;
+
+&lt;p&gt;When I said I wanted to start a research blog, I got asked why - wasn’t it something from the nineties that nobody did anymore? That’s actually not an unreasonable question: nobody is even able to keep up with arXiv anymore, why introduce any more sources of long reads? Sure, big teams at DeepMind and Microsoft Research keep blogs, but they also have the resources to hire designers and editors.&lt;/p&gt;
+
+&lt;p&gt;Still, despite the over-abundance of information, NLP blogging is definitely having a Renaissance moment. There are not only great technical blogs like &lt;a href=&quot;https://towardsdatascience.com/&quot;&gt;Towards Data Science&lt;/a&gt;; many great minds are using it to talk about methodology and other community-wide issues. See, for example, the recent discussion of the issues in review process by &lt;a href=&quot;https://medium.com/ai2-blog/5-steps-to-reconciling-pre-prints-and-blind-review-92a2d80d8735&quot;&gt;Matt Gardner&lt;/a&gt;, and interdisciplinarity in NLP by &lt;a href=&quot;https://medium.com/@ryancotterell/what-interdisciplinarity-in-acl-means-to-me-f070121bfa85&quot;&gt;Ryan Cotterell&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I think there are two reasons for this trend:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;People use their blogs to increase the visibility of their work (as many blog posts are about research they’re done), and &lt;strong&gt;to do so in a way that does not involve dry, dull writing&lt;/strong&gt; that too many of us seem to think is prerequisite for an accepted paper (see eg this recent discussion on Twitter). Also, blogs enable showing off your Jupyter notebooks, fancy interactive charts, and other cool stuff that won’t ever fit into a paper pdf.&lt;/li&gt;
+  &lt;li&gt;People use their blogs as &lt;strong&gt;a platform to think aloud&lt;/strong&gt;, hopefully get feedback and start important conversations in the NLP community. Heck, we’re trying to model human language, we need all the help we can get! These conversations count as “gray literature”: pre-publication snippets that are still &lt;a href=&quot;https://patthomson.net/2017/12/14/can-i-cite-a-blog-post/&quot;&gt;citable&lt;/a&gt; if need be, and useful to shape the final publication.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;My goal is rather the latter (although who can resist a good shameless self-citation every now and then?) Thinking-aloud, thinking-in-writing is really the only way to think clearly. Here’s an anecdote of Richard Feynman, as narrated by Sonke Ahrens &lt;a class=&quot;citation&quot; href=&quot;#Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers&quot;&gt;(Ahrens, 2017)&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Richard Feynman once had a visitor in his office, a historian who wanted to interview him. When he spotted Feynman’s notebooks, he said how delighted he was to see such “wonderful records of Feynman’s thinking.” “No, no!” Feynman protested. “They aren’t a record of my thinking process. They are my thinking process. I actually did the work on the paper.” &lt;br /&gt;
+  “Well,” the historian said, “the work was done in your head, but the record of it is still here.” “No, it’s not a record, not really. It’s working. You have to work on paper, and this is the paper.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I don’t know about you, but this is 100% true of me: if I can’t spell something out, I don’t understand it - and if I never try, I won’t even see the holes in my argument. So…&lt;/p&gt;
+
+&lt;p&gt;The blog is dead. Long live the blog!&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;div class=&quot;text-justify&quot;&gt;
+    &lt;span id=&quot;Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers&quot;&gt;Ahrens, S. (2017). &lt;i&gt;How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking: For Students, Academics and Nonfiction Book Writers&lt;/i&gt;. North Charleston, SC: CreateSpace.&lt;/span&gt;
+
+    
+    
+
+    &lt;button class=&quot;btn--info&quot; onclick=&quot;showBibtex('Ahrens_2017_How_to')&quot;&gt;BibTex&lt;/button&gt;
+    
+&lt;div class=&quot;bibtex&quot; id=&quot;Ahrens_2017_How_to&quot;&gt;&lt;pre&gt;@book{Ahrens_2017_How_to_take_smart_notes_one_simple_technique_to_boost_writing_learning_and_thinking_for_students_academics_and_nonfiction_book_writers,
+  address = {{North Charleston, SC}},
+  title = {How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking: For Students, Academics and Nonfiction Book Writers},
+  isbn = {978-1-5428-6650-7},
+  shorttitle = {How to Take Smart Notes},
+  language = {eng},
+  publisher = {{CreateSpace}},
+  author = {Ahrens, S{\&quot;o}nke},
+  year = {2017}
+}
+&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div&gt;
+    
+&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</content><author><name>Anna Rogers</name><uri>http://www.cs.uml.edu/~arogers/</uri></author><category term="academia" /><summary type="html">Benefits of blogging for the academic souls.</summary></entry></feed>

@@ -1,0 +1,1699 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.4 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>On word analogies and negative results in NLP - Hacking semantics</title>
+<meta name="description" content="Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov’s word analogies.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hacking semantics">
+<meta property="og:title" content="On word analogies and negative results in NLP">
+<meta property="og:url" content="https://hackingsemantics.xyz/2019/analogies/">
+
+
+  <meta property="og:description" content="Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov’s word analogies.">
+
+
+
+  <meta property="og:image" content="https://hackingsemantics.xyz/assets/images/analogy-header.png">
+
+
+
+  <meta name="twitter:site" content="@annargrs">
+  <meta name="twitter:title" content="On word analogies and negative results in NLP">
+  <meta name="twitter:description" content="Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov’s word analogies.">
+  <meta name="twitter:url" content="https://hackingsemantics.xyz/2019/analogies/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://hackingsemantics.xyz/assets/images/analogy-header.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2019-07-07T12:00:47-04:00">
+
+
+
+  <meta property="article:modified_time" content="2019-07-11T05:00:47-04:00">
+
+
+
+
+<link rel="canonical" href="https://hackingsemantics.xyz/2019/analogies/">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hacking semantics Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+<!--bibtex hack-->
+<script>
+function showBibtex(bibDiv) {
+  var x = document.getElementById(bibDiv);
+  if (x.style.display === "none" || x.style.display === '') {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="icon" type="image/png" href="/assets/images/logo-3col.png">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet" type="text/css">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo-3col.png" alt=""></a>
+        
+        <a class="site-title" href="/">Hacking Semantics</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >All Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tags</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/aro.png" alt="Anna Rogers" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Anna Rogers</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Thinking aloud: computational linguistics, cognition, AI and NLP
+      </p>
+    <!--p>Post-doctoral associate at <a href="">Text Machine Lab</a>, University of Massachusetts Lowell</p-->
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+
+      
+        <li>
+          <a href="http://www.cs.uml.edu/~arogers/" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i> Homepage
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/annargrs" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--p>
+      
+        <li>
+          <a href="https://vine.co/u/doesn't matter" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-vine" aria-hidden="true"></i> Vine
+          </a>
+        </li>
+      
+      </p-->
+
+      
+        <li>
+          <a href="http://text-machine.cs.uml.edu/lab/">
+            <i class="fas fa-fw fa-university" aria-hidden="true"></i> UMass Lowell, <br/>Text Machine Lab
+          </a>
+        </li>
+      
+
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <!--label for="ac-toc">Toggle Menu</label-->
+  <ul class="nav__items">
+    
+  </ul>
+</nav>
+    
+  
+
+
+<!-- stolen from here:
+https://www.gungorbudak.com/blog/2017/12/08/tags-cloud-sorted-by-post-count-for-jekyll-blogs-without-plugins/
+-->
+<!--div class="tag-cloud">
+
+
+
+
+    
+    
+    
+    
+    <span class="tag-size-5">
+        <a class="tag-link" href="/tags/#academia/" rel="tag">#academia</a> (5)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-2">
+        <a class="tag-link" href="/tags/#methodology/" rel="tag">#methodology</a> (2)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#negresults/" rel="tag">#negresults</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#review/" rel="tag">#review</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#socialNLP/" rel="tag">#socialNLP</a> (1)
+    </span>
+
+    
+    
+    
+    
+    <span class="tag-size-1">
+        <a class="tag-link" href="/tags/#teaching/" rel="tag">#teaching</a> (1)
+    </span>
+
+
+
+
+
+</div-->
+
+
+
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="On word analogies and negative results in NLP">
+    <meta itemprop="description" content="Negative results are hard to publish, and even harder to make well-known. Even when the disproved result is something as pervasive as Mikolov’s word analogies.">
+    <meta itemprop="datePublished" content="July 07, 2019">
+    <meta itemprop="dateModified" content="July 11, 2019">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">On word analogies and negative results in NLP
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> </h4></header>
+              <ul class="toc__menu">
+  <li><a href="#all-things-wrong-with-word-analogies">All things wrong with word analogies.</a></li>
+  <li><a href="#lack-of-impact-on-further-research">(Lack of) impact on further research</a></li>
+  <li><a href="#how-we-can-encourage-fact-checking-of-widespread-claims">How we can encourage fact-checking of widespread claims</a></li>
+  <li><a href="#">***</a></li>
+  <li><a href="#references">References</a></li>
+  <li><a href="#cite-this-post">Cite this post</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <figure>
+	<img src="/assets/images/analogy-header.png" />
+	<!--figcaption> some figure </figcaption-->
+</figure>
+
+<p>In real world, fake news spread faster than facts. People’s attention is caught by sensational, exaggerated, clickbait-y messages like “5.23 million more immigrants are moving to the UK”. Any subsequent fact-checking messages look less sensational and they will not reach as many people. Once the damage is done, it’s done.</p>
+
+<p>Thank God this never happens in academia. Right?</p>
+
+<p>Wrong.</p>
+
+<p>Experts are as susceptible as the rest of the populace - see for example Daniel Kahneman’s account of an author of a statistics textbook who readily went with stereotype rather than provided base rate information <a class="citation" href="#Kahneman_2013_Thinking_fast_and_slow">(Kahneman, 2013)</a>. Maybe we - researchers - have it even worse, because we also have to publish-or-perish. The publication treadmill demands eye-catching, breakthrough results that can’t possibly be produced at the required speed. We rarely have the problem of people deliberately faking results, but… how shall I put it… there isn’t exactly an incentive to triple-check things before they land on Arxiv. If you happen to be right, you get to be the first to publish that, and if you’re wrong - no shame in it, you can always revise.</p>
+
+<p>The readers are not necessarily triple-checking either. For an academic publication it would require much more than a google search, so we rarely bother unless we’re reviewing or replicating. The worst case scenario is when the shiny but hasty result also conforms to your own intuitions about how things should work - i.e. when you’re told something you want to believe anyway.</p>
+
+<p>I think this is what happened to word analogies <a class="citation" href="#MikolovChenEtAl_2013_Efficient_estimation_of_word_representations_in_vector_space">(Mikolov, Chen, Corrado, &amp; Dean, 2013)</a>. Its <a href="https://scholar.google.com/citations?hl=en&amp;user=oBu8kMMAAAAJ">over 11K citations</a> are mostly due to the hugely popular word2vec architecture, but the idea of word analogies rode the same wave. A separate paper on “linguistic regularities” <a class="citation" href="#MikolovYihEtAl_2013_Linguistic_Regularities_in_Continuous_Space_Word_Representations">(Mikolov, Yih, &amp; Zweig, 2013)</a> currently has extra 2K citations.</p>
+
+<p>These citations are not just something from 2013 either. Because it’s so tempting to believe that language really works this way, the word analogies are still everywhere. Only in June 2019, I heard them mentioned in the first 10 minutes of a NAACL invited talk, in a word embeddings lecture in the <a href="http://ciss.deephack.me/">CISS dialogue summer school</a>, and all over Twitter. It just soo makes sense that language relations are all neat and regular like this:</p>
+
+<figure>
+	<img src="/assets/images/analogy-mikolov.png" class="width70" />
+	<!--figcaption>some figure</figcaption-->
+</figure>
+
+<p>However, that may be too good to be true.</p>
+
+<h2 id="all-things-wrong-with-word-analogies">All things wrong with word analogies.</h2>
+
+<p>To the best of my knowledge, the first suspicions about vector offset arose when it didn’t work for lexicographic relations <a class="citation" href="#KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces">(Köper, Scheible, &amp; im Walde, 2015)</a> - a pattern later confirmed by <a class="citation" href="#KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It">(Karpinska, Li, Rogers, &amp; Drozd, 2018)</a>. Then the BATS dataset <a class="citation" href="#GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt">(Gladkova, Drozd, &amp; Matsuoka, 2016)</a> offered a larger balanced sample of 40 relations, among which the vector offset worked well only on those that happened to be included in the original Google dataset.</p>
+
+<figure>
+	<img src="/assets/images/analogy-bats2.png" />
+	<figcaption>When does the vector offset work? 40 relations from the BATS dataset</figcaption>
+</figure>
+
+<p>So why doesn’t it generalize, if language relations are so neat and regular? Well, it turns out that it wouldn’t have worked in the first place if the 3 source words were not excluded from the set of possible answers. In the original formulation, the solution to <script type="math/tex">king-man+woman</script> should be <script type="math/tex">queen</script>, given that the vectors <script type="math/tex">king</script>, <script type="math/tex">man</script> and <script type="math/tex">woman</script> are excluded from the set of possible answers. Tal Linzen showed that for some relations you get considerable accuracy by simply getting the nearest neighbor of <script type="math/tex">woman</script> word, or the one most similar to both <script type="math/tex">woman</script> and <script type="math/tex">king</script> (without <script type="math/tex">man</script>) <a class="citation" href="#Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies">(Linzen, 2016)</a>. And here’s what happens if you don’t exclude any of them <a class="citation" href="#RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors">(Rogers, Drozd, &amp; Li, 2017)</a>:</p>
+
+<figure>
+	<img src="/assets/images/analogy-honest.png" class="width60" /> 
+	<figcaption>Share of BATS analogy questions in which the vector the closest to the predicted vector is one of the source vectors (a,a', b), the target vector b', or some other vector. In most cases the result is simply the vector b ("woman").
+	</figcaption>
+</figure>
+
+<p>If in most cases the predicted vector is the closest to the source <script type="math/tex">woman</script> vector, it means that the vector offset is simply too small to induce a meaning shift on its own. And that means that adding it will not get you somewhere significantly different. Which means you’re staying in the neighborhood of the original vectors.</p>
+
+<p>Here are some more experiments showing that if the source vectors <script type="math/tex">a</script> (“man”), <script type="math/tex">a'</script> (king), and <script type="math/tex">b</script> (“woman”) are excluded, your likelihood to succeed depends on how close the correct answer is to the source words <a class="citation" href="#RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors">(Rogers, Drozd, &amp; Li, 2017)</a>:</p>
+
+<figure>
+	<img src="/assets/images/analogy-sim-bias.png" />
+	<figcaption>The share of BATS analogy questions predicted successfully vs similarity of the target vector to the source vectors</figcaption>
+</figure>
+
+<p>One could object that this is due to bad word embeddings, and ideal embeddings would have every possible relation encoded so that it would be recoverable from vector offset. That remains to be shown empirically, but from theoretical perspective it is not likely to happen:</p>
+
+<ul>
+  <li>Semantically, the idea of manipulating vector differences is reminiscent of componential analysis of the 1950s, and there are good reasons why that is no longer actively developed. For example, does “man” + “unmarried” as definition of “bachelor” apply to Pope?</li>
+  <li>Distributionally, even seemingly perfect analogy between <em>cat:cats</em> and <em>table:tables</em> are never perfect. For example, <em>turn the tables</em> is not the same as <em>turn the table</em>, they will appear in different contexts - but that difference does not apply to <em>cat:cats</em>. Given hundreds of such differences, why would we expect the aggregate representations to always perfectly line up? And if they did, would that even be a good representation of language semantics? If we are to ever have good language generation, we need to be able to take into account such nuances, not to discard them.</li>
+</ul>
+
+<p>To sum up: several research papers brought up good reasons to doubt the efficacy of vector offset. If the formulation of vector offset excludes the source vectors, it will appear to work for the small original dataset, where much of its success can be attributed to basic cosine similarity. But it will fail to generalize to a larger set of linguistic relations.</p>
+
+<h2 id="lack-of-impact-on-further-research">(Lack of) impact on further research</h2>
+
+<p>The focus of this post is not just the above negative evidence about vector offset, but the fact that these multiple reports of negative results never reached the same audience of thousands of researchers who were impressed by the original Mikolov’s paper.</p>
+
+<p>Obviously, I’m impartial here because some of this work is mine, but isn’t it just counter-productive for the field in general? If there are serious updates to a widely cited but too-good-to-be-true paper, it is in everybody’s interest for those updates to travel fast. They could save people the effort of either doing the same work again, or the wasted effort of building on the original untested assumption. Right?</p>
+
+<p>Well, the problem with publishing negative results is well-known, and perhaps it’s not coincidental that only one of the above papers even made it to one of the main conferences. However, there are now two ACL, one COLING, and one best-paper-mention ICML paper that provide mathematical proofs for why the vector offset <em>should</em> work <a class="citation" href="#GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity">(Gittens, Achlioptas, &amp; Mahoney, 2017; Hakami, Hayashi, &amp; Bollegala, 2018; Ethayarajh, Duvenaud, &amp; Hirst, 2019; Allen &amp; Hospedales, 2019)</a>. Go figure. Only one paper also took a mathematical perspective, but bravely arrived at the opposite conclusion <a class="citation" href="#Schluter_2018_Word_Analogy_Testing_Caveat">(Schluter, 2018)</a>.</p>
+
+<p>Obviously, these positions need to be reconciled in the future. I am fully open to the possibility that the vector offset does indeed work, and the above negative evidence is somehow wrong. That would actually be great for everybody, as it would mean that we already have an intuitive, cheap, and reliable way to perform analogical reasoning. But that still needs to be shown, and so far the papers providing proofs for vector offset did not address the available negative evidence.</p>
+
+<p>Consider that if the negative evidence is correct, this has serious implications for the field. It would mean that we are pursuing a simplistic model of linguistic relations that is not representative of most of language. For instance, the vector offset attracted the attention of researchers on fairness/bias, and many practitioners actually use it in earnest. Here’s a NIPS paper that started from accepting that the underlying vector offset mechanism works: <a class="citation" href="#BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings">(Bolukbasi, Chang, Zou, Saligrama, &amp; Kalai, 2016)</a>. But this one didn’t: <a class="citation" href="#NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor">(Nissim, van Noord, &amp; van der Goot, 2019)</a>. Let me quote the authors on what it would mean to make social conclusions on the basis of unreliable metrics:</p>
+
+<figure>
+	<img src="/assets/images/analogy-nissim.png" />
+</figure>
+
+<p>To conclude: analogical reasoning is an incredibly important aspect of human reasoning, and we <em>have</em> to get it right if we’re ever to arrive at general AI. So far, from what I’ve seen, linear vector offsets in word embeddings are not the right way to think of it. But there are plenty of other directions, including better methods for analogical reasoning <a class="citation" href="#DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen">(Drozd, Gladkova, &amp; Matsuoka, 2016; Vine, Geva, &amp; Bruza, 2018; Bouraoui, Jameel, &amp; Schockaert, 2018; Dufter &amp; Schütze, 2019)</a> and specialized representations for analogous pairs <a class="citation" href="#WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space">(Washio &amp; Kato, 2018; Joshi, Choi, Levy, Weld, &amp; Zettlemoyer, 2018; Hakami &amp; Bollegala, 2019; Camacho-Collados, Espinosa-Anke, &amp; Schockaert, 2019)</a>. If we’re not married to the ideal of natural language with impossibly regular relations, shouldn’t we try to maximize the research effort in more promising directions?</p>
+
+<h2 id="how-we-can-encourage-fact-checking-of-widespread-claims">How we can encourage fact-checking of widespread claims</h2>
+
+<p>The problem with vector offset is not unique. Its components are (1) a shiny result that is intuitively appealing and becomes too-famous-to-be-questioned, (2) the low visibility of negative results, even when they are available. In NLP, the latter problem is aggravated by the insane Arxiv pace. When you work on “a truth universally accepted”, and you can’t even keep up with the list of papers that you <em>want</em> to read, why would you bother searching for papers nobody cited?</p>
+
+<p>It is admittedly hard to make negative results sexy, but in high-profile cases I think it is doable. Why don’t we have an <strong>impactful-negative-result award category at ACL conferences</strong>, to encourage fact-checking of at least the most widely-accepted assumptions? This would:</p>
+
+<ul>
+  <li><strong>increase the awareness of widespread problems, so that people do not build on shaky assumptions;</strong></li>
+  <li><strong>identify high-profile research directions where more hands are needed next year, thus stimulating the overall progress in NLP;</strong></li>
+  <li><strong>help with reproducibility crisis by encouraging replication studies and reporting of negative results.</strong></li>
+</ul>
+
+<p>For example, in NAACL 2019 there were several interesting papers that could definitely be considered for such an award. A few personal favorites:</p>
+
+<ul>
+  <li>exposing the lack of transfer between QA datasets <a class="citation" href="#Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC">(Yatskar, 2019)</a>,</li>
+  <li>limitations of attention as “explaining” mechanism <a class="citation" href="#JainWallace_2019_Attention_is_not_Explanation">(Jain &amp; Wallace, 2019)</a>,</li>
+  <li>multimodal QA systems that work better by simply ignoring some of the input modalities <a class="citation" href="#ThomasonGordonEtAl_2019_Shifting_Baseline_Single_Modality_Performance_on_Visual_Navigation_QA">(Thomason, Gordon, &amp; Bisk, 2019)</a>.</li>
+</ul>
+
+<p>2 out of 3 of these great papers were posters, and I can not imagine how many more did not even make it through review. I would argue that it sends a message to the people doing this important work, and it is the wrong message.</p>
+
+<p>On the other hand, imagine that such an award existed, and was granted, say, to <a class="citation" href="#Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC">(Yatskar, 2019)</a>. Then everybody in the final session got to hear about the lack of transfer between 3 popular QA datasets. QA is one of the most popular tasks, so wouldn’t it be good for the community to highlight the problem, so that next year more people focus on solving QA rather than particular datasets? Perhaps the impactful-negative-result paper could also be chosen so as to match next year’s theme.</p>
+
+<h2>***</h2>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><div class="text-justify">
+    <span id="Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word_Embeddings">Camacho-Collados, J., Espinosa-Anke, L., &amp; Schockaert, S. (2019). Relational Word Embeddings. <i>ACL 2019</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1906.01373'">URL</button>
+    
+<div class="bibtex" id="Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word"><pre>@article{Camacho-ColladosEspinosa-AnkeEtAl_2019_Relational_Word_Embeddings,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1906.01373},
+  title = {Relational {{Word Embeddings}}},
+  journal = {ACL 2019},
+  url = {http://arxiv.org/abs/1906.01373},
+  author = {{Camacho-Collados}, Jose and {Espinosa-Anke}, Luis and Schockaert, Steven},
+  month = jun,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1906.01373
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC">Yatskar, M. (2019). A Qualitative Comparison of CoQA, SQuAD 2.0 and QuAC. <i>Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</i>, 2318–2323.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Yatskar_2019_Qualitative_Comparison')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/papers/N/N19/N19-1241/'">URL</button>
+    
+<div class="bibtex" id="Yatskar_2019_Qualitative_Comparison"><pre>@inproceedings{Yatskar_2019_Qualitative_Comparison_of_CoQA_SQuAD_20_and_QuAC,
+  title = {A {{Qualitative Comparison}} of {{CoQA}}, {{SQuAD}} 2.0 and {{QuAC}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://www.aclweb.org/anthology/papers/N/N19/N19-1241/},
+  author = {Yatskar, Mark},
+  month = jun,
+  year = {2019},
+  pages = {2318-2323}
+}
+</pre>
+https://www.aclweb.org/anthology/papers/N/N19/N19-1241/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space">Washio, K., &amp; Kato, T. (2018). Neural Latent Relational Analysis to Capture Lexical Semantic Relations in a Vector Space. <i>Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing</i>, 594–600. Brussels, Belgium: Association for Computational Linguistics.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('WashioKato_2018_Neural_Latent')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://aclweb.org/anthology/D18-1058'">URL</button>
+    
+<div class="bibtex" id="WashioKato_2018_Neural_Latent"><pre>@inproceedings{WashioKato_2018_Neural_Latent_Relational_Analysis_to_Capture_Lexical_Semantic_Relations_in_a_Vector_Space,
+  address = {{Brussels, Belgium}},
+  title = {Neural {{Latent Relational Analysis}} to {{Capture Lexical Semantic Relations}} in a {{Vector Space}}},
+  booktitle = {Proceedings of the 2018 {{Conference}} on {{Empirical Methods}} in {{Natural Language Processing}}},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://aclweb.org/anthology/D18-1058},
+  author = {Washio, Koki and Kato, Tsuneaki},
+  year = {2018},
+  pages = {594-600}
+}
+</pre>
+http://aclweb.org/anthology/D18-1058
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="VineGevaEtAl_2018_Unsupervised_Mining_of_Analogical_Frames_by_Constraint_Satisfaction">Vine, L. D., Geva, S., &amp; Bruza, P. (2018). Unsupervised Mining of Analogical Frames by Constraint Satisfaction. <i>Proceedings of the Australasian Language Technology Association Workshop 2018</i>, 34–43.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('VineGevaEtAl_2018_Unsupervised_Mining')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/papers/U/U18/U18-1004/'">URL</button>
+    
+<div class="bibtex" id="VineGevaEtAl_2018_Unsupervised_Mining"><pre>@inproceedings{VineGevaEtAl_2018_Unsupervised_Mining_of_Analogical_Frames_by_Constraint_Satisfaction,
+  title = {Unsupervised {{Mining}} of {{Analogical Frames}} by {{Constraint Satisfaction}}},
+  language = {en-us},
+  booktitle = {Proceedings of the {{Australasian Language Technology Association Workshop}} 2018},
+  url = {https://www.aclweb.org/anthology/papers/U/U18/U18-1004/},
+  author = {Vine, Lance De and Geva, Shlomo and Bruza, Peter},
+  month = dec,
+  year = {2018},
+  pages = {34-43}
+}
+</pre>
+https://www.aclweb.org/anthology/papers/U/U18/U18-1004/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="ThomasonGordonEtAl_2019_Shifting_Baseline_Single_Modality_Performance_on_Visual_Navigation_QA">Thomason, J., Gordon, D., &amp; Bisk, Y. (2019). Shifting the Baseline: Single Modality Performance on Visual Navigation &amp; QA. <i>Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</i>, 1977–1983.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('ThomasonGordonEtAl_2019_Shifting_Baseline')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/papers/N/N19/N19-1197/'">URL</button>
+    
+<div class="bibtex" id="ThomasonGordonEtAl_2019_Shifting_Baseline"><pre>@inproceedings{ThomasonGordonEtAl_2019_Shifting_Baseline_Single_Modality_Performance_on_Visual_Navigation_QA,
+  title = {Shifting the {{Baseline}}: {{Single Modality Performance}} on {{Visual Navigation}} \&amp; {{QA}}},
+  shorttitle = {Shifting the {{Baseline}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://www.aclweb.org/anthology/papers/N/N19/N19-1197/},
+  author = {Thomason, Jesse and Gordon, Daniel and Bisk, Yonatan},
+  month = jun,
+  year = {2019},
+  pages = {1977-1983}
+}
+</pre>
+https://www.aclweb.org/anthology/papers/N/N19/N19-1197/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Schluter_2018_Word_Analogy_Testing_Caveat">Schluter, N. (2018). The Word Analogy Testing Caveat. <i>Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers)</i>, 242–246. https://doi.org/10.18653/v1/N18-2039</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Schluter_2018_Word_Analogy')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/papers/N/N18/N18-2039/'">URL</button>
+    
+<div class="bibtex" id="Schluter_2018_Word_Analogy"><pre>@inproceedings{Schluter_2018_Word_Analogy_Testing_Caveat,
+  title = {The {{Word Analogy Testing Caveat}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2018 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 2 ({{Short Papers}})},
+  doi = {10.18653/v1/N18-2039},
+  url = {https://www.aclweb.org/anthology/papers/N/N18/N18-2039/},
+  author = {Schluter, Natalie},
+  month = jun,
+  year = {2018},
+  pages = {242-246}
+}
+</pre>
+https://www.aclweb.org/anthology/papers/N/N18/N18-2039/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors">Rogers, A., Drozd, A., &amp; Li, B. (2017). The (Too Many) Problems of Analogical Reasoning with Word Vectors. <i>Proceedings of the 6th Joint Conference on Lexical and Computational Semantics (* SEM 2017)</i>, 135–148.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('RogersDrozdEtAl_2017_Too_Many')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://www.aclweb.org/anthology/S17-1017'">URL</button>
+    
+<div class="bibtex" id="RogersDrozdEtAl_2017_Too_Many"><pre>@inproceedings{RogersDrozdEtAl_2017_Too_Many_Problems_of_Analogical_Reasoning_with_Word_Vectors,
+  title = {The ({{Too Many}}) {{Problems}} of {{Analogical Reasoning}} with {{Word Vectors}}},
+  booktitle = {Proceedings of the 6th {{Joint Conference}} on {{Lexical}} and {{Computational Semantics}} (* {{SEM}} 2017)},
+  url = {http://www.aclweb.org/anthology/S17-1017},
+  author = {Rogers, Anna and Drozd, Aleksandr and Li, Bofang},
+  year = {2017},
+  keywords = {peer-reviewed},
+  pages = {135--148}
+}
+</pre>
+http://www.aclweb.org/anthology/S17-1017
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor">Nissim, M., van Noord, R., &amp; van der Goot, R. (2019). Fair Is Better than Sensational:Man Is to Doctor as Woman Is to Doctor. <i>ArXiv:1905.09866 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('NissimvanNoordEtAl_2019_Fair_is')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1905.09866'">URL</button>
+    
+<div class="bibtex" id="NissimvanNoordEtAl_2019_Fair_is"><pre>@article{NissimvanNoordEtAl_2019_Fair_is_Better_than_SensationalMan_is_to_Doctor_as_Woman_is_to_Doctor,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1905.09866},
+  primaryclass = {cs},
+  title = {Fair Is {{Better}} than {{Sensational}}:{{Man}} Is to {{Doctor}} as {{Woman}} Is to {{Doctor}}},
+  shorttitle = {Fair Is {{Better}} than {{Sensational}}},
+  journal = {arXiv:1905.09866 [cs]},
+  url = {http://arxiv.org/abs/1905.09866},
+  author = {Nissim, Malvina and {van Noord}, Rik and {van der Goot}, Rob},
+  month = may,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1905.09866
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="MikolovYihEtAl_2013_Linguistic_Regularities_in_Continuous_Space_Word_Representations">Mikolov, T., Yih, W.-tau, &amp; Zweig, G. (2013). Linguistic Regularities in Continuous Space Word Representations. <i>Proceedings of NAACL-HLT 2013</i>, 746–751. Atlanta, Georgia, 9–14 June 2013.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('MikolovYihEtAl_2013_Linguistic_Regularities')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/N13-1090'">URL</button>
+    
+<div class="bibtex" id="MikolovYihEtAl_2013_Linguistic_Regularities"><pre>@inproceedings{MikolovYihEtAl_2013_Linguistic_Regularities_in_Continuous_Space_Word_Representations,
+  address = {{Atlanta, Georgia, 9\textendash{}14 June 2013}},
+  title = {Linguistic {{Regularities}} in {{Continuous Space Word Representations}}.},
+  booktitle = {Proceedings of {{NAACL}}-{{HLT}} 2013},
+  url = {https://www.aclweb.org/anthology/N13-1090},
+  author = {Mikolov, Tomas and Yih, Wen-tau and Zweig, Geoffrey},
+  year = {2013},
+  keywords = {_Sasha},
+  pages = {746--751}
+}
+</pre>
+https://www.aclweb.org/anthology/N13-1090
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="MikolovChenEtAl_2013_Efficient_estimation_of_word_representations_in_vector_space">Mikolov, T., Chen, K., Corrado, G., &amp; Dean, J. (2013). Efficient Estimation of Word Representations in Vector Space. <i>Proceedings of International Conference on Learning Representations (ICLR)</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('MikolovChenEtAl_2013_Efficient_estimation')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://arxiv.org/pdf/1301.3781'">URL</button>
+    
+<div class="bibtex" id="MikolovChenEtAl_2013_Efficient_estimation"><pre>@inproceedings{MikolovChenEtAl_2013_Efficient_estimation_of_word_representations_in_vector_space,
+  title = {Efficient Estimation of Word Representations in Vector Space},
+  booktitle = {Proceedings of {{International Conference}} on {{Learning Representations}} ({{ICLR}})},
+  url = {https://arxiv.org/pdf/1301.3781},
+  author = {Mikolov, Tomas and Chen, Kai and Corrado, Greg and Dean, Jeffrey},
+  year = {2013}
+}
+</pre>
+https://arxiv.org/pdf/1301.3781
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies">Linzen, T. (2016). Issues in Evaluating Semantic Spaces Using Word Analogies. <i>Proceedings of the First Workshop on Evaluating Vector Space Representations for NLP</i>. https://doi.org/http://dx.doi.org/10.18653/v1/W16-2503</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Linzen_2016_Issues_in')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://anthology.aclweb.org/W16-2503'">URL</button>
+    
+<div class="bibtex" id="Linzen_2016_Issues_in"><pre>@inproceedings{Linzen_2016_Issues_in_evaluating_semantic_spaces_using_word_analogies,
+  title = {Issues in Evaluating Semantic Spaces Using Word Analogies.},
+  booktitle = {Proceedings of the {{First Workshop}} on {{Evaluating Vector Space Representations}} for {{NLP}}},
+  publisher = {{Association for Computational Linguistics}},
+  doi = {http://dx.doi.org/10.18653/v1/W16-2503},
+  url = {http://anthology.aclweb.org/W16-2503},
+  author = {Linzen, Tal},
+  year = {2016}
+}
+</pre>
+http://anthology.aclweb.org/W16-2503
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces">Köper, M., Scheible, C., &amp; im Walde, S. S. (2015). Multilingual Reliability and "Semantic" Structure of Continuous Word Spaces. <i>Proceedings of the 11th International Conference on Computational Semantics</i>, 40–45. Association for Computational Linguistics.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('KoperScheibleEtAl_2015_Multilingual_reliability')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://www.aclweb.org/anthology/W15-01#page=56'">URL</button>
+    
+<div class="bibtex" id="KoperScheibleEtAl_2015_Multilingual_reliability"><pre>@inproceedings{KoperScheibleEtAl_2015_Multilingual_reliability_and_semantic_structure_of_continuous_word_spaces,
+  title = {Multilingual Reliability and "Semantic" Structure of Continuous Word Spaces},
+  booktitle = {Proceedings of the 11th {{International Conference}} on {{Computational Semantics}}},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://www.aclweb.org/anthology/W15-01\#page=56},
+  author = {K{\"o}per, Maximilian and Scheible, Christian and {im Walde}, Sabine Schulte},
+  year = {2015},
+  pages = {40-45}
+}
+</pre>
+http://www.aclweb.org/anthology/W15-01#page=56
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It">Karpinska, M., Li, B., Rogers, A., &amp; Drozd, A. (2018). Subcharacter Information in Japanese Embeddings: When Is It Worth It? <i>Proceedings of the Workshop on the Relevance of Linguistic Structure in Neural Architectures for NLP</i>, 28–37. Melbourne, Australia: Association for Computational Linguistics.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('KarpinskaLiEtAl_2018_Subcharacter_Information')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://aclweb.org/anthology/W18-2905'">URL</button>
+    
+<div class="bibtex" id="KarpinskaLiEtAl_2018_Subcharacter_Information"><pre>@inproceedings{KarpinskaLiEtAl_2018_Subcharacter_Information_in_Japanese_Embeddings_When_Is_It_Worth_It,
+  address = {{Melbourne, Australia}},
+  title = {Subcharacter {{Information}} in {{Japanese Embeddings}}: {{When Is It Worth It}}?},
+  booktitle = {Proceedings of the {{Workshop}} on the {{Relevance}} of {{Linguistic Structure}} in {{Neural Architectures}} for {{NLP}}},
+  publisher = {{Association for Computational Linguistics}},
+  url = {http://aclweb.org/anthology/W18-2905},
+  author = {Karpinska, Marzena and Li, Bofang and Rogers, Anna and Drozd, Aleksandr},
+  year = {2018},
+  pages = {28-37}
+}
+</pre>
+http://aclweb.org/anthology/W18-2905
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="Kahneman_2013_Thinking_fast_and_slow">Kahneman, D. (2013). <i>Thinking, Fast and Slow</i> (1st pbk. ed). New York: Farrar, Straus and Giroux.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('Kahneman_2013_Thinking_fast')">BibTex</button>
+    
+<div class="bibtex" id="Kahneman_2013_Thinking_fast"><pre>@book{Kahneman_2013_Thinking_fast_and_slow,
+  address = {{New York}},
+  edition = {1st pbk. ed},
+  title = {Thinking, Fast and Slow},
+  isbn = {978-0-374-53355-7},
+  lccn = {BF441 .K238 2013},
+  publisher = {{Farrar, Straus and Giroux}},
+  author = {Kahneman, Daniel},
+  year = {2013}
+}
+</pre>
+
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="JoshiChoiEtAl_2018_pair2vec_Compositional_Word-Pair_Embeddings_for_Cross-Sentence_Inference">Joshi, M., Choi, E., Levy, O., Weld, D. S., &amp; Zettlemoyer, L. (2018). Pair2vec: Compositional Word-Pair Embeddings for Cross-Sentence Inference. <i>ArXiv:1810.08854 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('JoshiChoiEtAl_2018_pair2vec_Compositional')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1810.08854'">URL</button>
+    
+<div class="bibtex" id="JoshiChoiEtAl_2018_pair2vec_Compositional"><pre>@article{JoshiChoiEtAl_2018_pair2vec_Compositional_Word-Pair_Embeddings_for_Cross-Sentence_Inference,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1810.08854},
+  primaryclass = {cs},
+  title = {Pair2vec: {{Compositional Word}}-{{Pair Embeddings}} for {{Cross}}-{{Sentence Inference}}},
+  shorttitle = {Pair2vec},
+  journal = {arXiv:1810.08854 [cs]},
+  url = {http://arxiv.org/abs/1810.08854},
+  author = {Joshi, Mandar and Choi, Eunsol and Levy, Omer and Weld, Daniel S. and Zettlemoyer, Luke},
+  month = oct,
+  year = {2018}
+}
+</pre>
+http://arxiv.org/abs/1810.08854
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="JainWallace_2019_Attention_is_not_Explanation">Jain, S., &amp; Wallace, B. C. (2019). Attention Is Not Explanation. <i>Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</i>, 3543–3556.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('JainWallace_2019_Attention_is')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://aclweb.org/anthology/papers/N/N19/N19-1357/'">URL</button>
+    
+<div class="bibtex" id="JainWallace_2019_Attention_is"><pre>@inproceedings{JainWallace_2019_Attention_is_not_Explanation,
+  title = {Attention Is Not {{Explanation}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 2019 {{Conference}} of the {{North American Chapter}} of the {{Association}} for {{Computational Linguistics}}: {{Human Language Technologies}}, {{Volume}} 1 ({{Long}} and {{Short Papers}})},
+  url = {https://aclweb.org/anthology/papers/N/N19/N19-1357/},
+  author = {Jain, Sarthak and Wallace, Byron C.},
+  month = jun,
+  year = {2019},
+  pages = {3543-3556}
+}
+</pre>
+https://aclweb.org/anthology/papers/N/N19/N19-1357/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="HakamiHayashiEtAl_2018_Why_does_PairDiff_work">Hakami, H., Hayashi, K., &amp; Bollegala, D. (2018). Why Does PairDiff Work? - A Mathematical Analysis of Bilinear Relational Compositional Operators for Analogy Detection. <i>Proceedings of the 27th International Conference on Computational Linguistics</i>, 2493–2504.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('HakamiHayashiEtAl_2018_Why_does')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/papers/C/C18/C18-1211/'">URL</button>
+    
+<div class="bibtex" id="HakamiHayashiEtAl_2018_Why_does"><pre>@inproceedings{HakamiHayashiEtAl_2018_Why_does_PairDiff_work,
+  title = {Why Does {{PairDiff}} Work? - {{A Mathematical Analysis}} of {{Bilinear Relational Compositional Operators}} for {{Analogy Detection}}},
+  shorttitle = {Why Does {{PairDiff}} Work?},
+  language = {en-us},
+  booktitle = {Proceedings of the 27th {{International Conference}} on {{Computational Linguistics}}},
+  url = {https://www.aclweb.org/anthology/papers/C/C18/C18-1211/},
+  author = {Hakami, Huda and Hayashi, Kohei and Bollegala, Danushka},
+  month = aug,
+  year = {2018},
+  pages = {2493-2504}
+}
+</pre>
+https://www.aclweb.org/anthology/papers/C/C18/C18-1211/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="HakamiBollegala_2019_Learning_Relation_Representations_from_Word_Representations">Hakami, H., &amp; Bollegala, D. (2019). Learning Relation Representations from Word Representations. <i>AKBC 2019</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('HakamiBollegala_2019_Learning_Relation')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://openreview.net/forum?id=r1e3WW5aTX&amp;noteId=BklR5HOySN'">URL</button>
+    
+<div class="bibtex" id="HakamiBollegala_2019_Learning_Relation"><pre>@inproceedings{HakamiBollegala_2019_Learning_Relation_Representations_from_Word_Representations,
+  title = {Learning {{Relation Representations}} from {{Word Representations}}},
+  booktitle = {{{AKBC}} 2019},
+  url = {https://openreview.net/forum?id=r1e3WW5aTX\&amp;noteId=BklR5HOySN},
+  author = {Hakami, Huda and Bollegala, Danushka},
+  year = {2019}
+}
+</pre>
+https://openreview.net/forum?id=r1e3WW5aTX&amp;noteId=BklR5HOySN
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt">Gladkova, A., Drozd, A., &amp; Matsuoka, S. (2016). Analogy-Based Detection of Morphological and Semantic Relations with Word Embeddings: What Works and What Doesn’t. <i>Proceedings of the NAACL-HLT SRW</i>, 47–54. https://doi.org/10.18653/v1/N16-2002</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('GladkovaDrozdEtAl_2016_Analogybased_detection')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/N/N16/N16-2002.pdf'">URL</button>
+    
+<div class="bibtex" id="GladkovaDrozdEtAl_2016_Analogybased_detection"><pre>@inproceedings{GladkovaDrozdEtAl_2016_Analogybased_detection_of_morphological_and_semantic_relations_with_word_embeddings_what_works_and_what_doesnt,
+  address = {{San Diego, California, June 12-17, 2016}},
+  title = {Analogy-Based Detection of Morphological and Semantic Relations with Word Embeddings: What Works and What Doesn't.},
+  booktitle = {Proceedings of the {{NAACL}}-{{HLT SRW}}},
+  publisher = {{ACL}},
+  doi = {10.18653/v1/N16-2002},
+  url = {https://www.aclweb.org/anthology/N/N16/N16-2002.pdf},
+  author = {Gladkova, Anna and Drozd, Aleksandr and Matsuoka, Satoshi},
+  year = {2016},
+  keywords = {peer-reviewed},
+  pages = {47-54}
+}
+</pre>
+https://www.aclweb.org/anthology/N/N16/N16-2002.pdf
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity">Gittens, A., Achlioptas, D., &amp; Mahoney, M. W. (2017). Skip-Gram - Zipf + Uniform = Vector Additivity. <i>Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</i>, 69–76. https://doi.org/10.18653/v1/P17-1007</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('GittensAchlioptasEtAl_2017_SkipGram_Zipf')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/papers/P/P17/P17-1007/'">URL</button>
+    
+<div class="bibtex" id="GittensAchlioptasEtAl_2017_SkipGram_Zipf"><pre>@inproceedings{GittensAchlioptasEtAl_2017_SkipGram_Zipf_Uniform_Vector_Additivity,
+  title = {Skip-{{Gram}} - {{Zipf}} + {{Uniform}} = {{Vector Additivity}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 55th {{Annual Meeting}} of the {{Association}} for {{Computational Linguistics}} ({{Volume}} 1: {{Long Papers}})},
+  doi = {10.18653/v1/P17-1007},
+  url = {https://www.aclweb.org/anthology/papers/P/P17/P17-1007/},
+  author = {Gittens, Alex and Achlioptas, Dimitris and Mahoney, Michael W.},
+  month = jul,
+  year = {2017},
+  pages = {69-76}
+}
+</pre>
+https://www.aclweb.org/anthology/papers/P/P17/P17-1007/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies">Ethayarajh, K., Duvenaud, D., &amp; Hirst, G. (2019). Towards Understanding Linear Word Analogies. <i>To Appear in ACL 2019</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('EthayarajhDuvenaudEtAl_2019_Towards_Understanding')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1810.04882'">URL</button>
+    
+<div class="bibtex" id="EthayarajhDuvenaudEtAl_2019_Towards_Understanding"><pre>@article{EthayarajhDuvenaudEtAl_2019_Towards_Understanding_Linear_Word_Analogies,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1810.04882},
+  title = {Towards {{Understanding Linear Word Analogies}}},
+  journal = {To appear in ACL 2019},
+  url = {http://arxiv.org/abs/1810.04882},
+  author = {Ethayarajh, Kawin and Duvenaud, David and Hirst, Graeme},
+  month = oct,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1810.04882
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="DufterSchutze_2019_Analytical_Methods_for_Interpretable_Ultradense_Word_Embeddings">Dufter, P., &amp; Schütze, H. (2019). Analytical Methods for Interpretable Ultradense Word Embeddings. <i>ArXiv:1904.08654 [Cs]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('DufterSchutze_2019_Analytical_Methods')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1904.08654'">URL</button>
+    
+<div class="bibtex" id="DufterSchutze_2019_Analytical_Methods"><pre>@article{DufterSchutze_2019_Analytical_Methods_for_Interpretable_Ultradense_Word_Embeddings,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1904.08654},
+  primaryclass = {cs},
+  title = {Analytical {{Methods}} for {{Interpretable Ultradense Word Embeddings}}},
+  journal = {arXiv:1904.08654 [cs]},
+  url = {http://arxiv.org/abs/1904.08654},
+  author = {Dufter, Philipp and Sch{\"u}tze, Hinrich},
+  month = apr,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1904.08654
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen">Drozd, A., Gladkova, A., &amp; Matsuoka, S. (2016). Word Embeddings, Analogies, and Machine Learning: Beyond King - Man + Woman = Queen. <i>Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers</i>, 3519–3530. Osaka, Japan, December 11-17.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('DrozdGladkovaEtAl_2016_Word_embeddings')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/C/C16/C16-1332.pdf'">URL</button>
+    
+<div class="bibtex" id="DrozdGladkovaEtAl_2016_Word_embeddings"><pre>@inproceedings{DrozdGladkovaEtAl_2016_Word_embeddings_analogies_and_machine_learning_beyond_king_man_woman_queen,
+  address = {{Osaka, Japan, December 11-17}},
+  title = {Word Embeddings, Analogies, and Machine Learning: Beyond King - Man + Woman = Queen},
+  shorttitle = {Word {{Embeddings}}, {{Analogies}}, and {{Machine Learning}}},
+  booktitle = {Proceedings of {{COLING}} 2016, the 26th {{International Conference}} on {{Computational Linguistics}}: {{Technical Papers}}},
+  url = {https://www.aclweb.org/anthology/C/C16/C16-1332.pdf},
+  author = {Drozd, Aleksandr and Gladkova, Anna and Matsuoka, Satoshi},
+  year = {2016},
+  keywords = {peer-reviewed},
+  pages = {3519--3530}
+}
+</pre>
+https://www.aclweb.org/anthology/C/C16/C16-1332.pdf
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="BouraouiJameelEtAl_2018_Relation_Induction_in_Word_Embeddings_Revisited">Bouraoui, Z., Jameel, S., &amp; Schockaert, S. (2018). Relation Induction in Word Embeddings Revisited. <i>Proceedings of the 27th International Conference on Computational Linguistics</i>, 1627–1637.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('BouraouiJameelEtAl_2018_Relation_Induction')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'https://www.aclweb.org/anthology/papers/C/C18/C18-1138/'">URL</button>
+    
+<div class="bibtex" id="BouraouiJameelEtAl_2018_Relation_Induction"><pre>@inproceedings{BouraouiJameelEtAl_2018_Relation_Induction_in_Word_Embeddings_Revisited,
+  title = {Relation {{Induction}} in {{Word Embeddings Revisited}}},
+  language = {en-us},
+  booktitle = {Proceedings of the 27th {{International Conference}} on {{Computational Linguistics}}},
+  url = {https://www.aclweb.org/anthology/papers/C/C18/C18-1138/},
+  author = {Bouraoui, Zied and Jameel, Shoaib and Schockaert, Steven},
+  month = aug,
+  year = {2018},
+  pages = {1627-1637}
+}
+</pre>
+https://www.aclweb.org/anthology/papers/C/C18/C18-1138/
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings">Bolukbasi, T., Chang, K.-W., Zou, J., Saligrama, V., &amp; Kalai, A. (2016). Man Is to Computer Programmer As Woman Is to Homemaker? Debiasing Word Embeddings. <i>Proceedings of the 30th International Conference on Neural Information Processing Systems</i>, 4356–4364. USA: Curran Associates Inc.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('BolukbasiChangEtAl_2016_Man_is')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://dl.acm.org/citation.cfm?id=3157382.3157584'">URL</button>
+    
+<div class="bibtex" id="BolukbasiChangEtAl_2016_Man_is"><pre>@inproceedings{BolukbasiChangEtAl_2016_Man_is_to_Computer_Programmer_As_Woman_is_to_Homemaker_Debiasing_Word_Embeddings,
+  address = {{USA}},
+  series = {{{NIPS}}'16},
+  title = {Man Is to {{Computer Programmer As Woman}} Is to {{Homemaker}}? {{Debiasing Word Embeddings}}},
+  isbn = {978-1-5108-3881-9},
+  shorttitle = {Man Is to {{Computer Programmer As Woman}} Is to {{Homemaker}}?},
+  booktitle = {Proceedings of the 30th {{International Conference}} on {{Neural Information Processing Systems}}},
+  publisher = {{Curran Associates Inc.}},
+  url = {http://dl.acm.org/citation.cfm?id=3157382.3157584},
+  author = {Bolukbasi, Tolga and Chang, Kai-Wei and Zou, James and Saligrama, Venkatesh and Kalai, Adam},
+  year = {2016},
+  pages = {4356--4364}
+}
+</pre>
+http://dl.acm.org/citation.cfm?id=3157382.3157584
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li>
+<li><div class="text-justify">
+    <span id="AllenHospedales_2019_Analogies_Explained_Towards_Understanding_Word_Embeddings">Allen, C., &amp; Hospedales, T. (2019). Analogies Explained: Towards Understanding Word Embeddings. <i>ArXiv:1901.09813 [Cs, Stat]</i>.</span>
+
+    
+    
+
+    <button class="btn--info" onclick="showBibtex('AllenHospedales_2019_Analogies_Explained')">BibTex</button>
+    
+    <button class="btn--success" onclick="window.location.href = 'http://arxiv.org/abs/1901.09813'">URL</button>
+    
+<div class="bibtex" id="AllenHospedales_2019_Analogies_Explained"><pre>@article{AllenHospedales_2019_Analogies_Explained_Towards_Understanding_Word_Embeddings,
+  archiveprefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1901.09813},
+  primaryclass = {cs, stat},
+  title = {Analogies {{Explained}}: {{Towards Understanding Word Embeddings}}},
+  shorttitle = {Analogies {{Explained}}},
+  journal = {arXiv:1901.09813 [cs, stat]},
+  url = {http://arxiv.org/abs/1901.09813},
+  author = {Allen, Carl and Hospedales, Timothy},
+  month = jan,
+  year = {2019}
+}
+</pre>
+http://arxiv.org/abs/1901.09813
+</div>
+</div>
+
+
+
+<div>
+    
+</div></li></ol>
+
+<h2 id="cite-this-post">Cite this post</h2>
+
+<p>If you’d like to cite this post, please use the following bibtex:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@misc{Rogers_2019_analogies,
+  title = { On word analogies and negative results in NLP},
+  journal = {Hacking Semantics},
+  url = { https://hackingsemantics.xyz/2019/analogies/ },
+  author = {Rogers, Anna},
+  day = { 07 },
+  month = { Jul },
+  year = { 2019 }
+}
+</code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#academia" class="page__taxonomy-item" rel="tag">academia</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#methodology" class="page__taxonomy-item" rel="tag">methodology</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#negresults" class="page__taxonomy-item" rel="tag">negresults</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#review" class="page__taxonomy-item" rel="tag">review</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#squib" class="page__taxonomy-item" rel="tag">squib</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-07-11">July 11, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=annargrs&text=On+word+analogies+and+negative+results+in+NLP%20https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fanalogies%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fanalogies%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fanalogies%2F&title=On word analogies and negative results in NLP" class="btn" title=" Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fhackingsemantics.xyz%2F2019%2Fanalogies%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/2019/leaderboards/" class="pagination--pager" title="How the Transformers broke NLP leaderboards
+">Previous</a>
+    
+    
+      <a href="/2019/conversation/" class="pagination--pager" title="Talking to people outside your echo chamber: SocNLP challenges
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h2 class="page__comments-title">Comments</h2>
+      <section id="utterances-comments"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/nlp4linguists/" rel="permalink">How to teach NLP to non-CS-majors in 2 weeks?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  9 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">What I learned from organizing an introductory course on NLP for linguists at ESSLLI 2019.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/conversation/" rel="permalink">Talking to people outside your echo chamber: SocNLP challenges
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  10 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A post inspired by an Uber ride with a Trump supporter.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/leaderboards/" rel="permalink">How the Transformers broke NLP leaderboards
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  11 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">With the huge Transformer-based models such as BERT, GPT-2, and XLNet, are we losing track of how the state-of-the-art performance is achieved?
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/why-blog/" rel="permalink">Why blog about NLP in 2019?
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Benefits of blogging for the academic souls.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><input type="search" id="search" aria-placeholder="Enter your search term..." class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+    <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 Hacking semantics. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.<br/>
+  <!--a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a-->This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127096214-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127096214-2', { 'anonymize_ip': false});
+</script>
+
+
+
+
+
+
+    <script>
+  'use strict';
+
+  (function() {
+    var commentContainer = document.querySelector('#utterances-comments');
+
+    if (!commentContainer) {
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.setAttribute('src', 'https://utteranc.es/client.js');
+    script.setAttribute('repo', 'annargrs/blog');
+    script.setAttribute('issue-term', 'pathname');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+
+    commentContainer.appendChild(script);
+  })();
+</script>
+
+  
+
+
+
+
+
+
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+  </body>
+</html>
